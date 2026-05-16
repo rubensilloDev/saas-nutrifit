@@ -3,26 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriFit Systems - Preview</title>
+    <title>NutriFit Systems - Iniciar Sesión</title>
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/auth.css">
     <!-- Iconos de Remix Icon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
-    <!-- El sidebar se inyectará aquí automáticamente por sidebar.js -->
-    
-    <main style="padding: var(--spacing-xl);">
-        <h1 style="color: var(--primary);">Bienvenido a NutriFit Systems</h1>
-        <p style="color: var(--on-surface-variant);">Este es el proyecto SaaS configurado con el diseño premium de Stitch.</p>
-        
-        <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: white; border-radius: var(--radius-lg); border: 1px solid var(--outline-variant);">
-            <h3>Acceso Rápido</h3>
-            <p style="margin-bottom: var(--spacing-md);">Ya puedes acceder al Dashboard completo basado en la interfaz "Nutrición (PC)".</p>
-            <a href="pages/dashboard/index.html" style="display: inline-block; padding: 12px 24px; background: var(--primary); color: white; text-decoration: none; border-radius: var(--radius-md); font-weight: 600;">Ir al Dashboard de Nutrición</a>
-        </div>
-    </main>
+    <!-- Pantalla completa de autenticación - NutriFit Systems -->
+    <div class="auth-wrapper">
+        <!-- Elementos decorativos de fondo -->
+        <div class="auth-bg-circle auth-bg-circle--1"></div>
+        <div class="auth-bg-circle auth-bg-circle--2"></div>
 
-    <script src="src/components/sidebar.js"></script>
+        <!-- Tarjeta de autenticación -->
+        <div class="auth-card">
+            <!-- Logo y marca -->
+            <div class="auth-brand">
+                <div class="auth-logo">
+                    <i class="ri-leaf-fill"></i>
+                </div>
+                <h1 class="auth-title">NutriFit Systems</h1>
+                <p class="auth-subtitle">Tu plataforma de salud integral</p>
+            </div>
+
+            <!-- Sistema de Tabs con CSS Puro -->
+            <div class="auth-tabs">
+                <!-- Inputs ocultos para controlar los tabs -->
+                <input type="radio" name="authTab" id="tabLogin" checked>
+                <input type="radio" name="authTab" id="tabRegister">
+
+                <!-- Barra de pestañas (Segmented Control) -->
+                <div class="auth-tab-bar">
+                    <label for="tabLogin" class="auth-tab-btn">Iniciar Sesión</label>
+                    <label for="tabRegister" class="auth-tab-btn">Registrarse</label>
+                </div>
+
+                <!-- Contenedor de paneles -->
+                <div class="auth-panels">
+                    <!-- Panel: Iniciar Sesión -->
+                    <div class="auth-panel auth-panel--login">
+                        <div class="auth-field">
+                            <input type="email" id="loginEmail" class="auth-input" placeholder=" " autocomplete="email">
+                            <label for="loginEmail" class="auth-label">Correo electrónico</label>
+                        </div>
+                        <div class="auth-field">
+                            <input type="password" id="loginPass" class="auth-input" placeholder=" " autocomplete="current-password">
+                            <label for="loginPass" class="auth-label">Contraseña</label>
+                        </div>
+                        <div class="auth-options">
+                            <a href="#" class="auth-forgot">¿Olvidaste tu contraseña?</a>
+                        </div>
+                        <button type="submit" class="auth-btn auth-btn--primary">
+                            Iniciar Sesión
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+
+                    <!-- Panel: Registrarse -->
+                    <div class="auth-panel auth-panel--register">
+                        <div class="auth-field">
+                            <input type="text" id="regName" class="auth-input" placeholder=" " autocomplete="name">
+                            <label for="regName" class="auth-label">Nombre completo</label>
+                        </div>
+                        <div class="auth-field">
+                            <input type="email" id="regEmail" class="auth-input" placeholder=" " autocomplete="email">
+                            <label for="regEmail" class="auth-label">Correo electrónico</label>
+                        </div>
+                        <div class="auth-field">
+                            <input type="password" id="regPass" class="auth-input" placeholder=" " autocomplete="new-password">
+                            <label for="regPass" class="auth-label">Contraseña</label>
+                        </div>
+                        <div class="auth-field">
+                            <input type="password" id="regConfirm" class="auth-input" placeholder=" " autocomplete="new-password">
+                            <label for="regConfirm" class="auth-label">Confirmar contraseña</label>
+                        </div>
+                        <button type="submit" class="auth-btn auth-btn--primary">
+                            Crear Cuenta
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divisor -->
+            <div class="auth-divider">
+                <span>o continúa con</span>
+            </div>
+
+            <!-- Botones de inicio social -->
+            <div class="auth-social">
+                <button class="auth-btn auth-btn--social">
+                    <i class="ri-google-fill"></i>
+                    Google
+                </button>
+                <button class="auth-btn auth-btn--social">
+                    <i class="ri-apple-fill"></i>
+                    Apple
+                </button>
+            </div>
+
+            <!-- Enlace para entrar sin registrarse -->
+            <a href="pages/dashboard/index.html" class="auth-skip">
+                Entrar sin registrarse
+                <i class="ri-arrow-right-s-line"></i>
+            </a>
+        </div>
+    </div>
 </body>
 </html>

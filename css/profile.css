@@ -1,0 +1,395 @@
+/* 
+  NutriFit Systems - Estilos del Perfil de Usuario
+  Diseño limpio, moderno, con tarjetas y campos editables.
+*/
+
+:root {
+    --color-protein: #2e7d32;
+    --color-carbs: #fbc02d;
+    --color-fats: #d32f2f;
+    --color-water: #0288d1;
+    --color-calories: #ff6d00;
+}
+
+/* --- Grid del Perfil --- */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-lg);
+    width: 95%;
+    margin: 0 auto;
+}
+
+/* --- Tarjeta base --- */
+.profile-card {
+    background: var(--surface-container-lowest);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s;
+}
+
+.profile-card:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+/* --- Avatar Card --- */
+.profile-avatar-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spacing-md);
+    background: linear-gradient(160deg, var(--surface-container-lowest), #f1f8e9);
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--primary);
+    box-shadow: 0 4px 16px rgba(13, 99, 27, 0.15);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-avatar-edit {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(13, 99, 27, 0.3);
+    transition: all 0.2s;
+}
+
+.profile-avatar-edit:hover {
+    transform: scale(1.1);
+    background: #2e7d32;
+}
+
+.profile-name {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.profile-role {
+    font-size: 0.9rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+    margin: 0;
+}
+
+.profile-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #e8f5e9;
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.profile-badge i {
+    font-size: 1rem;
+}
+
+/* --- Data Card --- */
+.profile-data-card {
+    grid-column: span 2;
+}
+
+.profile-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--spacing-lg);
+    color: var(--on-surface);
+}
+
+.profile-section-title i {
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+
+.profile-section-title h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+/* --- Campos del formulario --- */
+.profile-field {
+    margin-bottom: var(--spacing-lg);
+}
+
+.profile-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.profile-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--outline-variant);
+    border-radius: 14px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    color: var(--on-surface);
+    background: white;
+    transition: all 0.25s;
+    outline: none;
+}
+
+.profile-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(13, 99, 27, 0.08);
+}
+
+.profile-input--disabled {
+    background: var(--surface-container-low);
+    color: var(--on-surface-variant);
+    cursor: not-allowed;
+}
+
+.profile-hint {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    margin-top: 4px;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+.profile-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+/* --- Botón guardar --- */
+.profile-save-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary), #2e7d32);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(13, 99, 27, 0.25);
+    margin-top: var(--spacing-md);
+}
+
+.profile-save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(13, 99, 27, 0.35);
+}
+
+.profile-save-btn i {
+    font-size: 1.2rem;
+}
+
+/* --- Goals Card --- */
+.profile-goals-card {
+    background: linear-gradient(160deg, var(--surface-container-lowest), #f3e5f5);
+}
+
+.profile-goal-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+.profile-goal-item:last-child {
+    border-bottom: none;
+}
+
+.profile-goal-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #fff3e0;
+    color: var(--color-calories);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.profile-goal-info {
+    flex: 1;
+}
+
+.profile-goal-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+.profile-goal-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--on-surface);
+}
+
+/* --- Stats Card --- */
+.profile-stats-card {
+    grid-column: span 2;
+    background: linear-gradient(160deg, var(--surface-container-lowest), #e8f5e9);
+}
+
+.profile-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+}
+
+.profile-stat-item {
+    text-align: center;
+    padding: var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--outline-variant);
+    transition: all 0.3s;
+}
+
+.profile-stat-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.profile-stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1.2;
+}
+
+.profile-stat-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* --- Logout Card --- */
+.profile-logout-card {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: linear-gradient(160deg, #fff5f5, var(--surface-container-lowest));
+    border: 1px solid #ffcdd2;
+}
+
+.profile-logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 48px;
+    background: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(211, 47, 47, 0.25);
+}
+
+.profile-logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(211, 47, 47, 0.35);
+    background: #c62828;
+}
+
+.profile-logout-btn i {
+    font-size: 1.3rem;
+}
+
+.profile-logout-hint {
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    opacity: 0.6;
+    margin: 0;
+    text-align: center;
+}
+
+/* --- Spin animation --- */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+    .profile-data-card,
+    .profile-stats-card {
+        grid-column: span 1;
+    }
+    .profile-stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .profile-field-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-stat-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

@@ -1,23 +1,17 @@
 /* 
-  Estilos para el Menú de Navegación Lateral (Sidebar) - NutriFit Premium
-  Implementando colapso, submenús y estética Glassmorphism.
+  NutriFit Systems - Estilos del Sidebar Lateral
+  Gestiona la navegación principal, estados de colapso y submenús dinámicos.
+  Estilo: Glassmorphism premium con Material Design 3.
 */
 
 :root {
+    /* Dimensiones estándar del sidebar */
     --sidebar-width: 280px;
     --sidebar-collapsed-width: 80px;
     --transition-speed: 0.3s;
-    /* Paleta de Colores (Stitch) */
-    --primary: #0d631b;
-    --on-primary: #ffffff;
-    --primary-container: #2e7d32;
-    --on-primary-container: #cbffc2;
-
-
-
 }
 
-
+/* --- Contenedor Principal (Sidebar) --- */
 .sidebar-container {
     width: var(--sidebar-width);
     height: 100vh;
@@ -25,8 +19,10 @@
     display: flex;
     flex-direction: column;
     position: fixed;
+    /* Mantiene el menú siempre visible al hacer scroll */
     left: 0;
     top: 0;
+    /* Efecto de cristal translúcido */
     background: var(--glass-bg, rgba(255, 255, 255, 0.8));
     backdrop-filter: blur(var(--glass-blur, 10px));
     border-right: 1px solid var(--glass-border, rgba(0, 0, 0, 0.1));
@@ -35,13 +31,13 @@
     overflow-x: hidden;
 }
 
-/* Estado Colapsado */
+/* Estado Colapsado: Reduce el ancho para maximizar el espacio de trabajo */
 .sidebar-container.collapsed {
     width: var(--sidebar-collapsed-width);
     padding: var(--spacing-lg) var(--spacing-md);
 }
 
-/* Header & Toggle */
+/* --- Cabecera: Logo y Título de Marca --- */
 .sidebar-header {
     padding-bottom: var(--spacing-xl);
     display: flex;
@@ -50,6 +46,7 @@
     position: relative;
 }
 
+/* Caja del Logo con gradiente corporativo */
 .brand-logo {
     width: 40px;
     height: 40px;
@@ -72,7 +69,14 @@
     transition: opacity var(--transition-speed), transform var(--transition-speed);
 }
 
-/* Toggle Button (Footer Integrated) */
+/* Ocultar título cuando está colapsado */
+.collapsed .brand-title {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+/* --- Botón de Toggle (Contraer/Expandir) --- */
 .toggle-btn {
     display: flex;
     align-items: center;
@@ -101,6 +105,7 @@
     border-color: var(--primary);
 }
 
+/* Estilo minimalista para el toggle cuando está colapsado */
 .collapsed .toggle-btn {
     padding: 12px 0;
     justify-content: center;
@@ -110,19 +115,14 @@
 
 .collapsed .toggle-btn i {
     transform: rotate(180deg);
+    /* Invierte la flecha */
 }
 
 .collapsed .toggle-btn .label {
     display: none;
 }
 
-.collapsed .brand-title {
-    opacity: 0;
-    width: 0;
-    pointer-events: none;
-}
-
-/* Menu Links */
+/* --- Menú de Navegación --- */
 .sidebar-menu {
     display: flex;
     flex-direction: column;
@@ -130,6 +130,7 @@
     flex-grow: 1;
 }
 
+/* Enlaces base del menú */
 .menu-link,
 .submenu-link {
     display: flex;
@@ -140,10 +141,7 @@
     color: var(--on-surface-variant);
     border-radius: var(--radius-md);
     font-weight: 600;
-    font-family: inherit;
-    /* Asegura que botones y enlaces usen la misma fuente */
     font-size: 1rem;
-    /* Asegura que botones y enlaces usen el mismo tamaño */
     transition: all 0.2s ease;
     border: none;
     background: transparent;
@@ -165,22 +163,33 @@
     transition: opacity var(--transition-speed);
 }
 
+/* Ocultar etiquetas y flechas al colapsar */
 .collapsed .menu-link .label,
 .collapsed .menu-link .arrow {
     opacity: 0;
     pointer-events: none;
 }
 
+/* Estados Hover y Active */
 .menu-link:hover {
     background-color: var(--surface-container-high, rgba(0, 0, 0, 0.05));
     color: var(--primary);
 }
 
 .menu-link.active {
+    background: linear-gradient(90deg, rgba(13, 99, 27, 0.08), transparent);
+    color: var(--primary);
+    font-weight: 700;
+    border-left: 3px solid var(--primary);
+    /* Indicador visual de página actual */
+    border-radius: var(--radius-md);
+}
+
+.menu-link.active .icon {
     color: var(--primary);
 }
 
-/* Dropdowns & Submenus */
+/* --- Submenús (Dropdowns) --- */
 .menu-group {
     display: flex;
     flex-direction: column;
@@ -191,10 +200,12 @@
     transition: transform 0.3s ease;
 }
 
+/* Rota la flecha cuando el grupo está abierto */
 .menu-group.open .arrow {
     transform: rotate(180deg);
 }
 
+/* Animación de apertura suave del submenú */
 .submenu {
     max-height: 0;
     overflow: hidden;
@@ -211,6 +222,7 @@
     padding-bottom: 8px;
 }
 
+/* Ocultar submenús en modo colapsado para evitar desbordamiento visual */
 .collapsed .submenu {
     display: none;
 }
@@ -221,7 +233,14 @@
     font-weight: 500;
 }
 
-/* Footer */
+.submenu-link.active {
+    background: linear-gradient(90deg, rgba(13, 99, 27, 0.06), transparent);
+    color: var(--primary);
+    font-weight: 700;
+    border-left: 3px solid var(--primary);
+}
+
+/* --- Footer: Perfil de Usuario --- */
 .sidebar-footer {
     margin-top: auto;
     padding-top: var(--spacing-lg);
@@ -237,6 +256,7 @@
     transition: background 0.2s;
 }
 
+/* Avatar circular del usuario */
 .user-avatar {
     width: 40px;
     height: 40px;
@@ -272,22 +292,25 @@
     white-space: nowrap;
 }
 
+/* Ocultar info de usuario al colapsar */
 .collapsed .user-info {
     opacity: 0;
     width: 0;
 }
 
-/* Ajuste del contenido principal cuando hay sidebar */
+/* --- Ajustes de Layout Global --- */
 body {
     display: flex;
 }
 
+/* El contenido principal empuja según el ancho del sidebar */
 main {
     flex-grow: 1;
     margin-left: var(--sidebar-width);
     transition: margin-left var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Ajuste automático cuando el sidebar está colapsado */
 .collapsed+main,
 body:has(.collapsed) main {
     margin-left: var(--sidebar-collapsed-width);

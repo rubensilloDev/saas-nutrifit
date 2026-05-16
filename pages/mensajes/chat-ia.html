@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat de IA - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/chat.css">
+</head>
+
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Asistente NutriFit AI</h1>
+            <p>Tu entrenador personal inteligente, resuelve tus dudas al instante.</p>
+        </header>
+
+        <div id="ai-chat-container" class="chat-container">
+            <!-- Cabecera del chat -->
+            <header class="chat-header">
+                <div class="chat-info">
+                    <div class="chat-avatar">
+                        <i class="ph-fill ph-robot"></i>
+                        <span class="status-indicator online"></span>
+                    </div>
+                    <div class="chat-details">
+                        <h3>Coach NutriFit AI</h3>
+                        <p>En línea</p>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button id="clear-chat" title="Limpiar conversación">
+                        <i class="ph ph-trash"></i>
+                    </button>
+                    <button id="close-chat" title="Cerrar">
+                        <i class="ph ph-x"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Mensajes del chat -->
+            <main id="chat-messages" class="chat-messages">
+                <!-- Mensaje de bienvenida -->
+                <div class="message bot">
+                    <div class="message-content">
+                        ¡Hola, Alex! Soy tu coach NutriFit AI. 🚀<br><br>
+                        Estoy aquí para ayudarte con tu alimentación, entrenamiento y hábitos. 
+                        ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre:
+                        <br><br>
+                        🥗 <strong>Planificación de comidas</strong><br>
+                        💪 <strong>Rutinas de entrenamiento</strong><br>
+                        📊 <strong>Análisis de progreso</strong><br>
+                        🧠 <strong>Consejos de nutrición</strong>
+                    </div>
+                    <span class="message-time">12:00</span>
+                </div>
+
+                <!-- Mensaje del usuario -->
+                <div class="message user">
+                    <div class="message-content">
+                        ¡Hola! He estado siguiendo la dieta que me recomendaste pero 
+                        siento que me falta energía en los entrenamientos de la tarde. 
+                        ¿Qué puedo ajustar?
+                    </div>
+                    <span class="message-time">12:05</span>
+                </div>
+
+                <!-- Respuesta del bot -->
+                <div class="message bot">
+                    <div class="message-content">
+                        Buenas preguntas, Alex. 💪<br><br>
+                        La falta de energía por la tarde suele estar relacionada con la 
+                        <strong>distribución de carbohidratos</strong> a lo largo del día.<br><br>
+                        Te recomiendo:<br>
+                        ✅ <strong>Pre-entreno (60-90 min antes):</strong> Plátano + café negro o avena con canela<br>
+                        ✅ <strong>Comida de media mañana:</strong> Añadir 30-40g de carbohidratos complejos (batata, arroz integral)<br>
+                        ✅ <strong>Hidratación:</strong> Asegura 500ml de agua 2h antes del entreno<br><br>
+                        ¿Qué tal si pruebas esto mañana y me cuentas cómo te sientes?
+                    </div>
+                    <span class="message-time">12:06</span>
+                </div>
+
+                <!-- Respuesta rápida del usuario -->
+                <div class="message user">
+                    <div class="message-content">
+                        Tiene sentido. Voy a probar lo del plátano pre-entreno. 
+                        ¿Y para la cena, qué recomiendas después de entrenar pierna?
+                    </div>
+                    <span class="message-time">12:08</span>
+                </div>
+
+                <!-- Respuesta del bot -->
+                <div class="message bot">
+                    <div class="message-content">
+                        Excelente elección. 🍌<br><br>
+                        Para después de entrenar pierna (que es muy demandante), 
+                        tu cena debería enfocarse en <strong>proteína de calidad + carbohidratos de absorción moderada</strong>:<br><br>
+                        🍽️ <strong>Cena post-pierna ideal:</strong><br>
+                        • 200g de salmón o pollo a la plancha<br>
+                        • 250g de batata asada 🍠<br>
+                        • Ensalada verde con aguacate 🥑<br>
+                        • Un puñado de nueces<br><br>
+                        Esto te dará triptófano (para dormir bien), glucógeno muscular 
+                        y antioxidantes para la recuperación. ¡Doble check! ✅✅
+                    </div>
+                    <span class="message-time">12:09</span>
+                </div>
+
+                <!-- Usuario agradeciendo -->
+                <div class="message user">
+                    <div class="message-content">
+                        Perfecto, lo voy a implementar hoy mismo. 
+                        ¡Gracias coach! Te cuento mañana cómo me fue.
+                    </div>
+                    <span class="message-time">12:11</span>
+                </div>
+
+                <!-- Cierre del bot -->
+                <div class="message bot">
+                    <div class="message-content">
+                        ¡Así se habla! 💯<br><br>
+                        Recuerda que la clave está en la <strong>consistencia</strong>, no en la perfección. 
+                        Si un día no sale perfecto, no pasa nada — lo importante es retomar al siguiente.<br><br>
+                        Estaré aquí cuando me necesites. ¡A darle duro mañana, Alex! 🔥💪
+                    </div>
+                    <span class="message-time">12:12</span>
+                </div>
+            </main>
+
+            <!-- Zona de entrada de texto -->
+            <footer class="chat-input-area">
+                <form id="chat-form">
+                    <div class="input-wrapper">
+                        <button type="button" class="attachment-btn">
+                            <i class="ph ph-paperclip"></i>
+                        </button>
+                        <textarea id="user-input" placeholder="Escribe tu consulta aquí..." rows="1" required></textarea>
+                    </div>
+                    <button type="submit" id="send-btn" class="send-button">
+                        <i class="ph-fill ph-paper-plane-right"></i>
+                    </button>
+                </form>
+            </footer>
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        const textarea = document.getElementById('user-input');
+        const form = document.getElementById('chat-form');
+        const messagesArea = document.getElementById('chat-messages');
+
+        // Auto-resize del textarea
+        textarea.addEventListener('input', () => {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        });
+
+        // Respuestas automáticas del bot
+        const botReplies = [
+            "Entiendo tu consulta. Como tu coach NutriFit AI, te recomiendo ajustar tu ingesta de proteína en la comida post-entreno para optimizar la recuperación muscular. ¿Quieres que te sugiera un menú específico?",
+            "¡Buena pregunta! La hidratación es clave. Te sugiero aumentar 300ml de agua en días de entrenamiento intenso. Además, los electrolitos naturales como el agua de coco pueden marcar la diferencia.",
+            "Excelente enfoque. Basado en tus métricas actuales, podrías beneficiarte de aumentar ligeramente los carbohidratos en el desayuno. Prueba añadir 40g de avena integral y cuéntame cómo te sientes.",
+            "Estoy procesando tu pregunta... Según la literatura científica, el timing de nutrientes es importante pero la consistencia diaria lo es aún más. Mantén tus macros ajustados y verás resultados sostenibles.",
+            "¡Me encanta tu motivación! 📈 Como sugerencia, te recomendaría incluir más ácidos grasos omega-3 en tu dieta (salmón, nueces, semillas de chía) para mejorar la recuperación articular y reducir la inflamación post-entreno."
+        ];
+
+        function getRandomReply() {
+            return botReplies[Math.floor(Math.random() * botReplies.length)];
+        }
+
+        function formatTime() {
+            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typing-indicator';
+            typingDiv.innerHTML = `
+                <div class="dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="typing-text">Escribiendo...</span>
+            `;
+            messagesArea.appendChild(typingDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) indicator.remove();
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = textarea.value.trim();
+            if (!text) return;
+
+            // Mensaje del usuario
+            const userMsg = `
+                <div class="message user">
+                    <div class="message-content">${text}</div>
+                    <span class="message-time">${formatTime()}</span>
+                </div>
+            `;
+            messagesArea.insertAdjacentHTML('beforeend', userMsg);
+            textarea.value = '';
+            textarea.style.height = 'auto';
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+
+            // Mostrar indicador de escritura
+            showTypingIndicator();
+
+            // Respuesta del bot después de 1.5-2.5s
+            const delay = 1500 + Math.random() * 1000;
+            setTimeout(() => {
+                removeTypingIndicator();
+
+                const reply = getRandomReply();
+                const botMsg = `
+                    <div class="message bot">
+                        <div class="message-content">${reply}</div>
+                        <span class="message-time">${formatTime()}</span>
+                    </div>
+                `;
+                messagesArea.insertAdjacentHTML('beforeend', botMsg);
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }, delay);
+        });
+
+        // Botón limpiar chat
+        document.getElementById('clear-chat').addEventListener('click', () => {
+            const botMessages = messagesArea.querySelectorAll('.message.bot');
+            const userMessages = messagesArea.querySelectorAll('.message.user');
+            userMessages.forEach(m => m.remove());
+            botMessages.forEach((m, i) => {
+                if (i > 0) m.remove();
+            });
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        });
+    </script>
+</body>
+
+</html>

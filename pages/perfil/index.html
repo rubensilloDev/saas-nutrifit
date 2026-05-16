@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profile.css">
+</head>
+
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>👤 Mi Perfil</h1>
+            <p>Gestiona tu información personal y ajustes de la cuenta.</p>
+        </header>
+
+        <div class="profile-grid">
+            <!-- Tarjeta de avatar e información principal -->
+            <div class="profile-card profile-avatar-card">
+                <div class="profile-avatar-wrapper">
+                    <div class="profile-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Alex+Rivera&background=0d631b&color=fff&size=128" alt="Avatar">
+                    </div>
+                    <button class="profile-avatar-edit" title="Cambiar foto">
+                        <i class="ri-camera-line"></i>
+                    </button>
+                </div>
+                <h2 class="profile-name">Alex Rivera</h2>
+                <p class="profile-role">Miembro Premium</p>
+                <div class="profile-badge">
+                    <i class="ri-verified-badge-fill"></i>
+                    <span>Cuenta verificada</span>
+                </div>
+            </div>
+
+            <!-- Tarjeta de datos personales -->
+            <div class="profile-card profile-data-card">
+                <div class="profile-section-title">
+                    <i class="ri-user-settings-line"></i>
+                    <h3>Datos Personales</h3>
+                </div>
+
+                <div class="profile-field">
+                    <label class="profile-label">Nombre completo</label>
+                    <input type="text" class="profile-input" value="Alex Rivera" placeholder="Tu nombre">
+                    <span class="profile-hint">Este nombre se mostrará en tu perfil.</span>
+                </div>
+
+                <div class="profile-field">
+                    <label class="profile-label">Correo electrónico</label>
+                    <input type="email" class="profile-input profile-input--disabled" value="alex@nutrifit.com" disabled>
+                    <span class="profile-hint">No editable. Contacta con soporte para cambiarlo.</span>
+                </div>
+
+                <div class="profile-field-row">
+                    <div class="profile-field">
+                        <label class="profile-label">Peso (kg)</label>
+                        <input type="number" class="profile-input" value="78" placeholder="kg" step="0.1" min="30" max="300">
+                    </div>
+                    <div class="profile-field">
+                        <label class="profile-label">Altura (cm)</label>
+                        <input type="number" class="profile-input" value="175" placeholder="cm" step="1" min="100" max="250">
+                    </div>
+                </div>
+
+                <div class="profile-field">
+                    <label class="profile-label">Fecha de nacimiento</label>
+                    <input type="date" class="profile-input" value="1995-06-15">
+                </div>
+
+                <button class="profile-save-btn">
+                    <i class="ri-save-3-line"></i>
+                    Guardar cambios
+                </button>
+            </div>
+
+            <!-- Tarjeta de objetivos -->
+            <div class="profile-card profile-goals-card">
+                <div class="profile-section-title">
+                    <i class="ri-trophy-line"></i>
+                    <h3>Mis Objetivos</h3>
+                </div>
+
+                <div class="profile-goal-item">
+                    <div class="profile-goal-icon">
+                        <i class="ri-fire-line"></i>
+                    </div>
+                    <div class="profile-goal-info">
+                        <span class="profile-goal-label">Calorías diarias</span>
+                        <span class="profile-goal-value">2,500 kcal</span>
+                    </div>
+                </div>
+
+                <div class="profile-goal-item">
+                    <div class="profile-goal-icon" style="background: #e8f5e9; color: var(--color-protein);">
+                        <i class="ri-restaurant-line"></i>
+                    </div>
+                    <div class="profile-goal-info">
+                        <span class="profile-goal-label">Proteína diaria</span>
+                        <span class="profile-goal-value">160g</span>
+                    </div>
+                </div>
+
+                <div class="profile-goal-item">
+                    <div class="profile-goal-icon" style="background: #fff8e1; color: var(--color-carbs);">
+                        <i class="ri-barley-line"></i>
+                    </div>
+                    <div class="profile-goal-info">
+                        <span class="profile-goal-label">Carbohidratos diarios</span>
+                        <span class="profile-goal-value">250g</span>
+                    </div>
+                </div>
+
+                <div class="profile-goal-item">
+                    <div class="profile-goal-icon" style="background: #fce4ec; color: var(--color-fats);">
+                        <i class="ri-oil-line"></i>
+                    </div>
+                    <div class="profile-goal-info">
+                        <span class="profile-goal-label">Grasas diarias</span>
+                        <span class="profile-goal-value">70g</span>
+                    </div>
+                </div>
+
+                <div class="profile-goal-item">
+                    <div class="profile-goal-icon" style="background: #e3f2fd; color: var(--color-water);">
+                        <i class="ri-drop-line"></i>
+                    </div>
+                    <div class="profile-goal-info">
+                        <span class="profile-goal-label">Agua diaria</span>
+                        <span class="profile-goal-value">3.0L</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta de actividad -->
+            <div class="profile-card profile-stats-card">
+                <div class="profile-section-title">
+                    <i class="ri-bar-chart-2-line"></i>
+                    <h3>Estadísticas</h3>
+                </div>
+
+                <div class="profile-stat-grid">
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value">12</span>
+                        <span class="profile-stat-label">Días de racha</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value">87%</span>
+                        <span class="profile-stat-label">Adherencia</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value">24</span>
+                        <span class="profile-stat-label">Entrenos este mes</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value">3.2k</span>
+                        <span class="profile-stat-label">kcal promedio</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de cierre de sesión -->
+            <div class="profile-card profile-logout-card">
+                <button class="profile-logout-btn" id="logout-btn">
+                    <i class="ri-logout-box-r-line"></i>
+                    <span>Cerrar sesión</span>
+                </button>
+                <p class="profile-logout-hint">Estás usando NutriFit v2.0. Al cerrar sesión volverás a la pantalla de inicio.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            // Visual-only: muestra un mensaje de confirmación (no funcional)
+            const btn = document.getElementById('logout-btn');
+            btn.innerHTML = '<i class="ri-loader-4-line" style="animation: spin 1s linear infinite;"></i> Cerrando sesión...';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="ri-check-line"></i> Sesión cerrada (demo)';
+                btn.style.background = '#e8f5e9';
+                btn.style.color = '#2e7d32';
+                btn.style.cursor = 'default';
+            }, 1500);
+        });
+    </script>
+</body>
+
+</html>
