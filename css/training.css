@@ -1,0 +1,743 @@
+/* --- ESPACIADO Y LAYOUT GENERAL --- */
+body {
+    /* Fondo sutil para dar atmósfera */
+    background: radial-gradient(at 0% 0%, rgba(13, 99, 27, 0.03) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(13, 99, 27, 0.03) 0px, transparent 50%),
+        var(--background);
+    background-attachment: fixed;
+}
+
+#routines-list-container,
+#history-list-container,
+#workout-session-list,
+#exercise-builder-list {
+    margin-top: 30px;
+    /* Mayor separación para un diseño más aireado y limpio */
+}
+
+#routines-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+
+/* BARRA DE ESTADÍSTICAS RÁPIDAS */
+.training-stats-bar {
+    width: 95%;
+    margin: 0 auto 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-mini-card {
+    background: white;
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--outline-variant);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-mini-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(13, 99, 27, 0.08);
+}
+
+.icon-wrap {
+    width: 48px;
+    height: 48px;
+    background: var(--surface-container-low);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.stat-info .label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    letter-spacing: 0.5px;
+}
+
+.stat-info .value {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    font-family: var(--font-heading);
+}
+
+/* ENCABEZADOS DE SECCIÓN MEJORADOS */
+.section-title {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.section-title h2 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--on-surface);
+}
+
+.section-title h2 i {
+    color: var(--primary);
+    background: var(--surface-container-lowest);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    box-shadow: inset 0 0 0 1px var(--outline-variant);
+}
+
+.section-title p {
+    margin-left: 48px;
+    color: var(--on-surface-variant);
+}
+
+/* CONTENEDORES DE FORMULARIO: Estética limpia y espaciada */
+.routine-creator,
+.workout-logger {
+    margin-bottom: var(--spacing-xl);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    margin-bottom: 8px;
+}
+
+/* INPUTS Y SELECTS: Bordes suaves y foco con color de marca */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--on-surface);
+    transition: all 0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(13, 99, 27, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+/* BUILDER ITEMS: Tarjetas anidadas para ejercicios de rutina */
+.exercise-build-item {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--primary);
+    margin-bottom: var(--spacing-md);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+}
+
+.exercise-build-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary);
+}
+
+/* TABLA DE SERIES: Diseño profesional de alto rendimiento */
+.sets-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin-bottom: var(--spacing-md);
+}
+
+.sets-table th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--on-surface-variant);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+.sets-table td {
+    padding: 4px;
+    vertical-align: middle;
+}
+
+.sets-table tr td:first-child {
+    font-weight: 900;
+    color: var(--primary);
+    text-align: center;
+    width: 40px;
+}
+
+/* INPUTS DENTRO DE TABLA: Integración invisible */
+.sets-table input {
+    padding: 8px 12px;
+    background: var(--surface-container-low);
+    border: none;
+    text-align: center;
+}
+
+.sets-table input:focus {
+    background: white;
+}
+
+/* BOTONES PREMIUM: Acciones principales y secundarias */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: var(--primary-container);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 99, 27, 0.2);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background: var(--surface-container-low);
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-weight: 700;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-large {
+    width: 100%;
+    justify-content: center;
+    padding: 16px;
+    font-size: 1.1rem;
+    margin-top: var(--spacing-xl);
+}
+
+.routine-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin: var(--spacing-xl) 0;
+}
+
+.routine-selector select {
+    max-width: 350px;
+}
+
+.btn-icon-only {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    border: 1px solid var(--outline-variant);
+    background: white;
+    color: var(--on-surface-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-icon-only:hover {
+    background: var(--surface-container-low);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-icon-only i {
+    font-size: 1.4rem;
+    transition: transform 0.3s;
+}
+
+.btn-icon-only.vault-collapsed i {
+    transform: rotate(180deg);
+}
+
+#routines-list-container {
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    max-height: 2000px;
+    opacity: 1;
+    overflow: hidden;
+    width: 100%;
+}
+
+#routines-list-container.vault-collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    pointer-events: none;
+}
+
+/* --- TARJETAS PREMIUM DE RUTINAS (Vault Look) --- */
+.routine-item {
+    background: white;
+    border-radius: 24px;
+    /* Bordes suaves y modernos */
+    border: 1px solid var(--outline-variant);
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.routine-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, var(--primary), var(--primary-container));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.routine-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-color: rgba(13, 99, 27, 0.2);
+}
+
+.routine-item:hover::before {
+    opacity: 1;
+}
+
+.routine-summary {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: linear-gradient(180deg, var(--surface-container-lowest) 0%, white 100%);
+    cursor: default;
+    /* Ya no es un acordeón simple, es una tarjeta completa */
+}
+
+.routine-summary h4 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--on-surface);
+    margin: 0 0 5px 0;
+}
+
+.routine-summary .meta {
+    font-size: 0.75rem;
+    color: var(--primary);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.routine-summary .meta::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+}
+
+.routine-details-mini {
+    padding: 0 24px 20px 24px;
+    flex-grow: 1;
+}
+
+.routine-details-mini ul {
+    background: var(--surface-container-lowest);
+    padding: 16px;
+    border-radius: 18px;
+    border: 1px solid var(--outline-variant);
+    list-style: none;
+    margin: 0;
+}
+
+.routine-details-mini li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--outline-variant);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.routine-details-mini li:last-child {
+    border-bottom: none;
+}
+
+.routine-details-mini .ex-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--on-surface);
+}
+
+.routine-details-mini .ex-plan {
+    font-size: 0.8rem;
+    background: white;
+    color: var(--primary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 800;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+/* BOTONES DE ACCIÓN EN TARJETA */
+.routine-card-footer {
+    padding: 16px 24px;
+    background: var(--surface-container-low);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1px solid var(--outline-variant);
+}
+
+.btn-play-routine {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(13, 99, 27, 0.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-play-routine:hover {
+    transform: scale(1.1) rotate(5deg);
+    background: var(--primary-container);
+}
+
+/* --- TARJETAS DE REGISTRO (Logging) --- */
+.logging-exercise-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--outline-variant);
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.exercise-header {
+    background: var(--surface-container-lowest);
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+.exercise-header h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.technical-notes {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 3px solid #ffd700;
+    /* Color oro para notas técnicas */
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* --- TABLAS DE SERIES --- */
+.sets-table-wrapper {
+    padding: 24px;
+}
+
+.sets-table th {
+    background: transparent;
+    border-bottom: 2px solid var(--surface-container-low);
+    color: var(--on-surface-variant);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 12px 10px;
+}
+
+.sets-table td {
+    padding: 12px 10px;
+}
+
+.sets-table input,
+.sets-table select {
+    background: var(--surface-container-low);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 8px 12px;
+    transition: all 0.2s;
+}
+
+.sets-table input:focus {
+    background: white;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+}
+
+/* ANIMACIONES SUTILES: Ajuste de velocidad y suavizado */
+.exercise-build-item,
+.logging-exercise-card,
+.routine-item {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* NOTIFICACIONES PERSONALIZADAS (Toast) */
+.toast-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: white;
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 5px solid var(--primary);
+    transform: translateX(120%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast i {
+    font-size: 1.25rem;
+    color: var(--primary);
+}
+
+/* FILTROS DE HISTORIAL */
+.filter-group {
+    display: flex;
+    gap: 8px;
+    background: var(--surface-container-low);
+    padding: 4px;
+    border-radius: var(--radius-md);
+}
+
+.btn-filter {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--on-surface-variant);
+    transition: all 0.2s;
+}
+
+.btn-filter.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* --- HISTORIAL DE ENTRENAMIENTOS (Modern Log Style) --- */
+.recent-workouts {
+    border: none;
+    padding: var(--spacing-lg);
+    box-shadow: none;
+}
+
+#history-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.history-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--outline-variant);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.history-card:hover {
+    border-color: var(--primary);
+    transform: translateX(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.history-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--primary);
+    opacity: 0.3;
+}
+
+.history-date-badge {
+    background: var(--surface-container-low);
+    padding: 10px;
+    border-radius: 14px;
+    text-align: center;
+    min-width: 60px;
+}
+
+.history-date-badge .day {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.history-date-badge .month {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--on-surface-variant);
+}
+
+.history-main-info {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.history-main-info h4 {
+    margin: 0 0 6px 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--on-surface);
+}
+
+.history-exercises-summary {
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    opacity: 0.8;
+    margin-bottom: 12px;
+    font-style: italic;
+    display: block;
+}
+
+.history-metrics-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.h-metric {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--surface-container-lowest);
+    padding: 4px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--outline-variant);
+}
+
+.h-metric i {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.h-metric .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--on-surface-variant);
+    margin-left: 2px;
+    font-weight: 600;
+}
+
+.history-meta-tags {
+    display: flex;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+.history-meta-tags span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

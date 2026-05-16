@@ -1,0 +1,84 @@
+/* 
+  NutriFit Systems - Global Styles & Design Tokens
+  Basado en el sistema de diseño NutriFit Premium SaaS Interface
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css');
+
+:root {
+    /* Paleta de Colores (Stitch) */
+    --primary: #0d631b;
+    --on-primary: #ffffff;
+    --primary-container: #2e7d32;
+    --on-primary-container: #cbffc2;
+    
+    --secondary: #286b33;
+    --on-secondary: #ffffff;
+    --secondary-container: #abf4ac;
+    --on-secondary-container: #2e7238;
+    
+    --background: #f7fbf0;
+    --on-background: #181d17;
+    
+    --surface: #f7fbf0;
+    --on-surface: #181d17;
+    --surface-variant: #e0e4da;
+    --on-surface-variant: #40493d;
+    
+    --outline: #707a6c;
+    --outline-variant: #bfcaba;
+    
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f1f5eb;
+    --surface-container: #ebefe5;
+    --surface-container-high: #e5eadf;
+    --surface-container-highest: #e0e4da;
+
+    /* Efecto Glassmorphism */
+    --glass-bg: rgba(250, 250, 250, 0.7);
+    --glass-border: rgba(129, 199, 132, 0.2);
+    --glass-blur: 12px;
+
+    /* Tipografía */
+    --font-heading: 'Lexend', sans-serif;
+    --font-body: 'Nunito Sans', sans-serif;
+
+    /* Espaciado */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+
+    /* Bordes */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+
+    /* Transiciones */
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--background);
+    color: var(--on-background);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+}

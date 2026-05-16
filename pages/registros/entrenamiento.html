@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Entrenamiento - NutriFit Systems</title>
+    <!-- Remix Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <!-- Los estilos se enlazarán aquí en el futuro -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/training.css">
+</head>
+
+<body>
+    <!-- El sidebar se inyectará aquí -->
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Entrenamiento</h1>
+            <p>Gestiona tus rutinas y registra tus progresos diarios.</p>
+        </header>
+
+        <!-- QUICK STATS HEADER -->
+        <div class="training-stats-bar">
+            <div class="stat-mini-card">
+                <div class="icon-wrap"><i class="ri-fire-line"></i></div>
+                <div class="stat-info">
+                    <span class="label">Racha Semanal</span>
+                    <span class="value">4 Días</span>
+                </div>
+            </div>
+            <div class="stat-mini-card">
+                <div class="icon-wrap"><i class="ri-trophy-line"></i></div>
+                <div class="stat-info">
+                    <span class="label">PRs Batidos</span>
+                    <span class="value">12 este mes</span>
+                </div>
+            </div>
+            <div class="stat-mini-card">
+                <div class="icon-wrap"><i class="ri-time-line"></i></div>
+                <div class="stat-info">
+                    <span class="label">Tiempo Total</span>
+                    <span class="value">8.5 horas</span>
+                </div>
+            </div>
+            <div class="stat-mini-card">
+                <div class="icon-wrap"><i class="ri-pulse-line"></i></div>
+                <div class="stat-info">
+                    <span class="label">Intensidad Media</span>
+                    <span class="value">RIR 1.5</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+
+            <!-- Botón para abrir el creador -->
+            <div
+                style="grid-column: span 12; display: flex; justify-content: flex-end; margin-bottom: var(--spacing-md);">
+                <button id="btn-show-creator" class="btn-primary">
+                    <i class="ri-add-circle-line"></i> Crear Nueva Rutina
+                </button>
+            </div>
+
+            <!-- SECCIÓN: Creador de Rutinas (Oculto por defecto) -->
+            <section id="routine-creator" class="widget routine-creator" style="grid-column: span 12; display: none;">
+                <div class="section-title">
+                    <h2 id="creator-title"><i class="ri-add-circle-line"></i> Crear Nueva Rutina</h2>
+                </div>
+
+                <form id="form-create-routine">
+                    <input type="hidden" id="edit-routine-id" value="">
+                    <div class="form-group">
+                        <label for="routine-name">Nombre de la Rutina</label>
+                        <input type="text" id="routine-name" placeholder="Ej: Empuje - Hipertrofia">
+                    </div>
+
+                    <div id="exercise-builder-list">
+                        <!-- Los ejercicios se añadirán aquí -->
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-top: var(--spacing-lg);">
+                        <button type="button" id="btn-add-exercise-builder" class="btn-secondary"><i
+                                class="ri-add-line"></i> Añadir Ejercicio</button>
+                        <button type="submit" id="btn-submit-routine" class="btn-primary">Guardar Rutina</button>
+                        <button type="button" id="btn-cancel-creator" class="btn-text"
+                            style="color: #666;">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- SECCIÓN: Mis Rutinas Guardadas (Desplegables) -->
+            <section class="widget managed-routines" style="grid-column: span 12;">
+                <div class="section-title" style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h2><i class="ri-folder-shield-2-line"></i> Mis Rutinas Guardadas</h2>
+                        <p style="font-size: 0.85rem; opacity: 0.8;">Haz clic en una rutina para ver sus ejercicios.</p>
+                    </div>
+                    <button id="btn-toggle-vault" class="btn-icon-only" title="Mostrar/Ocultar Rutinas">
+                        <i class="ri-arrow-up-s-line"></i>
+                    </button>
+                </div>
+                <div id="routines-list-container">
+                    <!-- Las rutinas se cargarán aquí dinámicamente -->
+                    <p style="text-align: center; padding: 20px; opacity: 0.5;">Aún no has creado ninguna rutina.</p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Registro de Sesión (Entreno Real) -->
+            <section class="widget workout-logger" style="grid-column: span 12;">
+                <div class="section-title">
+                    <h2><i class="ri-calendar-check-line"></i> Registrar Entrenamiento</h2>
+                </div>
+
+                <div class="routine-selector">
+                    <label for="select-routine">Seleccionar Rutina:</label>
+                    <select id="select-routine">
+                        <option value="">-- Elige una rutina guardada --</option>
+                    </select>
+                </div>
+
+                <hr>
+
+                <!-- Listado Dinámico de Ejercicios -->
+                <div id="workout-session-list">
+                    <!-- Se carga dinámicamente -->
+                </div>
+
+                <div class="workout-footer">
+                    <button type="submit" class="btn-primary btn-large">Finalizar y Guardar Entrenamiento</button>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Historial de Entrenamientos Recientes -->
+            <section class="widget recent-workouts" style="grid-column: span 12;">
+                <div class="section-title"
+                    style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h2><i class="ri-history-line"></i> Historial de Entrenamientos</h2>
+                        <p style="font-size: 0.85rem; opacity: 0.8;">Revisa tus sesiones pasadas y progresión.</p>
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn-filter active" data-filter="7">1 Semana</button>
+                        <button class="btn-filter" data-filter="14">2 Semanas</button>
+                        <button class="btn-filter" data-filter="30">1 Mes</button>
+                    </div>
+                </div>
+                <div id="history-list-container">
+                    <!-- Los entrenamientos pasados se cargarán aquí -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Notificaciones Custom (Toast) -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../src/components/sidebar.js"></script>
+    <script src="../../src/pages/training.js"></script>
+</body>
+
+</html>

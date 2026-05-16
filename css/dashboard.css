@@ -1,0 +1,620 @@
+/* 
+  Estilos para el Dashboard de Nutrición
+  Siguiendo el estilo de Stitch: NutriFit Premium SaaS Interface
+*/
+
+.dashboard-container {
+    margin-left: 280px;
+    /* Espacio para el sidebar */
+    padding: var(--spacing-xl);
+    min-height: 100vh;
+    background-color: var(--background);
+}
+
+.dashboard-header {
+    margin-bottom: var(--spacing-xl);
+}
+
+.dashboard-header h1 {
+    margin: 0 auto;
+    width: 95%;
+    font-size: 2.5rem;
+    color: var(--on-background);
+    margin-bottom: var(--spacing-xs);
+}
+
+.dashboard-header p {
+    color: var(--on-surface-variant);
+    font-size: 1.1rem;
+}
+
+/* GRID SISTEMA: Diseño de 12 columnas para máxima flexibilidad */
+.dashboard-grid {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--spacing-xxl);
+    width: 95%;
+}
+
+/* COMPONENTES BASE: Estilo Glassmorphism (Contenedores semi-transparentes) */
+.widget {
+    background: var(--surface-container-lowest);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    transition: var(--transition-base);
+}
+
+.widget:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* WIDGET CALORÍAS: Hero central con desglose de macros */
+.summary-kcal {
+    grid-column: span 12;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxl);
+    background: var(--surface-container-lowest);
+    position: relative;
+    overflow: hidden;
+}
+
+.kcal-main-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+}
+
+.kcal-progress-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    flex-shrink: 0;
+}
+
+/* LÓGICA SVG: Gráfico circular de progreso */
+.kcal-progress-svg {
+    transform: rotate(-90deg);
+    /* Empieza desde las 12 en punto */
+    width: 100%;
+    height: 100%;
+}
+
+.kcal-progress-bg {
+    fill: none;
+    stroke: var(--surface-container-high);
+    stroke-width: 10;
+}
+
+.kcal-progress-bar {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 628;
+    /* Longitud del círculo (2 * PI * r) */
+    stroke-dashoffset: 160;
+    /* Controla el nivel de llenado */
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.kcal-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.kcal-value {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    display: block;
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.kcal-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+.kcal-target {
+    text-align: center;
+    background: var(--surface-container-low);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+}
+
+.kcal-target .target-val {
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.kcal-target .target-lbl {
+    font-size: 0.7rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+.summary-info {
+    flex-grow: 1;
+    padding-left: var(--spacing-xl);
+    border-left: 1px solid var(--outline-variant);
+}
+
+/* REJILLA DE MACROS: 3 columnas iguales */
+.macro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.macro-card {
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--outline-variant);
+}
+
+.macro-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.macro-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.macro-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--on-surface-variant);
+}
+
+.macro-val {
+    font-size: 1.25rem;
+    font-weight: 800;
+    display: block;
+}
+
+.macro-progress {
+    height: 4px;
+    background: var(--surface-container-high);
+    border-radius: 4px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.macro-progress .bar {
+    height: 100%;
+    border-radius: 4px;
+}
+
+/* COLORES DE MARCA: Macros diferenciados */
+.protein {
+    color: #2196f3;
+}
+
+.protein .macro-dot,
+.protein .macro-progress .bar {
+    background-color: #2196f3;
+}
+
+.carbs {
+    color: #ffb300;
+}
+
+.carbs .macro-dot,
+.carbs .macro-progress .bar {
+    background-color: #ffb300;
+}
+
+.fats {
+    color: #9c27b0;
+}
+
+.fats .macro-dot,
+.fats .macro-progress .bar {
+    background-color: #9c27b0;
+}
+
+.remaining-kcal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface-container-low);
+    padding: 12px 20px;
+    border-radius: var(--radius-lg);
+}
+
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.footer-info i {
+    color: #f44336;
+}
+
+.footer-percent {
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* WIDGET DE AGUA: Estilo líquido inmersivo */
+.widget-water {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    background: linear-gradient(180deg, #4cc9f0 0%, #4361ee 100%);
+    position: relative;
+    overflow: hidden;
+    color: white;
+    padding: var(--spacing-xl) !important;
+    border: none !important;
+}
+
+/* EFECTO OLA: Pseudo-elemento rotando para simular movimiento de líquido */
+.widget-water::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 38%;
+    /* Forma irregular para que al rotar parezca una ola */
+    animation: waveRotate 10s infinite linear;
+    z-index: 1;
+}
+
+@keyframes waveRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.water-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+}
+
+.water-icon {
+    font-size: 2.5rem;
+    color: white;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+    margin-bottom: 10px;
+    display: block;
+}
+
+.water-value {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 5px;
+    display: block;
+    letter-spacing: -0.05em;
+}
+
+.water-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.9;
+}
+
+.water-meta {
+    margin-top: 15px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    display: inline-block;
+}
+
+/* SECCIÓN COMIDAS: Diseño tipo diario editorial */
+.meals-container {
+    grid-column: span 8;
+}
+
+.meals-container .section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding: 0 5px;
+}
+
+.meals-container .section-title h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--on-background);
+    letter-spacing: -0.02em;
+}
+
+.btn-all {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--surface-container-high);
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-all:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.meal-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: white;
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--outline-variant);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* EFECTO HOVER: Movimiento lateral para sensación premium */
+.meal-card:hover {
+    transform: translateX(12px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.meal-time-info {
+    min-width: 80px;
+}
+
+.meal-time-info .time {
+    display: block;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--on-surface);
+}
+
+.meal-main-info {
+    flex-grow: 1;
+}
+
+.meal-name {
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--on-surface);
+    margin-bottom: 2px;
+    display: block;
+}
+
+.meal-desc {
+    font-size: 0.85rem;
+    color: var(--on-surface-variant);
+    line-height: 1.4;
+}
+
+.meal-kcal-badge {
+    background: var(--surface-container-highest);
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 85px;
+}
+
+.meal-kcal-badge .val {
+    display: block;
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.meal-kcal-badge .unit {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--on-surface-variant);
+}
+
+/* COLUMNA LATERAL: Contenedor de widgets secundarios */
+.sidebar-widgets {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+/* HISTORIAL SEMANAL: Visualización de datos premium */
+.widget-history {
+    background: var(--surface-container-lowest);
+    width: 100%;
+    /* Asegura que ocupe todo el ancho de la columna */
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--spacing-lg);
+    color: var(--primary);
+}
+
+.history-header i {
+    font-size: 1.25rem;
+}
+
+.history-header h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.history-item {
+    position: relative;
+    padding: 12px 16px;
+    background: var(--surface-container-low);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.history-item:hover {
+    transform: scale(1.02);
+    background: var(--surface-container-high);
+}
+
+/* Barra de intensidad sutil en el fondo */
+.history-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--primary);
+    opacity: 0.08;
+    z-index: 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.history-day {
+    position: relative;
+    z-index: 1;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+}
+
+.history-kcal {
+    position: relative;
+    z-index: 1;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.history-kcal small {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-left: 2px;
+}
+
+/* TABLA DE ENTRENAMIENTO: Look técnico y profesional */
+.workout-container {
+    grid-column: span 8;
+}
+
+.workout-table-wrapper {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--outline-variant);
+    overflow: hidden;
+    margin-top: var(--spacing-md);
+}
+
+.workout-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.workout-table th {
+    background: var(--surface-container-low);
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--on-surface-variant);
+}
+
+.workout-row {
+    transition: var(--transition-base);
+}
+
+.workout-row:hover {
+    background-color: var(--surface-container-lowest);
+}
+
+.workout-cell {
+    padding: 16px;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+.exercise-name {
+    font-weight: 600;
+    color: var(--on-surface);
+    display: block;
+}
+
+.exercise-note {
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    display: block;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.badge-rir {
+    padding: 4px 8px;
+    background: var(--secondary-container);
+    color: var(--on-secondary-container);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.badge-load {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.rest-time {
+    font-size: 0.875rem;
+    color: var(--on-surface-variant);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

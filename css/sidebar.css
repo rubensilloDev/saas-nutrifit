@@ -1,0 +1,294 @@
+/* 
+  Estilos para el Menú de Navegación Lateral (Sidebar) - NutriFit Premium
+  Implementando colapso, submenús y estética Glassmorphism.
+*/
+
+:root {
+    --sidebar-width: 280px;
+    --sidebar-collapsed-width: 80px;
+    --transition-speed: 0.3s;
+    /* Paleta de Colores (Stitch) */
+    --primary: #0d631b;
+    --on-primary: #ffffff;
+    --primary-container: #2e7d32;
+    --on-primary-container: #cbffc2;
+
+
+
+}
+
+
+.sidebar-container {
+    width: var(--sidebar-width);
+    height: 100vh;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: var(--glass-bg, rgba(255, 255, 255, 0.8));
+    backdrop-filter: blur(var(--glass-blur, 10px));
+    border-right: 1px solid var(--glass-border, rgba(0, 0, 0, 0.1));
+    z-index: 1000;
+    transition: width var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-x: hidden;
+}
+
+/* Estado Colapsado */
+.sidebar-container.collapsed {
+    width: var(--sidebar-collapsed-width);
+    padding: var(--spacing-lg) var(--spacing-md);
+}
+
+/* Header & Toggle */
+.sidebar-header {
+    padding-bottom: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    position: relative;
+}
+
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background: linear-gradient(135deg, var(--primary), #81c784);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+}
+
+.brand-title {
+    font-size: 1.25rem;
+    color: var(--on-surface);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    transition: opacity var(--transition-speed), transform var(--transition-speed);
+}
+
+/* Toggle Button (Footer Integrated) */
+.toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 12px;
+    width: 100%;
+    background: var(--surface-container-high);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    color: var(--primary);
+    cursor: pointer;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    margin-bottom: var(--spacing-md);
+    transition: all var(--transition-base);
+}
+
+.toggle-btn i {
+    font-size: 1.4rem;
+    transition: transform var(--transition-speed);
+}
+
+.toggle-btn:hover {
+    background: var(--primary-container);
+    color: white;
+    border-color: var(--primary);
+}
+
+.collapsed .toggle-btn {
+    padding: 12px 0;
+    justify-content: center;
+    background: transparent;
+    border-color: transparent;
+}
+
+.collapsed .toggle-btn i {
+    transform: rotate(180deg);
+}
+
+.collapsed .toggle-btn .label {
+    display: none;
+}
+
+.collapsed .brand-title {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+/* Menu Links */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+}
+
+.menu-link,
+.submenu-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 12px;
+    text-decoration: none;
+    color: var(--on-surface-variant);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-family: inherit;
+    /* Asegura que botones y enlaces usen la misma fuente */
+    font-size: 1rem;
+    /* Asegura que botones y enlaces usen el mismo tamaño */
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-link .icon {
+    font-size: 1.4rem;
+    min-width: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-link .label {
+    flex-grow: 1;
+    white-space: nowrap;
+    transition: opacity var(--transition-speed);
+}
+
+.collapsed .menu-link .label,
+.collapsed .menu-link .arrow {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.menu-link:hover {
+    background-color: var(--surface-container-high, rgba(0, 0, 0, 0.05));
+    color: var(--primary);
+}
+
+.menu-link.active {
+    color: var(--primary);
+}
+
+/* Dropdowns & Submenus */
+.menu-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.menu-group.open .arrow {
+    transform: rotate(180deg);
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.menu-group.open .submenu {
+    max-height: 200px;
+    padding-top: 4px;
+    padding-bottom: 8px;
+}
+
+.collapsed .submenu {
+    display: none;
+}
+
+.submenu-link {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    font-weight: 500;
+}
+
+/* Footer */
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--outline-variant, rgba(0, 0, 0, 0.1));
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-lg);
+    transition: background 0.2s;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--primary-container);
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: opacity var(--transition-speed);
+}
+
+.user-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--on-surface);
+    white-space: nowrap;
+}
+
+.user-email {
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    white-space: nowrap;
+}
+
+.collapsed .user-info {
+    opacity: 0;
+    width: 0;
+}
+
+/* Ajuste del contenido principal cuando hay sidebar */
+body {
+    display: flex;
+}
+
+main {
+    flex-grow: 1;
+    margin-left: var(--sidebar-width);
+    transition: margin-left var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.collapsed+main,
+body:has(.collapsed) main {
+    margin-left: var(--sidebar-collapsed-width);
+}

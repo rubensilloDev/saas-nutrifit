@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Nutrición - NutriFit Systems</title>
+    <!-- Remix Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Estilos del Sistema -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/nutrition.css"> <!-- Se creará después -->
+</head>
+
+<body>
+    <!-- El sidebar se inyectará aquí -->
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Registro de Nutrición</h1>
+            <p>Controla tus macros, calorías e hidratación diaria para alcanzar tus objetivos.</p>
+        </header>
+
+        <!-- BARRA DE ESTADÍSTICAS RÁPIDAS (Kcal & Macros) -->
+        <div class="nutrition-stats-bar">
+            <div class="stat-mini-card">
+                <div class="icon-wrap calories"><i class="ri-fire-line"></i></div>
+                <div class="stat-info">
+                    <span class="label">Calorías Restantes</span>
+                    <span class="value" id="cal-remaining">1,840 kcal</span>
+                </div>
+            </div>
+            <div class="stat-mini-card">
+                <div class="icon-wrap protein"><i class="ri-restaurant-line"></i></div>
+                <div class="stat-info">
+                    <span class="label">Proteína</span>
+                    <span class="value" id="protein-total">45g / 160g</span>
+                </div>
+            </div>
+            <div class="stat-mini-card">
+                <div class="icon-wrap water"><i class="ri-drop-line"></i></div>
+                <div class="stat-info">
+                    <span class="label">Hidratación</span>
+                    <span class="value" id="water-total">1.5L / 3L</span>
+                </div>
+            </div>
+            <div class="stat-mini-card">
+                <div class="icon-wrap streak"><i class="ri-calendar-check-line"></i></div>
+                <div class="stat-info">
+                    <span class="label">Racha Dieta</span>
+                    <span class="value">12 Días</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            
+            <!-- SECCIÓN: REGISTRO DE COMIDAS -->
+            <section class="widget nutrition-logger" style="grid-column: span 8;">
+                <div class="section-header-row">
+                    <div class="title-with-badge">
+                        <h2>Diario de Comidas</h2>
+                        <span class="date-badge" id="current-date">Hoy, 16 May</span>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn-icon-only" id="prev-day"><i class="ri-arrow-left-s-line"></i></button>
+                        <button class="btn-icon-only" id="next-day"><i class="ri-arrow-right-s-line"></i></button>
+                    </div>
+                </div>
+
+                <!-- Lista de Comidas del Día -->
+                <div class="meals-list">
+                    <!-- DESAYUNO -->
+                    <div class="nutrition-diary-item" id="breakfast-section">
+                        <div class="meal-header">
+                            <div class="meal-title">
+                                <i class="ri-sun-line"></i>
+                                <h3>Desayuno</h3>
+                            </div>
+                            <button class="btn-add-food" data-meal="breakfast"><i class="ri-add-line"></i></button>
+                        </div>
+                        <div class="meal-content">
+                            <p class="empty-meal-msg">No hay alimentos registrados.</p>
+                        </div>
+                        <div class="meal-footer">
+                            <div class="meal-macros-summary">
+                                <span class="macro-pill kcal">0 kcal</span>
+                                <span class="macro-pill p">0g P</span>
+                                <span class="macro-pill c">0g C</span>
+                                <span class="macro-pill f">0g G</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ALMUERZO -->
+                    <div class="nutrition-diary-item" id="lunch-section">
+                        <div class="meal-header">
+                            <div class="meal-title">
+                                <i class="ri-restaurant-2-line"></i>
+                                <h3>Almuerzo</h3>
+                            </div>
+                            <button class="btn-add-food" data-meal="lunch"><i class="ri-add-line"></i></button>
+                        </div>
+                        <div class="meal-content">
+                            <p class="empty-meal-msg">No hay alimentos registrados.</p>
+                        </div>
+                        <div class="meal-footer">
+                            <div class="meal-macros-summary">
+                                <span class="macro-pill kcal">0 kcal</span>
+                                <span class="macro-pill p">0g P</span>
+                                <span class="macro-pill c">0g C</span>
+                                <span class="macro-pill f">0g G</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENA -->
+                    <div class="nutrition-diary-item" id="dinner-section">
+                        <div class="meal-header">
+                            <div class="meal-title">
+                                <i class="ri-moon-line"></i>
+                                <h3>Cena</h3>
+                            </div>
+                            <button class="btn-add-food" data-meal="dinner"><i class="ri-add-line"></i></button>
+                        </div>
+                        <div class="meal-content">
+                            <p class="empty-meal-msg">No hay alimentos registrados.</p>
+                        </div>
+                        <div class="meal-footer">
+                            <div class="meal-macros-summary">
+                                <span class="macro-pill kcal">0 kcal</span>
+                                <span class="macro-pill p">0g P</span>
+                                <span class="macro-pill c">0g C</span>
+                                <span class="macro-pill f">0g G</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SNACKS / OTROS -->
+                    <div class="nutrition-diary-item" id="snacks-section">
+                        <div class="meal-header">
+                            <div class="meal-title">
+                                <i class="ri-apple-line"></i>
+                                <h3>Snacks / Otros</h3>
+                            </div>
+                            <button class="btn-add-food" data-meal="snacks"><i class="ri-add-line"></i></button>
+                        </div>
+                        <div class="meal-content">
+                            <p class="empty-meal-msg">No hay alimentos registrados.</p>
+                        </div>
+                        <div class="meal-footer">
+                            <div class="meal-macros-summary">
+                                <span class="macro-pill kcal">0 kcal</span>
+                                <span class="macro-pill p">0g P</span>
+                                <span class="macro-pill c">0g C</span>
+                                <span class="macro-pill f">0g G</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN LATERAL: HIDRATACIÓN Y RESUMEN -->
+            <aside class="nutrition-aside" style="grid-column: span 4; display: flex; flex-direction: column; gap: var(--spacing-xxl);">
+                
+                <!-- WIDGET AGUA -->
+                <div class="widget water-widget">
+                    <div class="section-title">
+                        <h3><i class="ri-drop-fill"></i> Control de Agua</h3>
+                    </div>
+                    <div class="water-progress-visual">
+                        <div class="water-glass-container">
+                            <div class="water-level" id="water-level-bar" style="height: 50%;"></div>
+                        </div>
+                        <div class="water-stats">
+                            <span class="current">1.5L</span>
+                            <span class="goal">Meta: 3.0L</span>
+                        </div>
+                    </div>
+                    <div class="water-controls">
+                        <button class="btn-water" data-amount="250"><i class="ri-add-line"></i> 250ml</button>
+                        <button class="btn-water" data-amount="500"><i class="ri-add-line"></i> 500ml</button>
+                    </div>
+                </div>
+
+                <!-- WIDGET MACROS RESUMEN -->
+                <div class="widget macros-widget">
+                    <div class="section-title">
+                        <h3>Resumen de Macros</h3>
+                    </div>
+                    <div class="macro-progress-list">
+                        <div class="macro-item">
+                            <div class="macro-label">
+                                <span>Proteína</span>
+                                <span>45g / 160g</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill protein" style="width: 28%;"></div></div>
+                        </div>
+                        <div class="macro-item">
+                            <div class="macro-label">
+                                <span>Carbohidratos</span>
+                                <span>120g / 250g</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill carbs" style="width: 48%;"></div></div>
+                        </div>
+                        <div class="macro-item">
+                            <div class="macro-label">
+                                <span>Grasas</span>
+                                <span>35g / 70g</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill fats" style="width: 50%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WIDGET PRÓXIMA COMIDA SUGERIDA (IA) -->
+                <div class="widget ai-suggestion">
+                    <div class="section-title">
+                        <h3><i class="ri-sparkling-fill"></i> Sugerencia IA</h3>
+                    </div>
+                    <p class="suggestion-text">"Te faltan 30g de proteína para cumplir tu meta de hoy. Te sugerimos una merienda de yogur griego con nueces."</p>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- MODAL PARA AÑADIR ALIMENTO (Oculto por defecto) -->
+    <div id="modal-food-search" class="modal">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h2>Añadir Alimento</h2>
+                <button class="btn-close-modal"><i class="ri-close-line"></i></button>
+            </header>
+            <div class="modal-body">
+                <div class="search-box">
+                    <i class="ri-search-line"></i>
+                    <input type="text" id="food-search-input" placeholder="Busca un alimento o marca...">
+                </div>
+                <div id="search-results" class="search-results">
+                    <!-- Resultados de búsqueda dinámicos -->
+                    <p class="search-hint">Empieza a escribir para buscar alimentos...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificaciones Toast -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../src/components/sidebar.js"></script>
+    <script src="../../src/pages/nutrition.js"></script> <!-- Se creará después -->
+</body>
+
+</html>

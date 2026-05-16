@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - NutriFit Systems</title>
+    <!-- Remix Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+</head>
+
+<body>
+    <!-- El sidebar se inyectará aquí -->
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Hola, Alex Rivera</h1>
+            <p>Aquí tienes el resumen de tu nutrición para hoy.</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Resumen de Calorías Premium (Solicitado por el usuario) -->
+            <div class="widget summary-kcal">
+                <div class="kcal-main-view">
+                    <div class="kcal-progress-container">
+                        <svg class="kcal-progress-svg" viewBox="0 0 220 220">
+                            <circle class="kcal-progress-bg" cx="110" cy="110" r="100"></circle>
+                            <circle class="kcal-progress-bar" cx="110" cy="110" r="100"></circle>
+                        </svg>
+                        <div class="kcal-center-text">
+                            <span class="kcal-value">1,842</span>
+                            <span class="kcal-label">consumidas</span>
+                        </div>
+                    </div>
+                    <div class="kcal-target">
+                        <span class="target-val">2,500</span>
+                        <span class="target-lbl">Meta diaria</span>
+                    </div>
+                </div>
+
+                <div class="summary-info">
+                    <div class="macro-grid">
+                        <!-- Proteína (Azul) -->
+                        <div class="macro-card protein">
+                            <div class="macro-header">
+                                <span class="macro-dot"></span>
+                                <span class="macro-name">Proteína</span>
+                            </div>
+                            <div class="macro-body">
+                                <span class="macro-val">145<small>g</small></span>
+                                <div class="macro-progress">
+                                    <div class="bar" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Carbs (Ámbar) -->
+                        <div class="macro-card carbs">
+                            <div class="macro-header">
+                                <span class="macro-dot"></span>
+                                <span class="macro-name">Carbs</span>
+                            </div>
+                            <div class="macro-body">
+                                <span class="macro-val">210<small>g</small></span>
+                                <div class="macro-progress">
+                                    <div class="bar" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grasas (Púrpura) -->
+                        <div class="macro-card fats">
+                            <div class="macro-header">
+                                <span class="macro-dot"></span>
+                                <span class="macro-name">Grasas</span>
+                            </div>
+                            <div class="macro-body">
+                                <span class="macro-val">52<small>g</small></span>
+                                <div class="macro-progress">
+                                    <div class="bar" style="width: 45%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="remaining-kcal-footer">
+                        <div class="footer-info">
+                            <i class="ri-fire-fill"></i>
+                            <span>Te quedan <strong>658 kcal</strong> para hoy</span>
+                        </div>
+                        <div class="footer-percent">73%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comidas de Hoy -->
+            <div class="meals-container">
+                <div class="section-title">
+                    <h3>Comidas de Hoy</h3>
+                    <button class="btn-all">
+                        <span>Ver todas</span>
+                        <i class="ri-arrow-right-s-line"></i>
+                    </button>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time-info">
+                        <span class="time">08:30</span>
+                    </div>
+                    <div class="meal-main-info">
+                        <span class="meal-name">Desayuno Proteico</span>
+                        <span class="meal-desc">Huevos orgánicos, aguacate hass y pan de masa madre.</span>
+                    </div>
+                    <div class="meal-kcal-badge">
+                        <span class="val">450</span>
+                        <span class="unit">kcal</span>
+                    </div>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time-info">
+                        <span class="time">14:15</span>
+                    </div>
+                    <div class="meal-main-info">
+                        <span class="meal-name">Bowl de Salmón & Quinoa</span>
+                        <span class="meal-desc">Salmón salvaje, brócoli al vapor y aderezo cítrico.</span>
+                    </div>
+                    <div class="meal-kcal-badge">
+                        <span class="val">620</span>
+                        <span class="unit">kcal</span>
+                    </div>
+                </div>
+
+                <div class="meal-card">
+                    <div class="meal-time-info">
+                        <span class="time">20:45</span>
+                    </div>
+                    <div class="meal-main-info">
+                        <span class="meal-name">Cena Ligera de Pavo</span>
+                        <span class="meal-desc">Pechuga de pavo con espárragos y ensalada verde.</span>
+                    </div>
+                    <div class="meal-kcal-badge">
+                        <span class="val">380</span>
+                        <span class="unit">kcal</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Widget de Agua Estilo Inmersivo -->
+            <div class="widget widget-water">
+                <div class="water-content">
+                    <i class="ri-drop-fill water-icon"></i>
+                    <span class="water-value">2.1L</span>
+                    <span class="water-label">Agua hoy</span>
+                    <br>
+                    <div class="water-meta">Meta: 3.0L</div>
+                </div>
+            </div>
+
+            <!-- Último Entrenamiento -->
+            <div class="workout-container">
+                <div class="section-title">
+                    <h3>Último Entrenamiento: Pierna & Empuje</h3>
+                    <span style="font-size: 0.875rem; color: var(--on-surface-variant);">14 Mayo, 2026</span>
+                </div>
+                <div class="workout-table-wrapper">
+                    <table class="workout-table">
+                        <thead>
+                            <tr>
+                                <th>Ejercicio</th>
+                                <th>Series/Reps</th>
+                                <th>Carga</th>
+                                <th>Descanso</th>
+                                <th>Intensidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="workout-row">
+                                <td class="workout-cell">
+                                    <span class="exercise-name">Sentadilla con Barra</span>
+                                    <span class="exercise-note">Controlar profundidad, evitar valgo</span>
+                                </td>
+                                <td class="workout-cell">4 x 6</td>
+                                <td class="workout-cell"><span class="badge-load">100 kg</span></td>
+                                <td class="workout-cell">
+                                    <div class="rest-time"><i class="ri-timer-line"></i> 180s</div>
+                                </td>
+                                <td class="workout-cell"><span class="badge-rir">RIR 1</span></td>
+                            </tr>
+                            <tr class="workout-row">
+                                <td class="workout-cell">
+                                    <span class="exercise-name">Press Militar</span>
+                                    <span class="exercise-note">Glúteo activo, no arquear zona lumbar</span>
+                                </td>
+                                <td class="workout-cell">3 x 10</td>
+                                <td class="workout-cell"><span class="badge-load">45 kg</span></td>
+                                <td class="workout-cell">
+                                    <div class="rest-time"><i class="ri-timer-line"></i> 90s</div>
+                                </td>
+                                <td class="workout-cell"><span class="badge-rir">RIR 2</span></td>
+                            </tr>
+                            <tr class="workout-row">
+                                <td class="workout-cell">
+                                    <span class="exercise-name">Dominadas Pronas</span>
+                                    <span class="exercise-note">Rango completo, barbilla sobre la barra</span>
+                                </td>
+                                <td class="workout-cell">3 x MAX</td>
+                                <td class="workout-cell"><span class="badge-load">Peso Corp.</span></td>
+                                <td class="workout-cell">
+                                    <div class="rest-time"><i class="ri-timer-line"></i> 120s</div>
+                                </td>
+                                <td class="workout-cell"><span class="badge-rir">RIR 0</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Sidebar Widgets -->
+            <div class="sidebar-widgets">
+                <!-- Historial Semanal Premium -->
+                <div class="widget widget-history">
+                    <div class="history-header">
+                        <i class="ri-history-line"></i>
+                        <h3>Historial Semanal</h3>
+                    </div>
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-bar" style="width: 82%;"></div>
+                            <span class="history-day">Ayer</span>
+                            <span class="history-kcal">2,450 <small>kcal</small></span>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-bar" style="width: 95%;"></div>
+                            <span class="history-day">Lunes</span>
+                            <span class="history-kcal">2,890 <small>kcal</small></span>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-bar" style="width: 70%;"></div>
+                            <span class="history-day">Domingo</span>
+                            <span class="history-kcal">2,100 <small>kcal</small></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../../src/components/sidebar.js"></script>
+</body>
+
+</html>
