@@ -69,6 +69,72 @@
     --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* --- Loading Screen Premium --- */
+#nutrifit-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background: linear-gradient(160deg, #f7fbf0, #e8f5e9, #f1f8e9);
+    opacity: 1;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: all;
+}
+
+#nutrifit-loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(13, 99, 27, 0.25);
+    animation: loaderLogoPulse 1.2s ease-in-out infinite;
+}
+
+.loader-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@keyframes loaderLogoPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 8px 32px rgba(13, 99, 27, 0.25); }
+    50% { transform: scale(1.06); box-shadow: 0 12px 48px rgba(13, 99, 27, 0.35); }
+}
+
+.loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(13, 99, 27, 0.12);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: loaderSpin 0.8s linear infinite;
+}
+
+@keyframes loaderSpin {
+    to { transform: rotate(360deg); }
+}
+
+.loader-brand {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+    opacity: 0.8;
+}
+
 /* --- Estilos Base y Reset --- */
 * {
     margin: 0;
@@ -88,4 +154,20 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 600;
+}
+
+/* --- Mobile: max-width 768px --- */
+/* Ajustes globales para evitar desbordamiento horizontal y escalar tipografía */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden; /* Evita scroll horizontal por elementos que sobresalgan */
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .dashboard-header p {
+        font-size: 0.85rem;
+    }
 }

@@ -7,7 +7,6 @@
     <title>Chat de IA - NutriFit Systems</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/dashboard.css">
@@ -18,17 +17,12 @@
     <div id="sidebar-target"></div>
 
     <main class="dashboard-container">
-        <header class="dashboard-header">
-            <h1>Asistente NutriFit AI</h1>
-            <p>Tu entrenador personal inteligente, resuelve tus dudas al instante.</p>
-        </header>
-
         <div id="ai-chat-container" class="chat-container">
             <!-- Cabecera del chat -->
             <header class="chat-header">
                 <div class="chat-info">
                     <div class="chat-avatar">
-                        <i class="ph-fill ph-robot"></i>
+                        <i class="ri-robot-fill"></i>
                         <span class="status-indicator online"></span>
                     </div>
                     <div class="chat-details">
@@ -38,10 +32,10 @@
                 </div>
                 <div class="chat-actions">
                     <button id="clear-chat" title="Limpiar conversación">
-                        <i class="ph ph-trash"></i>
+                        <i class="ri-delete-bin-line"></i>
                     </button>
                     <button id="close-chat" title="Cerrar">
-                        <i class="ph ph-x"></i>
+                        <i class="ri-close-line"></i>
                     </button>
                 </div>
             </header>
@@ -51,14 +45,14 @@
                 <!-- Mensaje de bienvenida -->
                 <div class="message bot">
                     <div class="message-content">
-                        ¡Hola, Alex! Soy tu coach NutriFit AI. 🚀<br><br>
+                        <i class="ri-rocket-2-fill" style="color: var(--primary);"></i> ¡Hola, Alex! Soy tu coach NutriFit AI.<br><br>
                         Estoy aquí para ayudarte con tu alimentación, entrenamiento y hábitos. 
                         ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre:
                         <br><br>
-                        🥗 <strong>Planificación de comidas</strong><br>
-                        💪 <strong>Rutinas de entrenamiento</strong><br>
-                        📊 <strong>Análisis de progreso</strong><br>
-                        🧠 <strong>Consejos de nutrición</strong>
+                        <i class="ri-salad-fill" style="color: var(--color-carbs);"></i> <strong>Planificación de comidas</strong><br>
+                        <i class="ri-arm-flex-fill" style="color: var(--primary);"></i> <strong>Rutinas de entrenamiento</strong><br>
+                        <i class="ri-bar-chart-2-fill" style="color: var(--color-calories);"></i> <strong>Análisis de progreso</strong><br>
+                        <i class="ri-brain-fill" style="color: #7b1fa2;"></i> <strong>Consejos de nutrición</strong>
                     </div>
                     <span class="message-time">12:00</span>
                 </div>
@@ -76,13 +70,13 @@
                 <!-- Respuesta del bot -->
                 <div class="message bot">
                     <div class="message-content">
-                        Buenas preguntas, Alex. 💪<br><br>
+                        <i class="ri-arm-flex-fill" style="color: var(--primary);"></i> Buenas preguntas, Alex.<br><br>
                         La falta de energía por la tarde suele estar relacionada con la 
                         <strong>distribución de carbohidratos</strong> a lo largo del día.<br><br>
                         Te recomiendo:<br>
-                        ✅ <strong>Pre-entreno (60-90 min antes):</strong> Plátano + café negro o avena con canela<br>
-                        ✅ <strong>Comida de media mañana:</strong> Añadir 30-40g de carbohidratos complejos (batata, arroz integral)<br>
-                        ✅ <strong>Hidratación:</strong> Asegura 500ml de agua 2h antes del entreno<br><br>
+                            <i class="ri-checkbox-circle-fill" style="color: var(--primary);"></i> <strong>Pre-entreno (60-90 min antes):</strong> Plátano + café negro o avena con canela<br>
+                            <i class="ri-checkbox-circle-fill" style="color: var(--primary);"></i> <strong>Comida de media mañana:</strong> Añadir 30-40g de carbohidratos complejos (batata, arroz integral)<br>
+                            <i class="ri-checkbox-circle-fill" style="color: var(--primary);"></i> <strong>Hidratación:</strong> Asegura 500ml de agua 2h antes del entreno<br><br>
                         ¿Qué tal si pruebas esto mañana y me cuentas cómo te sientes?
                     </div>
                     <span class="message-time">12:06</span>
@@ -100,16 +94,16 @@
                 <!-- Respuesta del bot -->
                 <div class="message bot">
                     <div class="message-content">
-                        Excelente elección. 🍌<br><br>
+                        <i class="ri-thumb-up-fill" style="color: var(--color-carbs);"></i> Excelente elección.<br><br>
                         Para después de entrenar pierna (que es muy demandante), 
                         tu cena debería enfocarse en <strong>proteína de calidad + carbohidratos de absorción moderada</strong>:<br><br>
-                        🍽️ <strong>Cena post-pierna ideal:</strong><br>
-                        • 200g de salmón o pollo a la plancha<br>
-                        • 250g de batata asada 🍠<br>
-                        • Ensalada verde con aguacate 🥑<br>
-                        • Un puñado de nueces<br><br>
-                        Esto te dará triptófano (para dormir bien), glucógeno muscular 
-                        y antioxidantes para la recuperación. ¡Doble check! ✅✅
+                            <i class="ri-restaurant-2-fill" style="color: var(--primary);"></i> <strong>Cena post-pierna ideal:</strong><br>
+                            • 200g de salmón o pollo a la plancha<br>
+                            • 250g de batata asada <i class="ri-food-fill" style="color: var(--color-carbs);"></i><br>
+                            • Ensalada verde con aguacate <i class="ri-leaf-fill" style="color: var(--primary);"></i><br>
+                            • Un puñado de nueces<br><br>
+                            Esto te dará triptófano (para dormir bien), glucógeno muscular 
+                            y antioxidantes para la recuperación. <i class="ri-check-double-fill" style="color: var(--primary);"></i> ¡Doble check!
                     </div>
                     <span class="message-time">12:09</span>
                 </div>
@@ -126,10 +120,10 @@
                 <!-- Cierre del bot -->
                 <div class="message bot">
                     <div class="message-content">
-                        ¡Así se habla! 💯<br><br>
+                        <i class="ri-hundred-fill" style="color: var(--primary);"></i> ¡Así se habla!<br><br>
                         Recuerda que la clave está en la <strong>consistencia</strong>, no en la perfección. 
                         Si un día no sale perfecto, no pasa nada — lo importante es retomar al siguiente.<br><br>
-                        Estaré aquí cuando me necesites. ¡A darle duro mañana, Alex! 🔥💪
+                        Estaré aquí cuando me necesites. ¡A darle duro mañana, Alex! <i class="ri-fire-fill" style="color: #ff6d00;"></i> <i class="ri-arm-flex-fill" style="color: var(--primary);"></i>
                     </div>
                     <span class="message-time">12:12</span>
                 </div>
@@ -140,12 +134,12 @@
                 <form id="chat-form">
                     <div class="input-wrapper">
                         <button type="button" class="attachment-btn">
-                            <i class="ph ph-paperclip"></i>
+                            <i class="ri-attachment-line"></i>
                         </button>
                         <textarea id="user-input" placeholder="Escribe tu consulta aquí..." rows="1" required></textarea>
                     </div>
                     <button type="submit" id="send-btn" class="send-button">
-                        <i class="ph-fill ph-paper-plane-right"></i>
+                        <i class="ri-send-plane-fill"></i>
                     </button>
                 </form>
             </footer>

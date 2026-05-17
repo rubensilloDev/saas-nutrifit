@@ -11,53 +11,54 @@ document.addEventListener('DOMContentLoaded', () => {
     //  Cada alimento tiene valores NUTRICIONALES por 100g
     //  Micros: Fibra, Sodio, Azúcar, Vitamina C, Hierro
     // ============================================================
+    /* Base de datos de alimentos con iconos Remix en lugar de emojis */
     const FOOD_DATABASE = [
         {
             id: 'food-poll',
             name: 'Pechuga de Pollo',
-            emoji: '🍗',
+            emoji: 'ri-restaurant-fill',
             per100: { kcal: 165, protein: 31, carbs: 0, fats: 3.6, fiber: 0, sodium: 74, sugar: 0, vitC: 0, iron: 1.0 }
         },
         {
             id: 'food-arroz',
             name: 'Arroz Blanco',
-            emoji: '🍚',
+            emoji: 'ri-restaurant-2-fill',
             per100: { kcal: 130, protein: 2.7, carbs: 28, fats: 0.3, fiber: 0.4, sodium: 1, sugar: 0.1, vitC: 0, iron: 0.2 }
         },
         {
             id: 'food-aguacate',
             name: 'Aguacate',
-            emoji: '🥑',
+            emoji: 'ri-leaf-fill',
             per100: { kcal: 160, protein: 2, carbs: 8.5, fats: 15, fiber: 6.7, sodium: 7, sugar: 0.7, vitC: 10, iron: 0.6 }
         },
         {
             id: 'food-huevos',
             name: 'Huevos Revueltos',
-            emoji: '🍳',
+            emoji: 'ri-egg-fill',
             per100: { kcal: 155, protein: 13, carbs: 1.1, fats: 11, fiber: 0, sodium: 124, sugar: 1.1, vitC: 0, iron: 1.8 }
         },
         {
             id: 'food-brocoli',
             name: 'Brócoli',
-            emoji: '🥦',
+            emoji: 'ri-leaf-fill',
             per100: { kcal: 34, protein: 2.8, carbs: 7, fats: 0.4, fiber: 2.6, sodium: 33, sugar: 1.7, vitC: 89, iron: 0.7 }
         },
         {
             id: 'food-salmon',
             name: 'Salmón Ahumado',
-            emoji: '🐟',
+            emoji: 'ri-restaurant-fill',
             per100: { kcal: 208, protein: 20, carbs: 0, fats: 13, fiber: 0, sodium: 59, sugar: 0, vitC: 0, iron: 0.3 }
         },
         {
             id: 'food-yogur',
             name: 'Yogur Griego',
-            emoji: '🥛',
+            emoji: 'ri-cup-fill',
             per100: { kcal: 59, protein: 10, carbs: 3.6, fats: 0.7, fiber: 0, sodium: 36, sugar: 3.6, vitC: 0, iron: 0 }
         },
         {
             id: 'food-platano',
             name: 'Plátano',
-            emoji: '🍌',
+            emoji: 'ri-restaurant-2-fill',
             per100: { kcal: 89, protein: 1.1, carbs: 23, fats: 0.3, fiber: 2.6, sodium: 1, sugar: 12, vitC: 8.7, iron: 0.3 }
         }
     ];
@@ -110,6 +111,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnAddFoods = document.querySelectorAll('.btn-add-food');
     const btnWaterBtns = document.querySelectorAll('.btn-water');
+
+    // ============================================================
+    //  PERSISTENCIA: guardar/cargar comidas en localStorage (sincronización con dashboard)
+    // ============================================================
+
+    function saveMealsToStorage() {
+        try {
+            localStorage.setItem('nutrifit-meals', JSON.stringify(state.meals));
+            localStorage.setItem('nutrifit-water', JSON.stringify(state.water));
+        } catch (e) { /* ignorar */ }
+    }
+
+    function loadMealsFromStorage() {
+        try {
+            const saved = JSON.parse(localStorage.getItem('nutrifit-meals'));
+            if (saved) {
+                state.meals = saved;
+                // Reconstruir calculated properties si es necesario
+            }
+            const waterSaved = JSON.parse(localStorage.getItem('nutrifit-water'));
+            if (waterSaved) state.water = waterSaved;
+        } catch (e) { /* ignorar */ }
+    }
 
     // ============================================================
     //  FUNCIONES AUXILIARES
@@ -183,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.innerHTML = `
                     <div class="food-info">
                         <div class="food-main-row">
-                            <span class="food-emoji">${entry.food.emoji}</span>
+                            <span class="food-emoji"><i class="${entry.food.emoji}"></i></span>
                             <span class="food-name">${entry.food.name}</span>
                             <button class="food-remove" data-meal="${mealId}" data-index="${index}" title="Eliminar">
                                 <i class="ri-close-line"></i>
@@ -256,11 +280,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Actualizar micros (crear o reusar)
         if (microsContainer) {
             microsContainer.innerHTML = `
-                <span>🌾 Fibra: ${totalFiber}g</span>
-                <span>🧂 Sodio: ${totalSodium}mg</span>
-                <span>🍬 Azúcar: ${totalSugar}g</span>
-                <span>🍊 Vit. C: ${totalVitC}mg</span>
-                <span>🩸 Hierro: ${totalIron}mg</span>
+                <span><i class="ri-plant-fill"></i> Fibra: ${totalFiber}g</span>
+                <span><i class="ri-bubble-chart-fill"></i> Sodio: ${totalSodium}mg</span>
+                <span><i class="ri-capsule-fill"></i> Azúcar: ${totalSugar}g</span>
+                <span><i class="ri-flask-fill"></i> Vit. C: ${totalVitC}mg</span>
+                <span><i class="ri-droplet-fill"></i> Hierro: ${totalIron}mg</span>
             `;
         }
     }
@@ -363,6 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const calculated = calcNutrition(food, grams);
         const entry = { food, grams, calculated };
         state.meals[mealId].push(entry);
+        saveMealsToStorage();
         renderMealFoods(mealId);
         recalculateAll();
         showToast(`${food.name} añadido (${grams}g)`, 'ri-add-circle-fill');
@@ -371,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function removeFood(mealId, index) {
         const removed = state.meals[mealId][index];
         state.meals[mealId].splice(index, 1);
+        saveMealsToStorage();
         renderMealFoods(mealId);
         recalculateAll();
         if (removed) {
@@ -428,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
         filtered.forEach(food => {
             html += `
                 <div class="food-result-item" data-food-id="${food.id}">
-                    <div class="food-result-emoji">${food.emoji}</div>
+                    <div class="food-result-emoji"><i class="${food.emoji}"></i></div>
                     <div class="food-result-info">
                         <span class="food-result-name">${food.name}</span>
                         <span class="food-result-nutri">${food.per100.kcal} kcal · P:${food.per100.protein}g · C:${food.per100.carbs}g · G:${food.per100.fats}g</span>
@@ -461,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchResults.innerHTML = `
             <div class="quantity-selector">
                 <div class="qs-header">
-                    <span class="qs-emoji">${food.emoji}</span>
+                    <span class="qs-emoji"><i class="${food.emoji}"></i></span>
                     <span class="qs-name">${food.name}</span>
                 </div>
                 <div class="qs-input-group">
@@ -470,17 +496,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="qs-unit">gramos</span>
                 </div>
                 <div class="qs-preview">
-                    <span class="qs-preview-item kcal">🔥 ${preview.kcal} kcal</span>
-                    <span class="qs-preview-item p">💪 ${preview.protein}g P</span>
-                    <span class="qs-preview-item c">🌾 ${preview.carbs}g C</span>
-                    <span class="qs-preview-item f">🧈 ${preview.fats}g G</span>
+                    <span class="qs-preview-item kcal"><i class="ri-fire-fill"></i> ${preview.kcal} kcal</span>
+                    <span class="qs-preview-item p"><i class="ri-arm-flex-fill"></i> ${preview.protein}g P</span>
+                    <span class="qs-preview-item c"><i class="ri-plant-fill"></i> ${preview.carbs}g C</span>
+                    <span class="qs-preview-item f"><i class="ri-droplet-fill"></i> ${preview.fats}g G</span>
                 </div>
                 <div class="qs-micros">
-                    <span>🌾 Fibra: ${preview.fiber}g</span>
-                    <span>🧂 Sodio: ${preview.sodium}mg</span>
-                    <span>🍬 Azúcar: ${preview.sugar}g</span>
-                    <span>🍊 Vit. C: ${preview.vitC}mg</span>
-                    <span>🩸 Hierro: ${preview.iron}mg</span>
+                    <span><i class="ri-plant-fill"></i> Fibra: ${preview.fiber}g</span>
+                    <span><i class="ri-bubble-chart-fill"></i> Sodio: ${preview.sodium}mg</span>
+                    <span><i class="ri-capsule-fill"></i> Azúcar: ${preview.sugar}g</span>
+                    <span><i class="ri-vitamin-fill"></i> Vit. C: ${preview.vitC}mg</span>
+                    <span><i class="ri-droplet-fill"></i> Hierro: ${preview.iron}mg</span>
                 </div>
                 <div class="qs-actions">
                     <button class="qs-btn cancel">Volver</button>
@@ -500,16 +526,16 @@ document.addEventListener('DOMContentLoaded', () => {
         function updatePreview() {
             const grams = parseFloat(input.value) || 0;
             const n = calcNutrition(food, grams);
-            previewKcal.innerHTML = `🔥 ${n.kcal} kcal`;
-            previewP.innerHTML = `💪 ${n.protein}g P`;
-            previewC.innerHTML = `🌾 ${n.carbs}g C`;
-            previewF.innerHTML = `🧈 ${n.fats}g G`;
+            previewKcal.innerHTML = `<i class="ri-fire-fill"></i> ${n.kcal} kcal`;
+            previewP.innerHTML = `<i class="ri-arm-flex-fill"></i> ${n.protein}g P`;
+            previewC.innerHTML = `<i class="ri-plant-fill"></i> ${n.carbs}g C`;
+            previewF.innerHTML = `<i class="ri-droplet-fill"></i> ${n.fats}g G`;
             microsContainer.innerHTML = `
-                <span>🌾 Fibra: ${n.fiber}g</span>
-                <span>🧂 Sodio: ${n.sodium}mg</span>
-                <span>🍬 Azúcar: ${n.sugar}g</span>
-                <span>🍊 Vit. C: ${n.vitC}mg</span>
-                <span>🩸 Hierro: ${n.iron}mg</span>
+                <span><i class="ri-plant-fill"></i> Fibra: ${n.fiber}g</span>
+                <span><i class="ri-bubble-chart-fill"></i> Sodio: ${n.sodium}mg</span>
+                <span><i class="ri-capsule-fill"></i> Azúcar: ${n.sugar}g</span>
+                <span><i class="ri-flask-fill"></i> Vit. C: ${n.vitC}mg</span>
+                <span><i class="ri-droplet-fill"></i> Hierro: ${n.iron}mg</span>
             `;
         }
 
@@ -567,11 +593,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const action = this.dataset.action || 'add';
             if (action === 'add') {
                 state.water.current += amount;
-                showToast(`+${amount}ml de agua 💧`, 'ri-drop-fill');
+                showToast(`+${amount}ml de agua`, 'ri-drop-fill');
             } else {
                 state.water.current = Math.max(0, state.water.current - amount);
                 showToast(`-${amount}ml de agua`, 'ri-drop-fill');
             }
+            saveMealsToStorage();
             recalculateAll();
         });
     });
@@ -588,12 +615,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ============================================================
-    //  INICIALIZAR: Render completo y fecha
+    //  INICIALIZAR: Cargar datos guardados y renderizar
     // ============================================================
 
+    loadMealsFromStorage();
     currentDateSpan.textContent = formatDate(state.currentDate);
 
-    // Renderizar todas las comidas (vacías al inicio)
+    // Renderizar todas las comidas (cargadas desde localStorage si existen)
     ['breakfast', 'lunch', 'dinner', 'snacks'].forEach(mealId => {
         renderMealFoods(mealId);
     });

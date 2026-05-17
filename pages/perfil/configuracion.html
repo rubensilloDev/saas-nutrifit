@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profile.css">
+</head>
+
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1><i class="ri-settings-5-fill" style="color: var(--primary);"></i> Configuración</h1>
+            <p>Personaliza tu experiencia en NutriFit.</p>
+        </header>
+
+        <div class="settings-grid">
+
+            <!-- PERFIL -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-user-3-line"></i>
+                    <h3>Perfil</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-field">
+                        <label class="profile-label">Nombre completo</label>
+                        <input type="text" class="profile-input" value="Alex Rivera" placeholder="Tu nombre">
+                    </div>
+                    <div class="settings-field">
+                        <label class="profile-label">Correo electrónico</label>
+                        <input type="email" class="profile-input" value="alex@nutrifit.com" placeholder="correo@ejemplo.com">
+                    </div>
+                    <div class="settings-field-row">
+                        <div class="settings-field">
+                            <label class="profile-label">Teléfono</label>
+                            <input type="tel" class="profile-input" value="+52 55 1234 5678" placeholder="+52 55 XXXX XXXX">
+                        </div>
+                        <div class="settings-field">
+                            <label class="profile-label">Fecha de nacimiento</label>
+                            <input type="date" class="profile-input" value="1995-06-15">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOTIFICACIONES -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-notification-3-line"></i>
+                    <h3>Notificaciones</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Correo electrónico</span>
+                            <span class="settings-toggle-desc">Resumen semanal, alertas de progreso</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Push (navegador)</span>
+                            <span class="settings-toggle-desc">Recordatorios de comidas, entrenos</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">SMS / WhatsApp</span>
+                            <span class="settings-toggle-desc">Alertas importantes de tu entrenador</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Recordatorio de comidas</span>
+                            <span class="settings-toggle-desc">Notificaciones diarias para registrar alimentos</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRIVACIDAD Y SEGURIDAD -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-lock-2-line"></i>
+                    <h3>Privacidad y Seguridad</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-action-row">
+                        <div class="settings-action-info">
+                            <span class="settings-toggle-label">Cambiar contraseña</span>
+                            <span class="settings-toggle-desc">Actualiza tu contraseña cada 3 meses</span>
+                        </div>
+                        <button class="settings-action-btn"><i class="ri-lock-line"></i> Cambiar</button>
+                    </div>
+                    <div class="settings-action-row">
+                        <div class="settings-action-info">
+                            <span class="settings-toggle-label">Autenticación en dos pasos (2FA)</span>
+                            <span class="settings-toggle-desc">Protege tu cuenta con un código adicional</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-action-row">
+                        <div class="settings-action-info">
+                            <span class="settings-toggle-label">Perfil público</span>
+                            <span class="settings-toggle-desc">Permitir que tu entrenador vea tu progreso</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-action-row" style="border-bottom: none;">
+                        <div class="settings-action-info">
+                            <span class="settings-toggle-label">Eliminar mis datos</span>
+                            <span class="settings-toggle-desc">Solicita la eliminación de tu cuenta y datos personales</span>
+                        </div>
+                        <button class="settings-action-btn settings-action-btn--danger"><i class="ri-delete-bin-line"></i> Solicitar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NUTRICIÓN -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-restaurant-2-line"></i>
+                    <h3>Preferencias de Nutrición</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-field">
+                        <label class="profile-label">Tipo de dieta</label>
+                        <select class="profile-input">
+                            <option value="balanced" selected>Equilibrada</option>
+                            <option value="low-carb">Baja en carbohidratos</option>
+                            <option value="keto">Cetogénica</option>
+                            <option value="vegan">Vegana</option>
+                            <option value="vegetarian">Vegetariana</option>
+                            <option value="mediterranean">Mediterránea</option>
+                        </select>
+                    </div>
+                    <div class="settings-field-row">
+                        <div class="settings-field">
+                            <label class="profile-label">Unidad de peso</label>
+                            <select class="profile-input">
+                                <option value="kg" selected>Kilogramos (kg)</option>
+                                <option value="lb">Libras (lb)</option>
+                            </select>
+                        </div>
+                        <div class="settings-field">
+                            <label class="profile-label">Formato de energía</label>
+                            <select class="profile-input">
+                                <option value="kcal" selected>kcal</option>
+                                <option value="kj">kJ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Recordatorio de agua</span>
+                            <span class="settings-toggle-desc">Notificación cada 2 horas para hidratarte</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Sugerencias de recetas</span>
+                            <span class="settings-toggle-desc">Recibe ideas semanales basadas en tus macros</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENTRENAMIENTO -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-run-line"></i>
+                    <h3>Preferencias de Entrenamiento</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-field-row">
+                        <div class="settings-field">
+                            <label class="profile-label">Días de entrenamiento</label>
+                            <select class="profile-input">
+                                <option value="3">3 días/semana</option>
+                                <option value="4" selected>4 días/semana</option>
+                                <option value="5">5 días/semana</option>
+                                <option value="6">6 días/semana</option>
+                            </select>
+                        </div>
+                        <div class="settings-field">
+                            <label class="profile-label">Duración ideal</label>
+                            <select class="profile-input">
+                                <option value="30">30 min</option>
+                                <option value="45" selected>45 min</option>
+                                <option value="60">60 min</option>
+                                <option value="90">90 min</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Recordatorio de entreno</span>
+                            <span class="settings-toggle-desc">Notificación cada mañana de tu rutina diaria</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Auto-descanso semanal</span>
+                            <span class="settings-toggle-desc">Descuenta automáticamente 1 día de descanso</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APARIENCIA -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-palette-line"></i>
+                    <h3>Apariencia</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-field">
+                        <label class="profile-label">Tema</label>
+                        <div class="settings-theme-options">
+                            <label class="settings-theme-option">
+                                <input type="radio" name="theme" value="light" checked>
+                                <span class="settings-theme-box">
+                                    <i class="ri-sun-line"></i>
+                                    <span>Claro</span>
+                                </span>
+                            </label>
+                            <label class="settings-theme-option">
+                                <input type="radio" name="theme" value="dark">
+                                <span class="settings-theme-box">
+                                    <i class="ri-moon-line"></i>
+                                    <span>Oscuro</span>
+                                </span>
+                            </label>
+                            <label class="settings-theme-option">
+                                <input type="radio" name="theme" value="system">
+                                <span class="settings-theme-box">
+                                    <i class="ri-computer-line"></i>
+                                    <span>Sistema</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="settings-field">
+                        <label class="profile-label">Tamaño de fuente</label>
+                        <div class="settings-theme-options">
+                            <label class="settings-theme-option">
+                                <input type="radio" name="font" value="small">
+                                <span class="settings-theme-box">A</span>
+                            </label>
+                            <label class="settings-theme-option">
+                                <input type="radio" name="font" value="medium" checked>
+                                <span class="settings-theme-box" style="font-size:1.2rem;">A</span>
+                            </label>
+                            <label class="settings-theme-option">
+                                <input type="radio" name="font" value="large">
+                                <span class="settings-theme-box" style="font-size:1.4rem;">A</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFORMACIÓN DE LA APP -->
+            <div class="profile-card settings-card settings-card--info">
+                <div class="profile-section-title">
+                    <i class="ri-information-line"></i>
+                    <h3>Información de la aplicación</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-info-row">
+                        <span class="settings-info-label">Versión</span>
+                        <span class="settings-info-value">v2.0.1</span>
+                    </div>
+                    <div class="settings-info-row">
+                        <span class="settings-info-label">Última actualización</span>
+                        <span class="settings-info-value">15 mayo 2026</span>
+                    </div>
+                    <div class="settings-info-row">
+                        <span class="settings-info-label">Plan actual</span>
+                        <span class="settings-info-value"><span class="profile-badge" style="margin:0;"><i class="ri-crown-fill"></i> Premium</span></span>
+                    </div>
+                    <div class="settings-info-row" style="border-bottom: none;">
+                        <span class="settings-info-label">Soporte</span>
+                        <span class="settings-info-value"><a href="#" style="color:var(--primary);font-weight:700;text-decoration:none;">soporte@nutrifit.com</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTÓN GUARDAR -->
+            <div class="profile-card settings-card settings-card--actions">
+                <button class="profile-save-btn" id="settings-save-btn">
+                    <i class="ri-save-3-line"></i>
+                    Guardar todos los cambios
+                </button>
+                <p class="settings-save-hint">Los cambios se aplicarán automáticamente en toda la aplicación.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const saveBtn = document.getElementById('settings-save-btn');
+
+            saveBtn.addEventListener('click', () => {
+                saveBtn.innerHTML = '<i class="ri-loader-4-line" style="animation: spin 1s linear infinite;"></i> Guardando...';
+                saveBtn.disabled = true;
+
+                setTimeout(() => {
+                    saveBtn.innerHTML = '<i class="ri-check-line"></i> Cambios guardados correctamente';
+                    saveBtn.style.background = '#e8f5e9';
+                    saveBtn.style.color = '#2e7d32';
+                    saveBtn.style.boxShadow = 'none';
+
+                    setTimeout(() => {
+                        saveBtn.innerHTML = '<i class="ri-save-3-line"></i> Guardar todos los cambios';
+                        saveBtn.style.background = '';
+                        saveBtn.style.color = '';
+                        saveBtn.style.boxShadow = '';
+                        saveBtn.disabled = false;
+                    }, 2500);
+                }, 1200);
+            });
+        });
+    </script>
+</body>
+
+</html>

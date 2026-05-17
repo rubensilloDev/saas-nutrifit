@@ -3,17 +3,64 @@
  * Inyecta el menú de navegación lateral en el DOM y gestiona los estados activos y de colapso.
  */
 
+// === LOADING SCREEN PREMIUM ===
+(function() {
+    // Inyectar el overlay de carga inmediatamente (antes de que el DOM termine)
+    if (!document.getElementById('nutrifit-loader')) {
+        const loader = document.createElement('div');
+        loader.id = 'nutrifit-loader';
+        loader.innerHTML = `
+            <div class="loader-logo"><img src="/img/icono-nutrifit.webp" alt="NutriFit"></div>
+            <div class="loader-spinner"></div>
+            <div class="loader-brand">NutriFit</div>
+        `;
+        document.documentElement.appendChild(loader);
+
+        // Ocultar el loader cuando el DOM esté listo
+        const hideLoader = () => {
+            requestAnimationFrame(() => {
+                loader.classList.add('hidden');
+                setTimeout(() => { loader.remove(); }, 700);
+            });
+        };
+
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(hideLoader, 250);
+        } else {
+            document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 250));
+            window.addEventListener('load', hideLoader);
+        }
+    }
+
+    // Interceptar clics en enlaces de navegación para mostrar loading
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('http') || href.startsWith('//')) return;
+
+        // Mostrar loader antes de navegar
+        const loader = document.getElementById('nutrifit-loader');
+        if (loader) {
+            loader.classList.remove('hidden');
+            loader.style.opacity = '1';
+            loader.style.pointerEvents = 'all';
+        }
+    });
+})();
+
 function initSidebar() {
-    // PERSISTENCIA: Recuperar el estado de colapso guardado en el navegador
-    const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
-    
+    const isMobile = window.innerWidth <= 768;
+    // En móvil siempre empieza colapsado (oculto); en desktop respeta localStorage
+    const defaultCollapsed = isMobile ? true : localStorage.getItem('sidebar-collapsed') === 'true';
+
     const sidebarHTML = `
-        <aside id="main-sidebar" class="sidebar-container ${isCollapsed ? 'collapsed' : ''}">
+        <aside id="main-sidebar" class="sidebar-container ${defaultCollapsed ? 'collapsed' : ''}">
             <div class="sidebar-header">
                 <div class="brand-logo">
-                    <i class="ri-leaf-line"></i>
+                    <img src="/img/icono-nutrifit.webp" alt="NutriFit">
                 </div>
-                <h2 class="brand-title">NutriFit</h2>
+                <img class="brand-title" src="/img/Logo_NutriFit_Systems_.webp" alt="NutriFit Systems">
             </div>
             
             <nav class="sidebar-menu">
@@ -22,12 +69,11 @@ function initSidebar() {
                     <span class="label">Inicio</span>
                 </a>
                 
-                <!-- Grupos con Dropdowns para navegación organizada -->
                 <div class="menu-group">
                     <button class="menu-link dropdown-toggle" id="btn-registros">
                         <i class="ri-book-read-line icon"></i>
                         <span class="label">Registros</span>
-                        <i class="ri-arrow-down-s-line arrow"></i>
+                        <i class="ri-arrow-down-s-line arrow-icon"></i>
                     </button>
                     <div class="submenu" id="submenu-registros">
                         <a href="/pages/registros/entrenamiento.html" class="submenu-link">
@@ -45,7 +91,7 @@ function initSidebar() {
                     <button class="menu-link dropdown-toggle" id="btn-mensajes">
                         <i class="ri-message-3-line icon"></i>
                         <span class="label">Mensajes</span>
-                        <i class="ri-arrow-down-s-line arrow"></i>
+                        <i class="ri-arrow-down-s-line arrow-icon"></i>
                     </button>
                     <div class="submenu" id="submenu-mensajes">
                         <a href="/pages/mensajes/chat-ia.html" class="submenu-link">
@@ -63,7 +109,7 @@ function initSidebar() {
                     <button class="menu-link dropdown-toggle" id="btn-perfil">
                         <i class="ri-user-3-line icon"></i>
                         <span class="label">Perfil</span>
-                        <i class="ri-arrow-down-s-line arrow"></i>
+                        <i class="ri-arrow-down-s-line arrow-icon"></i>
                     </button>
                     <div class="submenu" id="submenu-perfil">
                         <a href="/pages/perfil/index.html" class="submenu-link">
@@ -79,9 +125,9 @@ function initSidebar() {
             </nav>
 
             <div class="sidebar-footer">
-                <button id="sidebar-toggle" class="toggle-btn" title="Contraer menú">
+                <button id="sidebar-toggle" class="toggle-btn" title="${isMobile ? 'Cerrar menú' : 'Contraer menú'}">
                     <i class="ri-arrow-left-wide-line"></i>
-                    <span class="label">Contraer menú</span>
+                    <span class="label">${isMobile ? 'Cerrar menú' : 'Contraer menú'}</span>
                 </button>
                 <div class="user-profile">
                     <div class="user-avatar">
@@ -94,9 +140,12 @@ function initSidebar() {
                 </div>
             </div>
         </aside>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Menú">
+            <i class="ri-menu-line"></i>
+        </button>
+        <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     `;
 
-    // INYECCIÓN DINÁMICA: Asegura que el sidebar aparezca en todas las páginas
     const target = document.getElementById('sidebar-target');
     if (target) {
         target.innerHTML = sidebarHTML;
@@ -114,30 +163,83 @@ function initSidebar() {
 function setupEventListeners() {
     const sidebar = document.getElementById('main-sidebar');
     const toggleBtn = document.getElementById('sidebar-toggle');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const overlay = document.getElementById('mobile-menu-overlay');
     const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
-    // Gestión del botón de contraer/expandir
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('collapsed');
-        const isCollapsed = sidebar.classList.contains('collapsed');
-        localStorage.setItem('sidebar-collapsed', isCollapsed);
-        
-        // EVENTO PERSONALIZADO: Permite que otros elementos (como el dashboard) 
-        // ajusten sus márgenes automáticamente al mover el sidebar.
-        window.dispatchEvent(new CustomEvent('sidebarToggle', { detail: { collapsed: isCollapsed } }));
+    function isMobile() { return window.innerWidth <= 768; }
+
+    function closeSidebar() {
+        sidebar.classList.add('collapsed');
+        if (isMobile()) {
+            mobileBtn.innerHTML = '<i class="ri-menu-line"></i>';
+            overlay.classList.remove('active');
+        }
+    }
+
+    function openSidebar() {
+        sidebar.classList.remove('collapsed');
+        if (isMobile()) {
+            mobileBtn.innerHTML = '<i class="ri-close-line"></i>';
+            overlay.classList.add('active');
+        }
+    }
+
+    function toggleSidebar() {
+        const collapsed = sidebar.classList.contains('collapsed');
+        if (collapsed) {
+            openSidebar();
+        } else {
+            closeSidebar();
+        }
+        if (!isMobile()) {
+            localStorage.setItem('sidebar-collapsed', sidebar.classList.contains('collapsed'));
+            window.dispatchEvent(new CustomEvent('sidebarToggle', { detail: { collapsed: sidebar.classList.contains('collapsed') } }));
+        }
+    }
+
+    // Botón de toggle dentro del sidebar (escritorio)
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleSidebar);
+
+    // Botón hamburguesa fuera del sidebar (móvil)
+    if (mobileBtn) mobileBtn.addEventListener('click', toggleSidebar);
+
+    // Overlay: cerrar menú al tocar el fondo oscuro
+    if (overlay) overlay.addEventListener('click', closeSidebar);
+
+    // En móvil: cerrar sidebar al hacer clic en cualquier enlace del menú
+    document.querySelectorAll('.sidebar-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (isMobile()) closeSidebar();
+        });
     });
 
-    // Lógica de submenús: expande el sidebar si está cerrado al intentar abrir un dropdown
+    // Lógica de submenús: abrir/cerrar grupos hijos
     dropdownToggles.forEach(btn => {
         btn.addEventListener('click', () => {
-            if (sidebar.classList.contains('collapsed')) {
-                sidebar.classList.remove('collapsed');
-                localStorage.setItem('sidebar-collapsed', 'false');
-            }
-            
             const group = btn.closest('.menu-group');
             group.classList.toggle('open');
         });
+    });
+
+    // Re-evaluar al cambiar tamaño de ventana
+    window.addEventListener('resize', () => {
+        if (!isMobile()) {
+            overlay.classList.remove('active');
+            mobileBtn.innerHTML = '<i class="ri-menu-line"></i>';
+            const saved = localStorage.getItem('sidebar-collapsed') === 'true';
+            if (saved) {
+                sidebar.classList.add('collapsed');
+            } else {
+                sidebar.classList.remove('collapsed');
+            }
+        } else {
+            // En móvil, si no está colapsado, aseguramos overlay
+            if (!sidebar.classList.contains('collapsed')) {
+                overlay.classList.add('active');
+                mobileBtn.innerHTML = '<i class="ri-close-line"></i>';
+            }
+        }
     });
 }
 

@@ -16,7 +16,7 @@
 
     <main class="dashboard-container">
         <header class="dashboard-header">
-            <h1>¡Buenas tardes, Alex! 🌿</h1>
+            <h1><i class="ri-plant-fill" style="color: var(--primary);"></i> ¡Buenas tardes, Alex!</h1>
             <p>Tu progreso de hoy se ve sólido. Sigue así.</p>
         </header>
 
@@ -93,53 +93,15 @@
             <!-- Comidas de Hoy -->
             <div class="meals-container">
                 <div class="section-title">
-                    <h3>🍽️ Comidas de Hoy</h3>
-                    <button class="btn-all">
+                    <h3><i class="ri-restaurant-2-fill" style="color: var(--primary);"></i> Comidas de Hoy</h3>
+                    <a href="/pages/registros/nutricion.html" class="btn-all">
                         <span>Ver todas</span>
                         <i class="ri-arrow-right-s-line"></i>
-                    </button>
+                    </a>
                 </div>
 
-                <div class="meal-card">
-                    <div class="meal-time-info">
-                        <span class="time">08:30</span>
-                    </div>
-                    <div class="meal-main-info">
-                        <span class="meal-name">Desayuno Proteico</span>
-                        <span class="meal-desc">Huevos orgánicos, aguacate hass y pan de masa madre.</span>
-                    </div>
-                    <div class="meal-kcal-badge">
-                        <span class="val">450</span>
-                        <span class="unit">kcal</span>
-                    </div>
-                </div>
-
-                <div class="meal-card">
-                    <div class="meal-time-info">
-                        <span class="time">14:15</span>
-                    </div>
-                    <div class="meal-main-info">
-                        <span class="meal-name">Bowl de Salmón & Quinoa</span>
-                        <span class="meal-desc">Salmón salvaje, brócoli al vapor y aderezo cítrico.</span>
-                    </div>
-                    <div class="meal-kcal-badge">
-                        <span class="val">620</span>
-                        <span class="unit">kcal</span>
-                    </div>
-                </div>
-
-                <div class="meal-card">
-                    <div class="meal-time-info">
-                        <span class="time">20:45</span>
-                    </div>
-                    <div class="meal-main-info">
-                        <span class="meal-name">Cena Ligera de Pavo</span>
-                        <span class="meal-desc">Pechuga de pavo con espárragos y ensalada verde.</span>
-                    </div>
-                    <div class="meal-kcal-badge">
-                        <span class="val">380</span>
-                        <span class="unit">kcal</span>
-                    </div>
+                <div id="dashboard-meals-list">
+                    <!-- Las comidas se renderizan dinámicamente desde localStorage -->
                 </div>
             </div>
 
@@ -157,7 +119,7 @@
             <!-- Último Entrenamiento -->
             <div class="workout-container">
                 <div class="section-title">
-                    <h3>🏋️ Último Entrenamiento: Pierna & Empuje</h3>
+                    <h3><i class="ri-kettlebell-fill" style="color: var(--primary);"></i> Último Entrenamiento: Pierna & Empuje</h3>
                     <span style="font-size: 0.875rem; color: var(--on-surface-variant);">14 Mayo, 2026</span>
                 </div>
                 <div class="workout-table-wrapper">
@@ -218,7 +180,7 @@
                 <div class="widget widget-history">
                     <div class="history-header">
                         <i class="ri-history-line"></i>
-                        <h3>📊 Historial Semanal</h3>
+                        <h3><i class="ri-bar-chart-2-fill" style="color: var(--primary);"></i> Historial Semanal</h3>
                     </div>
                     <div class="history-list">
                         <div class="history-item">
@@ -245,8 +207,17 @@
     <script src="../../src/components/sidebar.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            try {
-                const data = JSON.parse(localStorage.getItem('nutrifit-nutrition'));
+
+            // === SINCRONIZACIÓN CON REGISTROS NUTRICIONALES ===
+            // Cargar datos de nutrición desde localStorage
+            function loadNutritionData() {
+                try {
+                    return JSON.parse(localStorage.getItem('nutrifit-nutrition'));
+                } catch (e) { return null; }
+            }
+
+            function updateNutritionUI() {
+                const data = loadNutritionData();
                 if (!data) return;
 
                 const { kcal, protein, carbs, fats, water, waterGoal, kcalGoal, proteinGoal, carbsGoal, fatsGoal } = data;
@@ -281,7 +252,89 @@
 
                 const waterValue = document.querySelector('.water-value');
                 if (waterValue) waterValue.textContent = (water / 1000).toFixed(1) + 'L';
-            } catch (e) { }
+            }
+
+            // === RENDERIZAR COMIDAS DESDE REGISTROS NUTRICIONALES ===
+            function renderDashboardMeals() {
+                const container = document.getElementById('dashboard-meals-list');
+                if (!container) return;
+
+                try {
+                    const meals = JSON.parse(localStorage.getItem('nutrifit-meals'));
+                    const waterSaved = JSON.parse(localStorage.getItem('nutrifit-water'));
+
+                    if (!meals || Object.values(meals).every(arr => arr.length === 0)) {
+                        container.innerHTML = `
+                            <div style="text-align:center;padding:40px 20px;color:var(--on-surface-variant);opacity:0.6;">
+                                <i class="ri-restaurant-2-line" style="font-size:2.5rem;display:block;margin-bottom:12px;"></i>
+                                <p>Aún no has registrado comidas hoy.</p>
+                                <p style="font-size:0.85rem;">Ve a <a href="/pages/registros/nutricion.html" style="color:var(--primary);font-weight:700;">Registros Nutricionales</a> para añadir tus alimentos.</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    // Mapeo de nombres de comidas y iconos
+                    const mealNames = {
+                        breakfast: { label: 'Desayuno', icon: 'ri-sun-line' },
+                        lunch: { label: 'Almuerzo', icon: 'ri-restaurant-2-line' },
+                        dinner: { label: 'Cena', icon: 'ri-moon-line' },
+                        snacks: { label: 'Snacks', icon: 'ri-apple-line' }
+                    };
+
+                    let html = '';
+                    for (const [mealId, items] of Object.entries(meals)) {
+                        if (!items || items.length === 0) continue;
+                        const info = mealNames[mealId] || { label: mealId, icon: 'ri-food-line' };
+                        const totalKcal = items.reduce((sum, item) => sum + (item.calculated?.kcal || 0), 0);
+
+                        items.forEach(item => {
+                            if (!item.food) return;
+                            html += `
+                                <div class="meal-card">
+                                    <div class="meal-time-info">
+                                        <i class="${info.icon}" style="font-size:1.3rem;color:var(--primary);"></i>
+                                        <span class="time">${info.label}</span>
+                                    </div>
+                                    <div class="meal-main-info">
+                                        <span class="meal-name">${item.food.name}</span>
+                                        <span class="meal-desc">${item.grams || 0}g · <i class="${item.food.emoji}"></i></span>
+                                    </div>
+                                    <div class="meal-kcal-badge">
+                                        <span class="val">${item.calculated?.kcal || 0}</span>
+                                        <span class="unit">kcal</span>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    }
+
+                    if (!html) {
+                        html = `
+                            <div style="text-align:center;padding:40px 20px;color:var(--on-surface-variant);opacity:0.6;">
+                                <i class="ri-restaurant-2-line" style="font-size:2.5rem;display:block;margin-bottom:12px;"></i>
+                                <p>Aún no has registrado comidas hoy.</p>
+                            </div>
+                        `;
+                    }
+
+                    container.innerHTML = html;
+                } catch (e) {
+                    container.innerHTML = `<p style="text-align:center;padding:20px;opacity:0.6;">No hay datos de comidas disponibles.</p>`;
+                }
+            }
+
+            // Cargar todo
+            updateNutritionUI();
+            renderDashboardMeals();
+
+            // Refrescar cada vez que se vuelve a la página (visibility change)
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    updateNutritionUI();
+                    renderDashboardMeals();
+                }
+            });
         });
     </script>
 </body>

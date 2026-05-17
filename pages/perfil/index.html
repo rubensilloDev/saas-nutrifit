@@ -18,26 +18,29 @@
 
     <main class="dashboard-container">
         <header class="dashboard-header">
-            <h1>👤 Mi Perfil</h1>
+            <h1><i class="ri-user-3-fill" style="color: var(--primary);"></i> Mi Perfil</h1>
             <p>Gestiona tu información personal y ajustes de la cuenta.</p>
         </header>
 
         <div class="profile-grid">
-            <!-- Tarjeta de avatar e información principal -->
+            <!-- Tarjeta de avatar e información principal (ancho completo en PC, diseño horizontal) -->
             <div class="profile-card profile-avatar-card">
                 <div class="profile-avatar-wrapper">
                     <div class="profile-avatar">
                         <img src="https://ui-avatars.com/api/?name=Alex+Rivera&background=0d631b&color=fff&size=128" alt="Avatar">
                     </div>
-                    <button class="profile-avatar-edit" title="Cambiar foto">
+                    <button class="profile-avatar-edit" id="btn-cambiar-foto" title="Cambiar foto">
                         <i class="ri-camera-line"></i>
                     </button>
+                    <input type="file" id="input-foto-perfil" accept="image/*" style="display: none;">
                 </div>
-                <h2 class="profile-name">Alex Rivera</h2>
-                <p class="profile-role">Miembro Premium</p>
-                <div class="profile-badge">
-                    <i class="ri-verified-badge-fill"></i>
-                    <span>Cuenta verificada</span>
+                <div class="profile-avatar-info">
+                    <h2 class="profile-name">Alex Rivera</h2>
+                    <p class="profile-role">Miembro Premium</p>
+                    <div class="profile-badge">
+                        <i class="ri-verified-badge-fill"></i>
+                        <span>Cuenta verificada</span>
+                    </div>
                 </div>
             </div>
 
@@ -95,7 +98,10 @@
                     </div>
                     <div class="profile-goal-info">
                         <span class="profile-goal-label">Calorías diarias</span>
-                        <span class="profile-goal-value">2,500 kcal</span>
+                        <div class="profile-goal-input-wrap">
+                            <input type="number" class="profile-goal-value profile-goal-input" id="goal-calorias" value="2500" step="50" min="500" max="10000">
+                            <span class="profile-goal-unit">kcal</span>
+                        </div>
                     </div>
                 </div>
 
@@ -105,17 +111,23 @@
                     </div>
                     <div class="profile-goal-info">
                         <span class="profile-goal-label">Proteína diaria</span>
-                        <span class="profile-goal-value">160g</span>
+                        <div class="profile-goal-input-wrap">
+                            <input type="number" class="profile-goal-value profile-goal-input" id="goal-protein" value="160" step="5" min="0" max="1000">
+                            <span class="profile-goal-unit">g</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="profile-goal-item">
                     <div class="profile-goal-icon" style="background: #fff8e1; color: var(--color-carbs);">
-                        <i class="ri-barley-line"></i>
+                        <i class="ri-bread-line"></i>
                     </div>
                     <div class="profile-goal-info">
                         <span class="profile-goal-label">Carbohidratos diarios</span>
-                        <span class="profile-goal-value">250g</span>
+                        <div class="profile-goal-input-wrap">
+                            <input type="number" class="profile-goal-value profile-goal-input" id="goal-carbs" value="250" step="5" min="0" max="1000">
+                            <span class="profile-goal-unit">g</span>
+                        </div>
                     </div>
                 </div>
 
@@ -125,7 +137,10 @@
                     </div>
                     <div class="profile-goal-info">
                         <span class="profile-goal-label">Grasas diarias</span>
-                        <span class="profile-goal-value">70g</span>
+                        <div class="profile-goal-input-wrap">
+                            <input type="number" class="profile-goal-value profile-goal-input" id="goal-fats" value="70" step="5" min="0" max="1000">
+                            <span class="profile-goal-unit">g</span>
+                        </div>
                     </div>
                 </div>
 
@@ -135,7 +150,10 @@
                     </div>
                     <div class="profile-goal-info">
                         <span class="profile-goal-label">Agua diaria</span>
-                        <span class="profile-goal-value">3.0L</span>
+                        <div class="profile-goal-input-wrap">
+                            <input type="number" class="profile-goal-value profile-goal-input" id="goal-agua" value="3.0" step="0.1" min="0.5" max="15">
+                            <span class="profile-goal-unit">L</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -180,16 +198,116 @@
 
     <script src="../../src/components/sidebar.js"></script>
     <script>
-        document.getElementById('logout-btn').addEventListener('click', () => {
-            // Visual-only: muestra un mensaje de confirmación (no funcional)
-            const btn = document.getElementById('logout-btn');
-            btn.innerHTML = '<i class="ri-loader-4-line" style="animation: spin 1s linear infinite;"></i> Cerrando sesión...';
-            setTimeout(() => {
-                btn.innerHTML = '<i class="ri-check-line"></i> Sesión cerrada (demo)';
-                btn.style.background = '#e8f5e9';
-                btn.style.color = '#2e7d32';
-                btn.style.cursor = 'default';
-            }, 1500);
+        document.addEventListener('DOMContentLoaded', () => {
+            // === OBJETIVOS EDITABLES CON AUTO-CÁLCULO DE MACROS ===
+            // Factores de conversión: P=4 kcal/g, C=4 kcal/g, G=9 kcal/g
+            // Distribución: 30% proteína, 40% carbohidratos, 30% grasas
+            const goalCalorias = document.getElementById('goal-calorias');
+            const goalProtein = document.getElementById('goal-protein');
+            const goalCarbs = document.getElementById('goal-carbs');
+            const goalFats = document.getElementById('goal-fats');
+            const goalAgua = document.getElementById('goal-agua');
+            const goalsInputs = [goalCalorias, goalProtein, goalCarbs, goalFats, goalAgua];
+
+            // Cargar valores guardados en localStorage
+            function loadGoals() {
+                try {
+                    const saved = JSON.parse(localStorage.getItem('nutrifit-goals'));
+                    if (saved) {
+                        if (saved.calorias) goalCalorias.value = saved.calorias;
+                        if (saved.protein) goalProtein.value = saved.protein;
+                        if (saved.carbs) goalCarbs.value = saved.carbs;
+                        if (saved.fats) goalFats.value = saved.fats;
+                        if (saved.agua) goalAgua.value = saved.agua;
+                    }
+                } catch (e) { /* ignorar */ }
+            }
+
+            // Guardar valores en localStorage
+            function saveGoals() {
+                try {
+                    localStorage.setItem('nutrifit-goals', JSON.stringify({
+                        calorias: goalCalorias.value,
+                        protein: goalProtein.value,
+                        carbs: goalCarbs.value,
+                        fats: goalFats.value,
+                        agua: goalAgua.value
+                    }));
+                } catch (e) { /* ignorar */ }
+            }
+
+            // Recalcular macros según las calorías (P=4, C=4, G=9 kcal/g)
+            function recalcMacrosFromCalories() {
+                const kcal = parseFloat(goalCalorias.value) || 0;
+                const pGrams = Math.round(kcal * 0.30 / 4);
+                const cGrams = Math.round(kcal * 0.40 / 4);
+                const fGrams = Math.round(kcal * 0.30 / 9);
+                goalProtein.value = pGrams;
+                goalCarbs.value = cGrams;
+                goalFats.value = fGrams;
+                saveGoals();
+            }
+
+            // Recalcular calorías desde los macros actuales
+            function recalcCaloriesFromMacros() {
+                const p = parseFloat(goalProtein.value) || 0;
+                const c = parseFloat(goalCarbs.value) || 0;
+                const f = parseFloat(goalFats.value) || 0;
+                const kcal = Math.round(p * 4 + c * 4 + f * 9);
+                goalCalorias.value = kcal;
+                saveGoals();
+            }
+
+            // Evento: cuando cambian las calorías, recalculamos todos los macros
+            goalCalorias.addEventListener('input', recalcMacrosFromCalories);
+
+            // Evento: cuando editan un macro individualmente, recalculamos las calorías totales
+            goalProtein.addEventListener('input', recalcCaloriesFromMacros);
+            goalCarbs.addEventListener('input', recalcCaloriesFromMacros);
+            goalFats.addEventListener('input', recalcCaloriesFromMacros);
+
+            // Guardar cambios del agua al editar
+            goalAgua.addEventListener('input', saveGoals);
+
+            // Cargar valores guardados al iniciar
+            loadGoals();
+
+            // === CAMBIO DE FOTO DE PERFIL ===
+            const btnFoto = document.getElementById('btn-cambiar-foto');
+            const inputFoto = document.getElementById('input-foto-perfil');
+            const imgAvatar = document.querySelector('.profile-avatar img');
+
+            btnFoto.addEventListener('click', () => inputFoto.click());
+
+            inputFoto.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    imgAvatar.src = ev.target.result;
+                    // Guardar en localStorage para persistencia
+                    try { localStorage.setItem('nutrifit-avatar', ev.target.result); } catch (e) { /* ignorar */ }
+                };
+                reader.readAsDataURL(file);
+            });
+
+            // Cargar foto guardada al iniciar
+            try {
+                const savedAvatar = localStorage.getItem('nutrifit-avatar');
+                if (savedAvatar) imgAvatar.src = savedAvatar;
+            } catch (e) { /* ignorar */ }
+
+            // === LOGOUT (demo visual) ===
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                const btn = document.getElementById('logout-btn');
+                btn.innerHTML = '<i class="ri-loader-4-line" style="animation: spin 1s linear infinite;"></i> Cerrando sesión...';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="ri-check-line"></i> Sesión cerrada (demo)';
+                    btn.style.background = '#e8f5e9';
+                    btn.style.color = '#2e7d32';
+                    btn.style.cursor = 'default';
+                }, 1500);
+            });
         });
     </script>
 </body>

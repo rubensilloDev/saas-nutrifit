@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Profesional - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional.css">
+</head>
+
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <div id="pro-chat-container" class="pro-chat-container">
+            <!-- Cabecera del chat con datos del entrenador -->
+            <header class="pro-chat-header">
+                <div class="pro-chat-info">
+                    <div class="pro-chat-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Carlos+Ruiz&background=0d631b&color=fff&size=96" alt="Entrenador">
+                        <span class="pro-status-indicator online"></span>
+                    </div>
+                    <div class="pro-chat-details">
+                        <h3>Carlos Ruiz</h3>
+                        <p>Entrenador Personal Certificado</p>
+                        <span class="pro-chat-meta"><i class="ri-star-fill"></i> 4.9 · 12 años de experiencia</span>
+                    </div>
+                </div>
+                <div class="pro-chat-actions">
+                    <button id="pro-clear-chat" title="Limpiar conversación">
+                        <i class="ri-delete-bin-line"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Panel lateral con información del entrenador y recursos -->
+            <aside class="pro-sidebar">
+                <div class="pro-sidebar-section">
+                    <h4><i class="ri-calendar-check-line"></i> Próxima Sesión</h4>
+                    <div class="pro-session-card">
+                        <span class="pro-session-date">Vie 22 May</span>
+                        <span class="pro-session-time">10:00 - 11:00</span>
+                        <button class="pro-session-btn"><i class="ri-video-on-line"></i> Unirse</button>
+                    </div>
+                </div>
+
+                <div class="pro-sidebar-section">
+                    <h4><i class="ri-file-list-3-line"></i> Plan Actual</h4>
+                    <div class="pro-plan-card">
+                        <span class="pro-plan-name">Hipertrofia · Volumen</span>
+                        <span class="pro-plan-progress">Semana 6 / 12</span>
+                        <div class="pro-plan-bar"><div class="pro-plan-fill" style="width:50%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="pro-sidebar-section">
+                    <h4><i class="ri-attachment-2"></i> Recursos</h4>
+                    <a href="#" class="pro-resource-link"><i class="ri-file-pdf-2-fill"></i> Dieta mensual.pdf</a>
+                    <a href="#" class="pro-resource-link"><i class="ri-file-pdf-2-fill"></i> Rutina pierna.pdf</a>
+                    <a href="#" class="pro-resource-link"><i class="ri-image-fill"></i> Progreso fotos</a>
+                </div>
+
+                <div class="pro-sidebar-section">
+                    <h4><i class="ri-line-chart-line"></i> Últimos Resultados</h4>
+                    <div class="pro-stat-row">
+                        <span>Peso</span>
+                        <span class="pro-stat-val down">-2.3 kg</span>
+                    </div>
+                    <div class="pro-stat-row">
+                        <span>Grasa corporal</span>
+                        <span class="pro-stat-val down">-1.8%</span>
+                    </div>
+                    <div class="pro-stat-row">
+                        <span>Músculo</span>
+                        <span class="pro-stat-val up">+1.2 kg</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Área de mensajes -->
+            <main class="pro-chat-messages" id="pro-chat-messages">
+                <div class="pro-message pro-message-trainer">
+                    <div class="pro-message-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Carlos+Ruiz&background=0d631b&color=fff&size=48" alt="CR">
+                    </div>
+                    <div class="pro-message-content">
+                        <div class="pro-message-header">
+                            <span class="pro-message-author">Carlos Ruiz</span>
+                            <span class="pro-message-time">08:30</span>
+                        </div>
+                        <p>¡Buenos días, Alex! He revisado tu progreso de esta semana y vamos muy bien. Los números de la semana pasada fueron excelentes.</p>
+                    </div>
+                </div>
+
+                <div class="pro-message pro-message-user">
+                    <div class="pro-message-content">
+                        <div class="pro-message-header">
+                            <span class="pro-message-author">Tú</span>
+                            <span class="pro-message-time">08:32</span>
+                        </div>
+                        <p>¡Gracias, Carlos! La verdad es que estoy notando mucha diferencia en la recuperación desde que ajustamos las proteínas.</p>
+                    </div>
+                </div>
+
+                <div class="pro-message pro-message-trainer">
+                    <div class="pro-message-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Carlos+Ruiz&background=0d631b&color=fff&size=48" alt="CR">
+                    </div>
+                    <div class="pro-message-content">
+                        <div class="pro-message-header">
+                            <span class="pro-message-author">Carlos Ruiz</span>
+                            <span class="pro-message-time">08:34</span>
+                        </div>
+                        <p>Me alegra mucho oírlo. Justamente por eso te he programado una revisión para el viernes. Quiero que empecemos a meter más carga en sentadilla.</p>
+                        <p>¿Cómo ves tu energía en los entrenamientos de pierna?</p>
+                    </div>
+                </div>
+
+                <div class="pro-message pro-message-user">
+                    <div class="pro-message-content">
+                        <div class="pro-message-header">
+                            <span class="pro-message-author">Tú</span>
+                            <span class="pro-message-time">08:36</span>
+                        </div>
+                        <p>Bastante bien la verdad. La última sesión de pierna complete todas las series con RIR 1-2. Creo que puedo subir 5 kg en sentadilla sin problema.</p>
+                    </div>
+                </div>
+
+                <div class="pro-message pro-message-trainer">
+                    <div class="pro-message-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Carlos+Ruiz&background=0d631b&color=fff&size=48" alt="CR">
+                    </div>
+                    <div class="pro-message-content">
+                        <div class="pro-message-header">
+                            <span class="pro-message-author">Carlos Ruiz</span>
+                            <span class="pro-message-time">08:38</span>
+                        </div>
+                        <p>Perfecto, entonces el viernes subimos a 105 kg. También quiero hablar sobre tu plan de comidas para la siguiente fase. He estado preparando unos ajustes.</p>
+                        <p>¿Puedes traer tus registros de alimentación de esta semana?</p>
+                    </div>
+                </div>
+
+                <div class="pro-message pro-message-user">
+                    <div class="pro-message-content">
+                        <div class="pro-message-header">
+                            <span class="pro-message-author">Tú</span>
+                            <span class="pro-message-time">08:40</span>
+                        </div>
+                        <p>Sí, claro. Los tengo todos registrados en la app. Los revisamos el viernes sin falta. ¡Gracias por estar tan pendiente!</p>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Zona de entrada de texto -->
+            <footer class="pro-chat-input-area">
+                <form id="pro-chat-form">
+                    <div class="pro-input-wrapper">
+                        <button type="button" class="pro-attachment-btn" title="Adjuntar archivo">
+                            <i class="ri-attachment-line"></i>
+                        </button>
+                        <textarea id="pro-user-input" placeholder="Escribe un mensaje a tu entrenador..." rows="1" required></textarea>
+                    </div>
+                    <button type="submit" id="pro-send-btn" class="pro-send-button">
+                        <i class="ri-send-plane-fill"></i>
+                    </button>
+                </form>
+            </footer>
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        const textarea = document.getElementById('pro-user-input');
+        const form = document.getElementById('pro-chat-form');
+        const messagesArea = document.getElementById('pro-chat-messages');
+
+        // Auto-resize del textarea
+        textarea.addEventListener('input', () => {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        });
+
+        // Respuestas automáticas del entrenador
+        const trainerReplies = [
+            'Buen trabajo esta semana, Alex. Sigue así que vamos por buen camino.',
+            'He visto tus registros y creo que podemos optimizar la ingesta de carbohidratos los días de pierna.',
+            'Recuerda que la técnica es más importante que el peso. No sacrifiques profundidad por kilos.',
+            'El viernes revisamos tu progreso en persona. Tráe todas tus dudas.',
+            'Excelente actitud. La consistencia es lo que separa a los mejores.',
+            '¿Cómo duermes esta semana? El descanso es clave para la recuperación muscular.'
+        ];
+
+        function getRandomReply() {
+            return trainerReplies[Math.floor(Math.random() * trainerReplies.length)];
+        }
+
+        function formatTime() {
+            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function addMessage(type, text) {
+            const isUser = type === 'user';
+            const div = document.createElement('div');
+            div.className = `pro-message pro-message-${isUser ? 'user' : 'trainer'}`;
+
+            if (!isUser) {
+                div.innerHTML = `
+                    <div class="pro-message-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Carlos+Ruiz&background=0d631b&color=fff&size=48" alt="CR">
+                    </div>
+                    <div class="pro-message-content">
+                        <div class="pro-message-header">
+                            <span class="pro-message-author">Carlos Ruiz</span>
+                            <span class="pro-message-time">${formatTime()}</span>
+                        </div>
+                        <p>${text}</p>
+                    </div>
+                `;
+            } else {
+                div.innerHTML = `
+                    <div class="pro-message-content">
+                        <div class="pro-message-header">
+                            <span class="pro-message-author">Tú</span>
+                            <span class="pro-message-time">${formatTime()}</span>
+                        </div>
+                        <p>${text}</p>
+                    </div>
+                `;
+            }
+
+            messagesArea.appendChild(div);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = textarea.value.trim();
+            if (!text) return;
+
+            addMessage('user', text);
+            textarea.value = '';
+            textarea.style.height = 'auto';
+
+            // Respuesta automática del entrenador después de 1.5-2.5s
+            const delay = 1500 + Math.random() * 1000;
+            setTimeout(() => {
+                addMessage('trainer', getRandomReply());
+            }, delay);
+        });
+
+        // Botón limpiar chat
+        document.getElementById('pro-clear-chat').addEventListener('click', () => {
+            const msgs = messagesArea.querySelectorAll('.pro-message');
+            // Mantiene solo el primer mensaje del entrenador
+            msgs.forEach((m, i) => {
+                if (i > 0) m.remove();
+            });
+            messagesArea.scrollTop = 0;
+        });
+    </script>
+</body>
+
+</html>

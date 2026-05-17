@@ -46,30 +46,41 @@
     position: relative;
 }
 
-/* Caja del Logo con gradiente corporativo */
+/* Caja del Logo (icono) — solo visible en modo colapsado */
 .brand-logo {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    background: linear-gradient(135deg, var(--primary), #81c784);
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+    overflow: hidden;
+    transition: opacity var(--transition-speed);
 }
 
+.brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Ocultar icono cuando el menú está expandido */
+.sidebar-container:not(.collapsed) .brand-logo {
+    opacity: 0;
+    width: 0;
+    min-width: 0;
+    pointer-events: none;
+}
+
+/* Título (logo completo) — solo visible en modo expandido */
 .brand-title {
-    font-size: 1.25rem;
-    color: var(--on-surface);
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    height: 44px;
+    width: auto;
     transition: opacity var(--transition-speed), transform var(--transition-speed);
 }
 
-/* Ocultar título cuando está colapsado */
+/* Ocultar logo completo cuando está colapsado */
 .collapsed .brand-title {
     opacity: 0;
     width: 0;
@@ -130,7 +141,7 @@
     flex-grow: 1;
 }
 
-/* Enlaces base del menú */
+/* Enlaces base del menú — todos con el mismo estilo exacto que Inicio */
 .menu-link,
 .submenu-link {
     display: flex;
@@ -142,6 +153,7 @@
     border-radius: var(--radius-md);
     font-weight: 600;
     font-size: 1rem;
+    font-family: var(--font-body);
     transition: all 0.2s ease;
     border: none;
     background: transparent;
@@ -163,9 +175,8 @@
     transition: opacity var(--transition-speed);
 }
 
-/* Ocultar etiquetas y flechas al colapsar */
-.collapsed .menu-link .label,
-.collapsed .menu-link .arrow {
+/* Ocultar etiquetas al colapsar */
+.collapsed .menu-link .label {
     opacity: 0;
     pointer-events: none;
 }
@@ -195,22 +206,11 @@
     flex-direction: column;
 }
 
-.arrow {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-/* Rota la flecha cuando el grupo está abierto */
-.menu-group.open .arrow {
-    transform: rotate(180deg);
-}
-
 /* Animación de apertura suave del submenú */
 .submenu {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out, padding 0.3s;
-    padding-left: 20px;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -227,14 +227,27 @@
     display: none;
 }
 
+/* Flecha desplegable animada */
+.arrow-icon {
+    font-size: 1.2rem;
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    min-width: 20px;
+}
+
+.menu-group.open .dropdown-toggle .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Submenu sutilmente diferente al padre */
 .submenu-link {
-    font-size: 0.9rem;
-    padding: 8px 12px;
+    padding-left: 20px;
     font-weight: 500;
+    font-size: 0.92rem;
 }
 
 .submenu-link.active {
-    background: linear-gradient(90deg, rgba(13, 99, 27, 0.06), transparent);
+    background: linear-gradient(90deg, rgba(13, 99, 27, 0.08), transparent);
     color: var(--primary);
     font-weight: 700;
     border-left: 3px solid var(--primary);
@@ -314,4 +327,110 @@ main {
 .collapsed+main,
 body:has(.collapsed) main {
     margin-left: var(--sidebar-collapsed-width);
+}
+
+/* === COMPONENTES MÓVILES (sidebar overlay) === */
+
+/* --- Botón menú móvil (hamburguesa) --- */
+/* Visible solo en móvil, siempre accesible porque está fuera del sidebar */
+.mobile-menu-btn {
+    display: none;                /* Oculto en desktop */
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 14px;
+    background: white;
+    color: var(--primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1002;                /* Sobre el sidebar y el overlay */
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+}
+
+.mobile-menu-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* --- Overlay móvil --- */
+/* Fondo oscuro con blur que cubre la pantalla cuando el sidebar está abierto */
+.mobile-menu-overlay {
+    display: none;                /* Oculto en desktop */
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;          /* Captura clics para cerrar el menú */
+}
+
+/* --- Mobile: max-width 768px --- */
+@media (max-width: 768px) {
+
+    /* Botón hamburguesa siempre visible */
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    /* Overlay listo para activarse */
+    .mobile-menu-overlay {
+        display: block;
+    }
+
+    /* Sidebar oculto por defecto (deslizado a la izquierda) */
+    .sidebar-container {
+        transform: translateX(-100%);
+        width: 280px !important;
+        padding: var(--spacing-lg) !important;
+        box-shadow: 4px 0 30px rgba(0,0,0,0.12);
+        z-index: 1001;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Al quitar la clase .collapsed, el sidebar se desliza hacia adentro */
+    .sidebar-container:not(.collapsed) {
+        transform: translateX(0);
+    }
+
+    /* En móvil ambos (icono y logo) son visibles cuando el menú está abierto */
+    .sidebar-container .brand-title {
+        opacity: 1;
+        width: auto;
+        pointer-events: auto;
+    }
+
+    .sidebar-container .brand-logo {
+        opacity: 1;
+        width: 44px;
+        min-width: 44px;
+        pointer-events: auto;
+    }
+
+    /* El contenido principal ocupa todo el ancho (sin margen del sidebar) */
+    main {
+        margin-left: 0 !important;
+    }
+
+    /* Bloquea el scroll del body cuando el menú está abierto */
+    body:has(.sidebar-container:not(.collapsed)) {
+        overflow: hidden;
+    }
+
+    /* El botón de contraer/expandir de escritorio no tiene sentido en móvil */
+    .toggle-btn {
+        display: none;
+    }
 }
