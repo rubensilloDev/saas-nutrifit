@@ -341,6 +341,16 @@
                         </div>
                     `;
                 }).join('');
+                // Toggle active class on checkbox change
+                list.addEventListener('change', (e) => {
+                    const cb = e.target;
+                    if (cb.classList.contains('food-fav')) {
+                        cb.closest('.pro-nutri-toggle-label').classList.toggle('active-fav', cb.checked);
+                    }
+                    if (cb.classList.contains('food-dislike')) {
+                        cb.closest('.pro-nutri-toggle-label').classList.toggle('active-dis', cb.checked);
+                    }
+                });
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             });
@@ -351,15 +361,21 @@
             });
             modal.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } });
 
-            document.getElementById('btn-save-preferences').addEventListener('click', () => {
+            document.getElementById('btn-save-preferences').addEventListener('click', function () {
                 const cid = parseInt(selectCliente.value);
                 const favs = [...document.querySelectorAll('.food-fav:checked')].map(el => el.dataset.food);
                 const dislikes = [...document.querySelectorAll('.food-dislike:checked')].map(el => el.dataset.food);
-                saveFoodPrefs(cid, { favs, dislikes });
-                renderFoodPrefs(cid);
-                modal.style.display = 'none';
-                document.body.style.overflow = '';
-                alert('Preferencias guardadas');
+                const btn = this;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="ri-loader-4-line pro-perfil-spin"></i> Guardando...';
+                setTimeout(() => {
+                    saveFoodPrefs(cid, { favs, dislikes });
+                    renderFoodPrefs(cid);
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="ri-save-line"></i> Guardar Preferencias';
+                }, 400);
             });
 
             // =========== MACROS ===========

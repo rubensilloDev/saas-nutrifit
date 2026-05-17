@@ -505,11 +505,15 @@
 @media (max-width: 768px) {
     .pro-chat-layout {
         grid-template-columns: 1fr;
-        height: auto;
-        min-height: auto;
+        height: calc(100vh - 180px);
+        min-height: 400px;
     }
     .pro-chat-sidebar {
         max-height: 200px;
+    }
+    .pro-chat-main {
+        min-height: 0;
+        height: 100%;
     }
     .pro-chat-msg {
         max-width: 90%;

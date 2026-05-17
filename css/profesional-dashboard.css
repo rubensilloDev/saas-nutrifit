@@ -195,9 +195,9 @@
 }
 
 .pro-alert-btn:hover {
-    background: var(--pro-accent);
+    background: #1976d2;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.25);
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.35);
 }
 
 /* WIDGET RESUMEN LATERAL */
@@ -600,5 +600,56 @@
     .pro-table th,
     .pro-table td {
         padding: 10px 12px;
+    }
+}
+
+/* ===== MOBILE IMPROVEMENTS ===== */
+@media (max-width: 1024px) {
+    .pro-perfil-card-right,
+    .pro-perfil-schedule-card {
+        grid-column: span 1;
+    }
+    .pro-perfil-contact {
+        grid-template-columns: 1fr;
+    }
+    .pro-config-hours-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .pro-dashboard-grid {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+    .pro-alerts-section,
+    .pro-summary-section,
+    .pro-clients-section {
+        grid-column: span 1;
+        width: 100%;
+    }
+    .pro-alert-item {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: var(--spacing-sm);
+    }
+    .pro-alert-avatar {
+        margin: 0 auto;
+    }
+    .pro-alert-btn {
+        width: 100%;
+    }
+    .pro-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .pro-table-wrapper table {
+        min-width: 600px;
+    }
+    .pro-table th,
+    .pro-table td {
+        white-space: nowrap;
     }
 }
