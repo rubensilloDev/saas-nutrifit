@@ -17,7 +17,7 @@
 
     <main class="dashboard-container">
         <header class="dashboard-header">
-            <h1><i class="ri-dashboard-3-line" style="color: var(--pro-primary);"></i> Panel Profesional</h1>
+            <h1><i class="ri-dashboard-3-line pro-perfil-icon"></i> Panel Profesional</h1>
             <p>Gestiona tus clientes, revisa check-ins y supervisa el progreso general.</p>
         </header>
 
@@ -59,7 +59,7 @@
             <section class="widget pro-alerts-section">
                 <div class="pro-section-header">
                     <h3><i class="ri-notification-3-line"></i> Próximas Acciones</h3>
-                    <span style="font-size:0.82rem;font-weight:700;color:var(--on-surface-variant);">
+                    <span class="pro-dash-pending-text">
                         <span id="pending-count">0</span> pendientes
                     </span>
                 </div>
@@ -71,7 +71,7 @@
             <!-- === RESUMEN LATERAL === -->
             <aside class="pro-summary-section">
                 <div class="pro-summary-card">
-                    <div class="pro-section-header" style="margin-bottom:var(--spacing-sm);">
+                    <div class="pro-section-header pro-dash-section-header-sm">
                         <h3><i class="ri-bar-chart-2-line"></i> Resumen Rápido</h3>
                     </div>
                     <div class="pro-summary-row">
@@ -83,7 +83,8 @@
                         <span class="pro-summary-row-value" id="summary-kcal">0</span>
                     </div>
                     <div class="pro-summary-row">
-                        <span class="pro-summary-row-label"><i class="ri-calendar-check-line"></i> Entrenos esta semana</span>
+                        <span class="pro-summary-row-label"><i class="ri-calendar-check-line"></i> Entrenos esta
+                            semana</span>
                         <span class="pro-summary-row-value" id="summary-workouts">0</span>
                     </div>
                     <div class="pro-summary-row">
@@ -106,7 +107,7 @@
                         <i class="ri-arrow-right-s-line pro-quick-arrow"></i>
                     </a>
                     <a href="clientes.html?mode=entreno" class="pro-quick-btn pro-quick-btn--training">
-                        <div class="pro-quick-btn-icon"><i class="ri-kettlebell-line"></i></div>
+                        <div class="pro-quick-btn-icon"><i class="ri-run-line icon"></i></div>
                         <div class="pro-quick-btn-info">
                             <span class="pro-quick-btn-label">Nueva Rutina</span>
                             <span class="pro-quick-btn-desc">Asigna entrenamiento</span>
@@ -121,7 +122,8 @@
                         </div>
                         <i class="ri-arrow-right-s-line pro-quick-arrow"></i>
                     </a>
-                    <a href="#" class="pro-quick-btn pro-quick-btn--add" onclick="alert('Añadir cliente — próximamente');return false;">
+                    <a href="#" class="pro-quick-btn pro-quick-btn--add"
+                        onclick="alert('Añadir cliente — próximamente');return false;">
                         <div class="pro-quick-btn-icon"><i class="ri-user-add-line"></i></div>
                         <div class="pro-quick-btn-info">
                             <span class="pro-quick-btn-label">Nuevo Cliente</span>

@@ -3,6 +3,8 @@
     grid-template-columns: 300px 1fr;
     gap: var(--spacing-xl);
     margin-top: var(--spacing-lg);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .pro-entreno-cliente {
@@ -226,6 +228,8 @@
     border: 1px solid var(--outline-variant);
     padding: var(--spacing-xl);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .pro-entreno-creator-header {
@@ -424,18 +428,21 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    min-width: 0;
 }
 
 .pro-ejercicio-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
+    min-width: 0;
 }
 
 .pro-ejercicio-field {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    min-width: 0;
 }
 
 .pro-ejercicio-field label {
@@ -463,6 +470,9 @@
     outline: none;
     transition: all 0.2s;
     background: white;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .pro-ejercicio-name:focus,
@@ -489,6 +499,9 @@
     outline: none;
     transition: all 0.2s;
     background: white;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .pro-ejercicio-notes {
@@ -518,6 +531,14 @@
     border-color: var(--pro-primary);
     background: var(--pro-surface);
 }
+
+/* ===== ENTRENAMIENTO inline styles replacement ===== */
+.pro-entreno-header-flex { display:flex; align-items:center; gap:14px; }
+.pro-entreno-h1 { margin:0; }
+.pro-entreno-icon { color:var(--pro-primary); }
+.pro-entreno-subtitle { margin:2px 0 0 0; font-size:0.85rem; color:var(--on-surface-variant); }
+.pro-entreno-hidden { display:none; }
+.pro-entreno-placeholder-text { font-size:0.82rem; opacity:0.6; text-align:center; padding:12px; }
 
 @media (max-width: 1024px) {
     .pro-entreno-layout {

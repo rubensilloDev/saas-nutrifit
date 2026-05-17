@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-dashboard.css">
     <link rel="stylesheet" href="../../css/profesional-chat.css">
 </head>
 <body>
     <div id="sidebar-target"></div>
 
     <main class="dashboard-container">
-        <header class="dashboard-header" style="margin-bottom:0;">
-            <div style="display:flex;align-items:center;gap:14px;">
+        <header class="dashboard-header pro-chat-header--no-mb">
+            <div class="pro-chat-header-flex">
                 <a href="clientes.html?mode=chat" class="pro-chat-back"><i class="ri-arrow-left-line"></i></a>
                 <div>
-                    <h1 style="margin:0;font-size:1.5rem;" id="chat-client-name"><i class="ri-message-3-line" style="color:var(--pro-primary);"></i> Cliente</h1>
-                    <p style="margin:2px 0 0 0;font-size:0.85rem;color:var(--on-surface-variant);" id="chat-client-subtitle">Selecciona un cliente desde el listado</p>
+                    <h1 class="pro-chat-h1" id="chat-client-name"><i class="ri-message-3-line pro-chat-icon"></i> Cliente</h1>
+                    <p class="pro-chat-subtitle" id="chat-client-subtitle">Selecciona un cliente desde el listado</p>
                 </div>
             </div>
         </header>
@@ -27,8 +28,11 @@
         <div class="pro-chat-layout">
             <div class="pro-chat-sidebar" id="chat-clients-sidebar">
                 <div class="pro-chat-sidebar-header">
-                    <h3>Conversaciones</h3>
-                    <span class="pro-chat-count" id="unread-count">0</span>
+                    <div class="pro-chat-header-left">
+                        <h3>Conversaciones</h3>
+                        <span class="pro-chat-count" id="unread-count">0</span>
+                    </div>
+                    <button class="pro-chat-toggle-sidebar" id="toggle-sidebar-btn" title="Contraer/Expandir"><i class="ri-collapse-horizontal-fill"></i></button>
                 </div>
                 <div id="chat-clients-list">
                     <!-- Se renderiza dinámicamente -->
@@ -42,13 +46,16 @@
                     <p>Elige una conversación de la lista para empezar a chatear.</p>
                 </div>
 
-                <div class="pro-chat-conversation" id="chat-conversation" style="display:none;">
+                <div class="pro-chat-conversation hidden" id="chat-conversation">
                     <div class="pro-chat-messages" id="chat-messages">
                         <!-- Mensajes dinámicos -->
                     </div>
                     <div class="pro-chat-input-area">
-                        <button class="pro-chat-attach"><i class="ri-attachment-line"></i></button>
-                        <input type="text" id="chat-input" placeholder="Escribe un mensaje..." autocomplete="off">
+                        <button class="pro-chat-attach" id="chat-attach-btn"><i class="ri-attachment-line"></i></button>
+                        <input type="file" id="chat-file-input" multiple class="pro-chat-file-input-hidden" accept="image/*,.pdf,.doc,.docx,.txt,.xls,.xlsx">
+                        <div class="pro-chat-input-wrap">
+                            <input type="text" id="chat-input" placeholder="Escribe un mensaje..." autocomplete="off">
+                        </div>
                         <button class="pro-chat-send" id="chat-send-btn"><i class="ri-send-plane-fill"></i></button>
                     </div>
                 </div>
@@ -104,6 +111,12 @@
             const emptyState = document.getElementById('chat-empty-state');
             const chatInput = document.getElementById('chat-input');
             const sendBtn = document.getElementById('chat-send-btn');
+            const attachBtn = document.getElementById('chat-attach-btn');
+            const fileInput = document.getElementById('chat-file-input');
+            const chatSidebar = document.getElementById('chat-clients-sidebar');
+            const chatLayout = document.querySelector('.pro-chat-layout');
+            const toggleSidebar = document.getElementById('toggle-sidebar-btn');
+            let attachedFiles = [];
 
             function renderClientsList() {
                 const unreadTotal = clients.reduce((sum, c) => sum + c.unread, 0);
@@ -128,10 +141,10 @@
                 const client = clients.find(c => c.id === clientId);
                 if (!client) return;
 
-                document.getElementById('chat-client-name').innerHTML = `<i class="ri-message-3-line" style="color:var(--pro-primary);"></i> ${client.name}`;
+                document.getElementById('chat-client-name').innerHTML = `<i class="ri-message-3-line pro-chat-icon"></i> ${client.name}`;
                 document.getElementById('chat-client-subtitle').textContent = `${client.goal} · Conversación activa`;
-                emptyState.style.display = 'none';
-                conversationArea.style.display = 'flex';
+                emptyState.classList.add('hidden');
+                conversationArea.classList.remove('hidden');
 
                 const msgs = messagesDB[clientId] || [];
                 messagesContainer.innerHTML = msgs.map(m => `
@@ -143,17 +156,39 @@
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             }
 
+            function createFileChips(files) {
+                return files.map((f, i) => `
+                    <div class="pro-chat-file-chip" data-idx="${i}">
+                        <i class="${f.type.startsWith('image/') ? 'ri-image-line' : 'ri-file-line'}"></i>
+                        <span class="pro-chat-file-chip-name">${f.name}</span>
+                        <span class="pro-chat-file-chip-remove" data-idx="${i}"><i class="ri-close-line"></i></span>
+                    </div>
+                `).join('');
+            }
+
             function sendMessage() {
                 const text = chatInput.value.trim();
-                if (!text) return;
+                if (!text && attachedFiles.length === 0) return;
                 if (!selectedClientId) return;
 
                 const msg = document.createElement('div');
                 msg.className = 'pro-chat-msg pro-chat-msg--trainer';
-                msg.innerHTML = `<div class="pro-chat-msg-content">${text}</div><span class="pro-chat-msg-time">Ahora</span>`;
+                let content = '';
+                if (text) content += `<div class="pro-chat-msg-content">${text}</div>`;
+                if (attachedFiles.length) {
+                    content += `<div class="pro-chat-msg-files">${attachedFiles.map(f => `
+                        <div class="pro-chat-file-preview">
+                            <i class="${f.type.startsWith('image/') ? 'ri-image-line' : 'ri-file-line'}"></i>
+                            <span>${f.name}</span>
+                        </div>
+                    `).join('')}</div>`;
+                }
+                msg.innerHTML = content + `<span class="pro-chat-msg-time">Ahora</span>`;
                 messagesContainer.appendChild(msg);
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
                 chatInput.value = '';
+                attachedFiles = [];
+                document.getElementById('chat-file-bar')?.remove();
 
                 setTimeout(() => {
                     const replies = [
@@ -168,6 +203,58 @@
                     messagesContainer.appendChild(reply);
                     messagesContainer.scrollTop = messagesContainer.scrollHeight;
                 }, 1500 + Math.random() * 1000);
+            }
+
+            // Adjuntar archivos
+            attachBtn.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', () => {
+                const newFiles = [...fileInput.files];
+                attachedFiles = [...attachedFiles, ...newFiles];
+                fileInput.value = '';
+
+                let bar = document.getElementById('chat-file-bar');
+                if (!bar && attachedFiles.length) {
+                    bar = document.createElement('div');
+                    bar.id = 'chat-file-bar';
+                    bar.className = 'pro-chat-file-bar';
+                    document.querySelector('.pro-chat-input-area').insertBefore(bar, document.querySelector('.pro-chat-input-area').firstChild);
+                }
+                if (bar) {
+                    bar.innerHTML = `<div class="pro-chat-file-bar-inner">${createFileChips(attachedFiles)}</div>`;
+                    bar.querySelectorAll('.pro-chat-file-chip-remove').forEach(el => {
+                        el.addEventListener('click', () => {
+                            const idx = parseInt(el.dataset.idx);
+                            attachedFiles.splice(idx, 1);
+                            if (attachedFiles.length) {
+                                bar.innerHTML = `<div class="pro-chat-file-bar-inner">${createFileChips(attachedFiles)}</div>`;
+                            } else {
+                                bar.remove();
+                            }
+                        });
+                    });
+                }
+            });
+
+            // Toggle sidebar
+            const setCollapsed = (collapsed) => {
+                if (collapsed) {
+                    chatLayout.classList.add('sidebar-collapsed');
+                    toggleSidebar.querySelector('i').className = 'ri-expand-horizontal-fill';
+                } else {
+                    chatLayout.classList.remove('sidebar-collapsed');
+                    toggleSidebar.querySelector('i').className = 'ri-collapse-horizontal-fill';
+                }
+                localStorage.setItem('nutrifit_chat_sidebar_collapsed', collapsed);
+            };
+
+            toggleSidebar.addEventListener('click', () => {
+                const isCollapsed = chatLayout.classList.contains('sidebar-collapsed');
+                setCollapsed(!isCollapsed);
+            });
+
+            if (localStorage.getItem('nutrifit_chat_sidebar_collapsed') === 'true') {
+                setCollapsed(true);
             }
 
             renderClientsList();

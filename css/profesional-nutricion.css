@@ -357,6 +357,10 @@
     transition: width 0.5s ease;
 }
 
+.pro-nutri-dist-fill--protein { background:var(--primary); }
+.pro-nutri-dist-fill--carbs { background:var(--primary-container); }
+.pro-nutri-dist-fill--fats { background:var(--secondary); }
+
 .pro-nutri-dist-pct {
     font-size: 0.85rem;
     font-weight: 800;
@@ -625,6 +629,32 @@
     justify-content: flex-end;
 }
 
+.pro-nutri-btn-save-prefs {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary), #2e7d32);
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    font-family: var(--font-heading);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 16px rgba(13, 99, 27, 0.25);
+}
+
+.pro-nutri-btn-save-prefs:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(13, 99, 27, 0.35);
+}
+
+.pro-nutri-btn-save-prefs:active {
+    transform: scale(0.97);
+}
+
 .pro-nutri-food-manager-item {
     display: flex;
     justify-content: space-between;
@@ -671,6 +701,20 @@
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+
+/* ===== NUTRICION inline styles replacement ===== */
+.pro-nutri-header-flex { display:flex; align-items:center; gap:14px; }
+.pro-nutri-h1 { margin:0; }
+.pro-nutri-icon-primary { color:var(--primary); }
+.pro-nutri-subtitle { margin:2px 0 0 0; font-size:0.85rem; color:var(--on-surface-variant); }
+.pro-nutri-hidden { display:none; }
+.pro-nutri-placeholder-text { font-size:0.8rem; opacity:0.5; }
+.pro-nutri-section-header-primary { color:var(--primary); }
+.pro-nutri-section-header-red { color:#d32f2f; }
+.pro-nutri-desc-text { font-size:0.85rem; color:var(--on-surface-variant); margin-bottom:var(--spacing-lg); }
+.pro-nutri-btn-save-mt { margin-top:var(--spacing-lg); }
+.pro-nutri-modal-text { font-size:0.9rem; color:var(--on-surface-variant); margin-bottom:var(--spacing-lg); }
+.pro-nutri-scroll-x { overflow-x:auto; }
 
 @media (max-width: 1024px) {
     .pro-nutri-layout { grid-template-columns: 1fr; }

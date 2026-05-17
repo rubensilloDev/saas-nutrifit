@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-dashboard.css">
+    <link rel="stylesheet" href="../../css/profile.css">
+</head>
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1><i class="ri-settings-5-fill pro-config-icon"></i> Configuración Profesional</h1>
+            <p>Personaliza tu experiencia como profesional en NutriFit.</p>
+        </header>
+
+        <div class="settings-grid">
+
+            <!-- PERFIL PROFESIONAL -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-user-3-line pro-config-icon"></i>
+                    <h3>Perfil Profesional</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-field">
+                        <label class="profile-label">Nombre completo</label>
+                        <input type="text" class="profile-input" value="Carlos Ruiz Méndez">
+                    </div>
+                    <div class="settings-field-row">
+                        <div class="settings-field">
+                            <label class="profile-label">Título profesional</label>
+                            <input type="text" class="profile-input" value="Lic. Nutrición Deportiva">
+                        </div>
+                        <div class="settings-field">
+                            <label class="profile-label">Cédula profesional</label>
+                            <input type="text" class="profile-input" value="NUT-12345">
+                        </div>
+                    </div>
+                    <div class="settings-field">
+                        <label class="profile-label">Bio profesional</label>
+                        <textarea class="profile-input pro-config-textarea">Nutriólogo deportivo con más de 8 años de experiencia ayudando a atletas y personas activas.</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOTIFICACIONES PROFESIONALES -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-notification-3-line pro-config-icon"></i>
+                    <h3>Notificaciones</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Nuevo cliente asignado</span>
+                            <span class="settings-toggle-desc">Notificación cuando un cliente te sea asignado</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Check-in de clientes</span>
+                            <span class="settings-toggle-desc">Alerta cuando un cliente registre su progreso</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Mensajes de clientes</span>
+                            <span class="settings-toggle-desc">Notificación de nuevos mensajes en el chat</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Recordatorio de planes</span>
+                            <span class="settings-toggle-desc">Recordatorio semanal para revisar planes activos</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-toggle">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Resumen semanal</span>
+                            <span class="settings-toggle-desc">Reporte cada lunes con actividad de tus clientes</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HORARIO DE CONSULTA -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-time-line pro-config-icon"></i>
+                    <h3>Horario de Consulta</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="pro-config-hours-grid">
+                        <div class="pro-config-hour-row">
+                            <span>Lunes</span>
+                            <input type="time" value="08:00"><span class="pro-config-hour-sep">a</span><input type="time" value="18:00">
+                        </div>
+                        <div class="pro-config-hour-row">
+                            <span>Martes</span>
+                            <input type="time" value="08:00"><span class="pro-config-hour-sep">a</span><input type="time" value="18:00">
+                        </div>
+                        <div class="pro-config-hour-row">
+                            <span>Miércoles</span>
+                            <input type="time" value="08:00"><span class="pro-config-hour-sep">a</span><input type="time" value="18:00">
+                        </div>
+                        <div class="pro-config-hour-row">
+                            <span>Jueves</span>
+                            <input type="time" value="08:00"><span class="pro-config-hour-sep">a</span><input type="time" value="18:00">
+                        </div>
+                        <div class="pro-config-hour-row">
+                            <span>Viernes</span>
+                            <input type="time" value="08:00"><span class="pro-config-hour-sep">a</span><input type="time" value="18:00">
+                        </div>
+                        <div class="pro-config-hour-row">
+                            <span>Sábado</span>
+                            <input type="time" value="09:00"><span class="pro-config-hour-sep">a</span><input type="time" value="14:00">
+                        </div>
+                    </div>
+                    <div class="settings-toggle pro-config-toggle-mt">
+                        <div class="settings-toggle-info">
+                            <span class="settings-toggle-label">Duración de consulta</span>
+                            <span class="settings-toggle-desc">Tiempo estándar por sesión</span>
+                        </div>
+                        <select class="profile-input pro-config-select">
+                            <option value="30">30 min</option>
+                            <option value="45" selected>45 min</option>
+                            <option value="60">60 min</option>
+                            <option value="90">90 min</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRIVACIDAD Y SEGURIDAD -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-lock-2-line pro-config-icon"></i>
+                    <h3>Privacidad y Seguridad</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-action-row">
+                        <div class="settings-action-info">
+                            <span class="settings-toggle-label">Cambiar contraseña</span>
+                            <span class="settings-toggle-desc">Actualiza tu acceso al panel profesional</span>
+                        </div>
+                        <button class="settings-action-btn"><i class="ri-lock-line"></i> Cambiar</button>
+                    </div>
+                    <div class="settings-action-row">
+                        <div class="settings-action-info">
+                            <span class="settings-toggle-label">Autenticación en dos pasos</span>
+                            <span class="settings-toggle-desc">Protege tu cuenta profesional con 2FA</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-action-row">
+                        <div class="settings-action-info">
+                            <span class="settings-toggle-label">Perfil público</span>
+                            <span class="settings-toggle-desc">Mostrar tu perfil en el directorio de profesionales</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox" checked>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-action-row pro-config-border-none">
+                        <div class="settings-action-info">
+                            <span class="settings-toggle-label">Visibilidad de clientes</span>
+                            <span class="settings-toggle-desc">Permitir que otros profesionales vean tus casos de éxito</span>
+                        </div>
+                        <label class="settings-switch">
+                            <input type="checkbox">
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLANTILLAS PREDETERMINADAS -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-file-copy-line pro-config-icon"></i>
+                    <h3>Plantillas Predeterminadas</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="pro-config-template-item">
+                        <div><span>Rutina de Hipertrofia</span><span>Usada en 12 clientes</span></div>
+                        <i class="ri-checkbox-circle-fill pro-config-icon"></i>
+                    </div>
+                    <div class="pro-config-template-item">
+                        <div><span>Plan de Pérdida de Peso</span><span>Usada en 8 clientes</span></div>
+                        <i class="ri-checkbox-circle-line"></i>
+                    </div>
+                    <div class="pro-config-template-item">
+                        <div><span>Rutina Full Body</span><span>Usada en 6 clientes</span></div>
+                        <i class="ri-checkbox-circle-line"></i>
+                    </div>
+                    <div class="pro-config-template-item pro-config-border-none">
+                        <div><span>Plan de Definición</span><span>Usada en 5 clientes</span></div>
+                        <i class="ri-checkbox-circle-line"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APARIENCIA -->
+            <div class="profile-card settings-card">
+                <div class="profile-section-title">
+                    <i class="ri-palette-line pro-config-icon"></i>
+                    <h3>Apariencia</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-field">
+                        <label class="profile-label">Tema</label>
+                        <div class="settings-theme-options">
+                            <label class="settings-theme-option">
+                                <input type="radio" name="theme" value="light" checked>
+                                <span class="settings-theme-box"><i class="ri-sun-line"></i><span>Claro</span></span>
+                            </label>
+                            <label class="settings-theme-option">
+                                <input type="radio" name="theme" value="dark">
+                                <span class="settings-theme-box"><i class="ri-moon-line"></i><span>Oscuro</span></span>
+                            </label>
+                            <label class="settings-theme-option">
+                                <input type="radio" name="theme" value="system">
+                                <span class="settings-theme-box"><i class="ri-computer-line"></i><span>Sistema</span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFORMACIÓN -->
+            <div class="profile-card settings-card settings-card--info">
+                <div class="profile-section-title">
+                    <i class="ri-information-line pro-config-icon"></i>
+                    <h3>Información</h3>
+                </div>
+                <div class="settings-card-body">
+                    <div class="settings-info-row"><span class="settings-info-label">Versión</span><span class="settings-info-value">v2.0.1</span></div>
+                    <div class="settings-info-row"><span class="settings-info-label">Plan actual</span><span class="settings-info-value"><span class="profile-badge pro-config-badge-m0"><i class="ri-crown-fill"></i> Profesional Premium</span></span></div>
+                    <div class="settings-info-row pro-config-border-none"><span class="settings-info-label">Soporte</span><span class="settings-info-value"><a href="#" class="pro-config-link">pro@nutrifit.com</a></span></div>
+                </div>
+            </div>
+
+            <!-- BOTÓN GUARDAR -->
+            <div class="profile-card settings-card settings-card--actions">
+                <button class="profile-save-btn pro-config-save-btn" id="settings-save-btn">
+                    <i class="ri-save-3-line"></i> Guardar todos los cambios
+                </button>
+                <p class="settings-save-hint">Los cambios se aplicarán automáticamente en toda la aplicación.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const saveBtn = document.getElementById('settings-save-btn');
+            saveBtn.addEventListener('click', () => {
+                saveBtn.innerHTML = '<i class="ri-loader-4-line pro-perfil-spin"></i> Guardando...';
+                saveBtn.disabled = true;
+                setTimeout(() => {
+                    saveBtn.innerHTML = '<i class="ri-check-line"></i> Cambios guardados correctamente';
+                    saveBtn.style.background = '#e3f2fd';
+                    saveBtn.style.color = '#1565c0';
+                    saveBtn.style.boxShadow = 'none';
+                    setTimeout(() => {
+                        saveBtn.innerHTML = '<i class="ri-save-3-line"></i> Guardar todos los cambios';
+                        saveBtn.style.background = '';
+                        saveBtn.style.color = '';
+                        saveBtn.style.boxShadow = '';
+                        saveBtn.disabled = false;
+                    }, 2500);
+                }, 1200);
+            });
+        });
+    </script>
+</body>
+</html>

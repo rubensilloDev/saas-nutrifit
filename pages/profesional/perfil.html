@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-dashboard.css">
+    <link rel="stylesheet" href="../../css/profile.css">
+</head>
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1><i class="ri-user-3-fill pro-perfil-icon"></i> Mi Perfil Profesional</h1>
+            <p>Gestiona tu información profesional y personal.</p>
+        </header>
+
+        <div class="profile-grid">
+            <div class="profile-card profile-avatar-card pro-perfil-avatar-card">
+                <div class="profile-avatar-wrapper">
+                    <div class="profile-avatar pro-perfil-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Carlos+Ruiz&background=1565c0&color=fff&size=128" alt="Avatar">
+                    </div>
+                    <button class="profile-avatar-edit pro-perfil-avatar-edit" id="btn-cambiar-foto" title="Cambiar foto">
+                        <i class="ri-camera-line"></i>
+                    </button>
+                    <input type="file" id="input-foto-perfil" accept="image/*" class="pro-perfil-hidden">
+                </div>
+                <div class="profile-avatar-info">
+                    <h2 class="profile-name">Carlos Ruiz</h2>
+                    <p class="profile-role">Nutricionista Deportivo & Entrenador Personal</p>
+                    <div class="pro-perfil-creds">
+                        <span><i class="ri-graduation-cap-fill"></i> Lic. Nutrición UNAM</span>
+                        <span><i class="ri-award-fill"></i> CPT-NASM</span>
+                        <span><i class="ri-trophy-fill"></i> 8 años experiencia</span>
+                    </div>
+                    <div class="pro-perfil-badge"><i class="ri-verified-badge-fill"></i> Profesional Verificado</div>
+                </div>
+            </div>
+
+            <div class="profile-card profile-data-card">
+                <div class="profile-section-title">
+                    <i class="ri-user-settings-line pro-perfil-icon"></i>
+                    <h3>Datos Personales</h3>
+                </div>
+                <div class="profile-field">
+                    <label class="profile-label">Nombre completo</label>
+                    <input type="text" class="profile-input" value="Carlos Ruiz Méndez" placeholder="Tu nombre">
+                </div>
+                <div class="profile-field">
+                    <label class="profile-label">Correo electrónico</label>
+                    <input type="email" class="profile-input profile-input--disabled" value="carlos.ruiz@nutrifit.com" disabled>
+                </div>
+                <div class="profile-field">
+                    <label class="profile-label">Teléfono profesional</label>
+                    <input type="tel" class="profile-input" value="+52 55 8765 4321" placeholder="+52 55 XXXX XXXX">
+                </div>
+                <div class="profile-field-row">
+                    <div class="profile-field">
+                        <label class="profile-label">Cédula profesional</label>
+                        <input type="text" class="profile-input" value="NUT-12345" placeholder="No. Cédula">
+                    </div>
+                    <div class="profile-field">
+                        <label class="profile-label">Años de experiencia</label>
+                        <input type="number" class="profile-input" value="8" min="1" max="60">
+                    </div>
+                </div>
+                <button class="profile-save-btn pro-perfil-save-btn">
+                    <i class="ri-save-3-line"></i> Guardar cambios
+                </button>
+            </div>
+
+            <div class="profile-card pro-perfil-card-right">
+                <div class="profile-section-title">
+                    <i class="ri-star-line pro-perfil-icon"></i>
+                    <h3>Especialidades</h3>
+                </div>
+                <div class="pro-perfil-specialties">
+                    <span>Nutrición Deportiva</span>
+                    <span>Hipertrofia</span>
+                    <span>Pérdida de peso</span>
+                    <span>Rendimiento</span>
+                    <span>Dieta Cetogénica</span>
+                    <span>Nutrición Vegetariana</span>
+                    <span>Recomposición Corporal</span>
+                    <span>Entrenamiento Funcional</span>
+                </div>
+                <div class="pro-perfil-mt-lg">
+                    <div class="profile-section-title">
+                        <i class="ri-quote-text pro-perfil-icon"></i>
+                        <h3>Biografía</h3>
+                    </div>
+                    <textarea class="profile-input pro-perfil-textarea" placeholder="Cuéntales a tus clientes sobre ti...">Soy nutriólogo deportivo certificado con más de 8 años de experiencia ayudando a atletas y personas activas a alcanzar su máximo potencial a través de la nutrición basada en evidencia y el entrenamiento inteligente.</textarea>
+                </div>
+            </div>
+
+            <div class="profile-card pro-perfil-schedule-card">
+                <div class="profile-section-title">
+                    <i class="ri-time-line pro-perfil-icon"></i>
+                    <h3>Horario de Consulta</h3>
+                </div>
+                <div class="pro-perfil-schedule">
+                    <div class="pro-perfil-schedule-row"><span>Lunes - Viernes</span><span>08:00 - 18:00</span></div>
+                    <div class="pro-perfil-schedule-row"><span>Sábados</span><span>09:00 - 14:00</span></div>
+                    <div class="pro-perfil-schedule-row"><span>Domingos</span><span>Cerrado</span></div>
+                </div>
+                <div class="pro-perfil-mt-md">
+                    <div class="profile-section-title">
+                        <i class="ri-contacts-line pro-perfil-icon"></i>
+                        <h3>Información de Contacto</h3>
+                    </div>
+                    <div class="pro-perfil-contact">
+                        <div class="pro-perfil-contact-item">
+                            <i class="ri-video-chat-line"></i>
+                            <div><span>Consulta virtual</span><span>Disponible</span></div>
+                        </div>
+                        <div class="pro-perfil-contact-item">
+                            <i class="ri-map-pin-line"></i>
+                            <div><span>Ubicación</span><span>CDMX, México</span></div>
+                        </div>
+                        <div class="pro-perfil-contact-item">
+                            <i class="ri-whatsapp-line"></i>
+                            <div><span>WhatsApp</span><span>+52 55 8765 4321</span></div>
+                        </div>
+                        <div class="pro-perfil-contact-item">
+                            <i class="ri-mail-line"></i>
+                            <div><span>Email</span><span>carlos.r@nutrifit.com</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-card profile-stats-card pro-perfil-stats-card-bg">
+                <div class="profile-section-title">
+                    <i class="ri-bar-chart-2-line pro-perfil-icon"></i>
+                    <h3>Estadísticas Profesionales</h3>
+                </div>
+                <div class="profile-stat-grid">
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value pro-perfil-stat-value">24</span>
+                        <span class="profile-stat-label">Clientes Totales</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value pro-perfil-stat-value">19</span>
+                        <span class="profile-stat-label">Clientes Activos</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value pro-perfil-stat-value">87%</span>
+                        <span class="profile-stat-label">Tasa de Éxito</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value pro-perfil-stat-value">4.9</span>
+                        <span class="profile-stat-label">Calificación</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value pro-perfil-stat-value">156</span>
+                        <span class="profile-stat-label">Planes Asignados</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value pro-perfil-stat-value">3.2</span>
+                        <span class="profile-stat-label">Años en NutriFit</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value pro-perfil-stat-value">98%</span>
+                        <span class="profile-stat-label">Adherencia Clientes</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-value pro-perfil-stat-value">12</span>
+                        <span class="profile-stat-label">Certificaciones</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-card profile-logout-card">
+                <button class="profile-logout-btn" id="logout-btn">
+                    <i class="ri-logout-box-r-line"></i>
+                    <span>Cerrar sesión</span>
+                </button>
+                <p class="profile-logout-hint">Estás usando NutriFit v2.0 · Panel Profesional</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnFoto = document.getElementById('btn-cambiar-foto');
+            const inputFoto = document.getElementById('input-foto-perfil');
+            const imgAvatar = document.querySelector('.profile-avatar img');
+            btnFoto.addEventListener('click', () => inputFoto.click());
+            inputFoto.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => { imgAvatar.src = ev.target.result; };
+                reader.readAsDataURL(file);
+            });
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                const btn = document.getElementById('logout-btn');
+                btn.innerHTML = '<i class="ri-loader-4-line pro-perfil-spin"></i> Cerrando sesión...';
+                btn.disabled = true;
+                setTimeout(() => { window.location.href = '/'; }, 800);
+            });
+        });
+    </script>
+</body>
+</html>

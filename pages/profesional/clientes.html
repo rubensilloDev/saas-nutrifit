@@ -16,7 +16,7 @@
 
     <main class="dashboard-container">
         <header class="dashboard-header">
-            <h1 id="page-title"><i class="ri-group-line" style="color: var(--pro-primary);"></i> Seleccionar Cliente</h1>
+            <h1 id="page-title"><i class="ri-group-line pro-perfil-icon"></i> Seleccionar Cliente</h1>
             <p id="page-subtitle">Elige un cliente para comenzar</p>
         </header>
 
@@ -42,7 +42,7 @@
                 nutricion: { title: 'Registros Nutricionales', subtitle: 'Selecciona un cliente para gestionar su plan', icon: 'ri-restaurant-2-line' }
             };
             const info = titles[mode] || titles.chat;
-            document.getElementById('page-title').innerHTML = `<i class="${info.icon}" style="color: var(--pro-primary);"></i> ${info.title}`;
+            document.getElementById('page-title').innerHTML = `<i class="${info.icon} pro-perfil-icon"></i> ${info.title}`;
             document.getElementById('page-subtitle').textContent = info.subtitle;
 
             const clients = [

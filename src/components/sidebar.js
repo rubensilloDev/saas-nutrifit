@@ -73,6 +73,23 @@ function initSidebar() {
                 <i class="ri-restaurant-2-line icon"></i>
                 <span class="label">Nutrición</span>
             </a>
+            <div class="menu-group">
+                <button class="menu-link dropdown-toggle" id="btn-perfil-pro">
+                    <i class="ri-user-3-line icon"></i>
+                    <span class="label">Perfil</span>
+                    <i class="ri-arrow-down-s-line arrow-icon"></i>
+                </button>
+                <div class="submenu" id="submenu-perfil-pro">
+                    <a href="/pages/profesional/perfil.html" class="submenu-link">
+                        <i class="ri-profile-line icon"></i>
+                        <span class="label">Mi Perfil</span>
+                    </a>
+                    <a href="/pages/profesional/configuracion.html" class="submenu-link">
+                        <i class="ri-settings-5-line icon"></i>
+                        <span class="label">Configuración</span>
+                    </a>
+                </div>
+            </div>
         </nav>
     ` : `
         <nav class="sidebar-menu">

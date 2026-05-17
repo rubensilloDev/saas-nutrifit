@@ -16,11 +16,11 @@
 
     <main class="dashboard-container">
         <header class="dashboard-header">
-            <div style="display:flex;align-items:center;gap:14px;">
+            <div class="pro-entreno-header-flex">
                 <a href="clientes.html?mode=entreno" class="pro-chat-back"><i class="ri-arrow-left-line"></i></a>
                 <div>
-                    <h1 style="margin:0;"><i class="ri-run-line" style="color:var(--pro-primary);"></i> Registro de Entrenamiento</h1>
-                    <p style="margin:2px 0 0 0;font-size:0.85rem;color:var(--on-surface-variant);" id="pro-entreno-subtitle">Asigna una rutina a tu cliente</p>
+                    <h1 class="pro-entreno-h1"><i class="ri-run-line pro-entreno-icon"></i> Registro de Entrenamiento</h1>
+                    <p class="pro-entreno-subtitle" id="pro-entreno-subtitle">Asigna una rutina a tu cliente</p>
                 </div>
             </div>
         </header>
@@ -32,7 +32,7 @@
                         <i class="ri-user-search-line"></i>
                         <p>Selecciona un cliente desde el listado o usando el buscador</p>
                     </div>
-                    <div class="pro-entreno-cliente-data" id="cliente-data" style="display:none;">
+                    <div class="pro-entreno-cliente-data pro-entreno-hidden" id="cliente-data">
                         <div class="pro-entreno-cliente-header">
                             <div class="pro-entreno-cliente-avatar" id="cliente-avatar">--</div>
                             <div>
@@ -61,7 +61,7 @@
                         <span>Plantillas Guardadas</span>
                     </div>
                     <div id="plantillas-list">
-                        <p style="font-size:0.82rem;opacity:0.6;text-align:center;padding:12px;">Usa el creador para guardar tu primera plantilla</p>
+                        <p class="pro-entreno-placeholder-text">Usa el creador para guardar tu primera plantilla</p>
                     </div>
                 </div>
             </aside>
@@ -268,7 +268,7 @@
                 const container = document.getElementById('plantillas-list');
                 const templates = JSON.parse(localStorage.getItem('nutrifit_pro_templates') || '[]');
                 if (!templates.length) {
-                    container.innerHTML = '<p style="font-size:0.82rem;opacity:0.6;text-align:center;padding:12px;">Usa el creador para guardar tu primera plantilla</p>';
+                    container.innerHTML = '<p class="pro-entreno-placeholder-text">Usa el creador para guardar tu primera plantilla</p>';
                     return;
                 }
                 container.innerHTML = templates.map(t => `

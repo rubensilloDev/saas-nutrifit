@@ -16,11 +16,11 @@
 
     <main class="dashboard-container">
         <header class="dashboard-header">
-            <div style="display:flex;align-items:center;gap:14px;">
+            <div class="pro-nutri-header-flex">
                 <a href="clientes.html?mode=nutricion" class="pro-chat-back"><i class="ri-arrow-left-line"></i></a>
                 <div>
-                    <h1 style="margin:0;"><i class="ri-restaurant-2-line" style="color:var(--primary);"></i> Registro Nutricional</h1>
-                    <p style="margin:2px 0 0 0;font-size:0.85rem;color:var(--on-surface-variant);" id="pro-nutri-subtitle">Gestiona el plan nutricional de tu cliente</p>
+                    <h1 class="pro-nutri-h1"><i class="ri-restaurant-2-line pro-nutri-icon-primary"></i> Registro Nutricional</h1>
+                    <p class="pro-nutri-subtitle" id="pro-nutri-subtitle">Gestiona el plan nutricional de tu cliente</p>
                 </div>
             </div>
         </header>
@@ -34,7 +34,7 @@
                     </select>
                 </div>
 
-                <div class="pro-nutri-cliente-card" id="nutri-cliente-card" style="display:none;">
+                <div class="pro-nutri-cliente-card pro-nutri-hidden" id="nutri-cliente-card">
                     <div class="pro-nutri-cliente-header">
                         <div class="pro-nutri-cliente-avatar" id="nutri-cliente-avatar">--</div>
                         <div>
@@ -52,19 +52,19 @@
                 <!-- Alimentos favoritos y no gustan -->
                 <div class="pro-nutri-food-lists">
                     <div class="pro-nutri-food-section">
-                        <div class="pro-nutri-food-section-header" style="color:var(--primary);">
+                        <div class="pro-nutri-food-section-header pro-nutri-section-header-primary">
                             <i class="ri-heart-3-fill"></i> <span>Favoritos</span>
                         </div>
                         <div id="fav-foods-list" class="pro-nutri-food-tags">
-                            <p style="font-size:0.8rem;opacity:0.5;">Selecciona un cliente</p>
+                            <p class="pro-nutri-placeholder-text">Selecciona un cliente</p>
                         </div>
                     </div>
                     <div class="pro-nutri-food-section">
-                        <div class="pro-nutri-food-section-header" style="color:#d32f2f;">
+                        <div class="pro-nutri-food-section-header pro-nutri-section-header-red">
                             <i class="ri-dislike-fill"></i> <span>No le gustan</span>
                         </div>
                         <div id="dislike-foods-list" class="pro-nutri-food-tags">
-                            <p style="font-size:0.8rem;opacity:0.5;">Selecciona un cliente</p>
+                            <p class="pro-nutri-placeholder-text">Selecciona un cliente</p>
                         </div>
                     </div>
                     <div class="pro-nutri-food-section">
@@ -120,17 +120,17 @@
                         <div id="macro-distribution">
                             <div class="pro-nutri-dist-item">
                                 <span class="pro-nutri-dist-label">Proteínas</span>
-                                <div class="pro-nutri-dist-bar"><div class="pro-nutri-dist-fill" style="width:30%;background:var(--primary);"></div></div>
+                                <div class="pro-nutri-dist-bar"><div class="pro-nutri-dist-fill pro-nutri-dist-fill--protein" style="width:30%;"></div></div>
                                 <span class="pro-nutri-dist-pct">30%</span>
                             </div>
                             <div class="pro-nutri-dist-item">
                                 <span class="pro-nutri-dist-label">Carbohidratos</span>
-                                <div class="pro-nutri-dist-bar"><div class="pro-nutri-dist-fill" style="width:40%;background:var(--primary-container);"></div></div>
+                                <div class="pro-nutri-dist-bar"><div class="pro-nutri-dist-fill pro-nutri-dist-fill--carbs" style="width:40%;"></div></div>
                                 <span class="pro-nutri-dist-pct">40%</span>
                             </div>
                             <div class="pro-nutri-dist-item">
                                 <span class="pro-nutri-dist-label">Grasas</span>
-                                <div class="pro-nutri-dist-bar"><div class="pro-nutri-dist-fill" style="width:30%;background:var(--secondary);"></div></div>
+                                <div class="pro-nutri-dist-bar"><div class="pro-nutri-dist-fill pro-nutri-dist-fill--fats" style="width:30%;"></div></div>
                                 <span class="pro-nutri-dist-pct">30%</span>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                 <div class="pro-nutri-tab-content" id="tab-comidas">
                     <div class="pro-nutri-card">
                         <h3><i class="ri-restaurant-line"></i> Asignar Comidas Sugeridas</h3>
-                        <p style="font-size:0.85rem;color:var(--on-surface-variant);margin-bottom:var(--spacing-lg);">Arrastra o selecciona alimentos para crear un menú sugerido para el cliente.</p>
+                        <p class="pro-nutri-desc-text">Arrastra o selecciona alimentos para crear un menú sugerido para el cliente.</p>
 
                         <div class="pro-nutri-food-picker">
                             <div class="pro-nutri-food-picker-search">
@@ -187,7 +187,7 @@
                                     <button class="pro-nutri-meal-add-food" data-meal="snacks"><i class="ri-add-line"></i> Añadir</button>
                                 </div>
                             </div>
-                            <button class="pro-nutri-btn-save" id="btn-save-meals" style="margin-top:var(--spacing-lg);"><i class="ri-send-plane-fill"></i> Asignar Menú al Cliente</button>
+                            <button class="pro-nutri-btn-save pro-nutri-btn-save-mt" id="btn-save-meals"><i class="ri-send-plane-fill"></i> Asignar Menú al Cliente</button>
                         </div>
                     </div>
                 </div>
@@ -196,20 +196,20 @@
     </main>
 
     <!-- Modal: Gestionar Alimentos (Favoritos / No gustan) -->
-    <div id="food-manager-modal" class="pro-nutri-modal" style="display:none;">
+    <div id="food-manager-modal" class="pro-nutri-modal pro-nutri-hidden">
         <div class="pro-nutri-modal-content">
             <div class="pro-nutri-modal-header">
                 <h3>Gestionar Preferencias de Alimentos</h3>
                 <button class="pro-nutri-modal-close"><i class="ri-close-line"></i></button>
             </div>
             <div class="pro-nutri-modal-body">
-                <p style="font-size:0.9rem;color:var(--on-surface-variant);margin-bottom:var(--spacing-lg);">Marca los alimentos como favoritos o como "no le gustan" para este cliente.</p>
+                <p class="pro-nutri-modal-text">Marca los alimentos como favoritos o como "no le gustan" para este cliente.</p>
                 <div id="food-manager-list">
                     <!-- Alimentos con checkboxes -->
                 </div>
             </div>
             <div class="pro-nutri-modal-footer">
-                <button class="pro-entreno-btn-primary" id="btn-save-preferences">Guardar Preferencias</button>
+                <button class="pro-nutri-btn-save-prefs" id="btn-save-preferences"><i class="ri-save-line"></i> Guardar Preferencias</button>
             </div>
         </div>
     </div>
@@ -306,12 +306,12 @@
                 if (prefs.favs.length) {
                     favContainer.innerHTML = prefs.favs.map(f => `<span class="pro-nutri-tag pro-nutri-tag--fav"><i class="ri-heart-3-fill"></i> ${f}</span>`).join('');
                 } else {
-                    favContainer.innerHTML = '<p style="font-size:0.8rem;opacity:0.5;">Sin favoritos aún</p>';
+                    favContainer.innerHTML = '<p class="pro-nutri-placeholder-text">Sin favoritos aún</p>';
                 }
                 if (prefs.dislikes.length) {
                     disContainer.innerHTML = prefs.dislikes.map(f => `<span class="pro-nutri-tag pro-nutri-tag--dislike"><i class="ri-close-circle-fill"></i> ${f}</span>`).join('');
                 } else {
-                    disContainer.innerHTML = '<p style="font-size:0.8rem;opacity:0.5;">Ninguno registrado</p>';
+                    disContainer.innerHTML = '<p class="pro-nutri-placeholder-text">Ninguno registrado</p>';
                 }
             }
 
@@ -493,7 +493,7 @@
                 ];
 
                 container.innerHTML = `
-                    <div style="overflow-x:auto;">
+                    <div class="pro-nutri-scroll-x">
                         <table class="pro-nutri-table">
                             <thead>
                                 <tr>
