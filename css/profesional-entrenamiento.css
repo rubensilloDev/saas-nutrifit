@@ -1,0 +1,543 @@
+.pro-entreno-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+
+.pro-entreno-cliente {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.pro-entreno-cliente-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--outline-variant);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.pro-entreno-cliente-placeholder {
+    text-align: center;
+    padding: 24px 12px;
+    color: var(--on-surface-variant);
+}
+
+.pro-entreno-cliente-placeholder i {
+    font-size: 2.5rem;
+    opacity: 0.3;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.pro-entreno-cliente-placeholder p {
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.pro-entreno-cliente-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: var(--spacing-md);
+}
+
+.pro-entreno-cliente-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pro-surface), #bbdefb);
+    color: var(--pro-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.pro-entreno-cliente-name {
+    display: block;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--on-surface);
+}
+
+.pro-entreno-cliente-goal {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.pro-entreno-cliente-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.pro-entreno-stat {
+    text-align: center;
+    background: var(--surface-container-lowest);
+    padding: 10px 8px;
+    border-radius: 12px;
+}
+
+.pro-entreno-stat-val {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--pro-primary);
+}
+
+.pro-entreno-stat-lbl {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.pro-entreno-select {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pro-entreno-select label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+}
+
+.pro-entreno-select select {
+    padding: 12px 14px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    background: white;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.pro-entreno-select select:focus {
+    border-color: var(--pro-primary);
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
+}
+
+.pro-entreno-plantillas {
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--outline-variant);
+    padding: var(--spacing-md) var(--spacing-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.pro-entreno-small-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--pro-primary);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+#plantillas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pro-plantilla-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: var(--surface-container-lowest);
+    border-radius: 10px;
+    border: 1px solid var(--outline-variant);
+    transition: all 0.2s;
+}
+
+.pro-plantilla-item:hover {
+    border-color: var(--pro-primary);
+}
+
+.pro-plantilla-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.pro-plantilla-name {
+    display: block;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--on-surface);
+}
+
+.pro-plantilla-meta {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+    margin-top: 1px;
+}
+
+.pro-plantilla-cargar {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    background: var(--pro-surface);
+    color: var(--pro-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pro-plantilla-cargar:hover {
+    background: var(--pro-primary);
+    color: white;
+}
+
+/* MAIN - CREADOR */
+.pro-entreno-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.pro-entreno-creator {
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--outline-variant);
+    padding: var(--spacing-xl);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.pro-entreno-creator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.pro-entreno-creator-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--pro-primary);
+}
+
+.pro-entreno-creator-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.pro-entreno-btn-primary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--pro-primary), #1976d2);
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-heading);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.2);
+}
+
+.pro-entreno-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(21, 101, 192, 0.3);
+}
+
+.pro-entreno-btn-outline {
+    padding: 10px 20px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    background: white;
+    color: var(--on-surface);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-heading);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pro-entreno-btn-outline:hover {
+    border-color: var(--pro-primary);
+    color: var(--pro-primary);
+    background: var(--pro-surface);
+}
+
+.pro-entreno-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.pro-entreno-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pro-entreno-field label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+}
+
+.pro-entreno-field input,
+.pro-entreno-field textarea,
+.pro-entreno-field select {
+    padding: 12px 14px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    font-family: var(--font-body);
+    outline: none;
+    transition: all 0.2s;
+    background: white;
+}
+
+.pro-entreno-field input:focus,
+.pro-entreno-field textarea:focus,
+.pro-entreno-field select:focus {
+    border-color: var(--pro-primary);
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.08);
+}
+
+.pro-entreno-field textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
+/* EJERCICIO CARD — Diseño premium */
+.pro-ejercicio-card {
+    background: linear-gradient(145deg, #ffffff, var(--surface-container-lowest));
+    border-radius: 18px;
+    border: 1px solid var(--outline-variant);
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    position: relative;
+}
+
+.pro-ejercicio-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--pro-primary), var(--pro-primary-container), var(--pro-primary));
+    opacity: 0;
+    transition: opacity 0.35s;
+}
+
+.pro-ejercicio-card:hover {
+    border-color: var(--pro-primary);
+    box-shadow: 0 8px 28px rgba(21, 101, 192, 0.1);
+    transform: translateY(-2px);
+}
+
+.pro-ejercicio-card:hover::before {
+    opacity: 1;
+}
+
+.pro-ejercicio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--pro-surface), #e8eaf6);
+    border-bottom: 1px solid rgba(21, 101, 192, 0.08);
+}
+
+.pro-ejercicio-number {
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--pro-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 4px 14px 4px 10px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(21, 101, 192, 0.12);
+}
+
+
+
+.pro-ejercicio-remove {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(211, 47, 47, 0.08);
+    color: #d32f2f;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+    font-size: 1.1rem;
+}
+
+.pro-ejercicio-remove:hover {
+    background: #d32f2f;
+    color: white;
+    transform: rotate(90deg);
+}
+
+.pro-ejercicio-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pro-ejercicio-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.pro-ejercicio-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pro-ejercicio-field label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pro-ejercicio-field label i {
+    font-size: 0.85rem;
+    color: var(--pro-primary);
+}
+
+.pro-ejercicio-name {
+    padding: 12px 14px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    outline: none;
+    transition: all 0.2s;
+    background: white;
+}
+
+.pro-ejercicio-name:focus,
+.pro-ejercicio-sets:focus,
+.pro-ejercicio-reps:focus,
+.pro-ejercicio-rir:focus,
+.pro-ejercicio-rest:focus,
+.pro-ejercicio-notes:focus {
+    border-color: var(--pro-primary);
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.08);
+}
+
+.pro-ejercicio-sets,
+.pro-ejercicio-reps,
+.pro-ejercicio-rir,
+.pro-ejercicio-rest,
+.pro-ejercicio-notes {
+    padding: 10px 12px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    outline: none;
+    transition: all 0.2s;
+    background: white;
+}
+
+.pro-ejercicio-notes {
+    min-height: 60px;
+    resize: vertical;
+    font-weight: 500;
+}
+
+.pro-entreno-btn-add-ex {
+    padding: 14px;
+    border: 2px dashed var(--outline-variant);
+    border-radius: 14px;
+    background: transparent;
+    color: var(--pro-primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pro-entreno-btn-add-ex:hover {
+    border-color: var(--pro-primary);
+    background: var(--pro-surface);
+}
+
+@media (max-width: 1024px) {
+    .pro-entreno-layout {
+        grid-template-columns: 1fr;
+    }
+    .pro-ejercicio-row {
+        grid-template-columns: 1fr 1fr;
+    }
+    .pro-entreno-creator-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .pro-ejercicio-row {
+        grid-template-columns: 1fr;
+    }
+    .pro-entreno-creator-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+}

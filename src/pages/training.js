@@ -296,21 +296,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${ex.notes ? `<p class="technical-notes"><strong>Tip:</strong> ${ex.notes}</p>` : ''}
                     </div>
 
-                    <div class="sets-table-wrapper">
-                        <table class="sets-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 50px;">Serie</th>
-                                    <th>Peso (kg)</th>
-                                    <th>Reps</th>
-                                    <th>RIR</th>
-                                    <th style="width: 60px;">OK</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${renderSetRow(1)}
-                            </tbody>
-                        </table>
+                    <div class="sets-stack">
+                        ${renderSetRow(1)}
                         <button type="button" class="btn-text btn-add-set" data-ex-index="${index}">+ Añadir Serie</button>
                     </div>
                 </div>
@@ -320,34 +307,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
         workoutSessionList.querySelectorAll('.btn-add-set').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const tableBody = e.target.closest('.sets-table-wrapper').querySelector('tbody');
-                const setNumber = tableBody.querySelectorAll('tr').length + 1;
-                tableBody.insertAdjacentHTML('beforeend', renderSetRow(setNumber));
-                attachCheckmarkEvents(tableBody.lastElementChild);
+                const stack = e.target.closest('.sets-stack');
+                const setNumber = stack.querySelectorAll('.set-card').length + 1;
+                const temp = document.createElement('div');
+                temp.innerHTML = renderSetRow(setNumber);
+                const newCard = temp.firstElementChild;
+                stack.insertBefore(newCard, e.target);
+                attachCheckmarkEvents(newCard);
             });
         });
 
-        workoutSessionList.querySelectorAll('.set-row').forEach(row => attachCheckmarkEvents(row));
+        workoutSessionList.querySelectorAll('.set-card').forEach(card => attachCheckmarkEvents(card));
     }
 
     function renderSetRow(number) {
         return `
-            <tr class="set-row">
-                <td style="text-align: center; font-weight:800;">${number}</td>
-                <td><input type="number" class="log-weight" placeholder="0" style="width:100%;"></td>
-                <td><input type="number" class="log-reps" placeholder="0" style="width:100%;"></td>
-                <td>
-                    <select class="log-rir" style="width:100%;">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3+</option>
-                    </select>
-                </td>
-                <td style="text-align: center;">
+            <div class="set-card">
+                <div class="set-card-header">
+                    <span class="set-number">Serie ${number}</span>
                     <button type="button" class="checkmark-btn"><i class="ri-check-line"></i></button>
-                </td>
-            </tr>
+                </div>
+                <div class="set-card-fields">
+                    <div class="set-field">
+                        <label>Peso (kg)</label>
+                        <input type="number" class="log-weight" placeholder="0">
+                    </div>
+                    <div class="set-field">
+                        <label>Reps</label>
+                        <input type="number" class="log-reps" placeholder="0">
+                    </div>
+                    <div class="set-field">
+                        <label>RIR</label>
+                        <select class="log-rir">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3+</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         `;
     }
 
@@ -400,27 +399,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const cardHTML = `
                 <div class="history-card">
-                    <div class="history-date-badge">
-                        <span class="day">${day}</span>
-                        <span class="month">${month}</span>
+                    <div class="history-card-top">
+                        <div class="history-date-badge">
+                            <span class="day">${day}</span>
+                            <span class="month">${month}</span>
+                        </div>
+                        <div class="history-card-title">
+                            <h4>${log.routineName}</h4>
+                            <span class="history-exercises-summary">${exSummary}</span>
+                        </div>
                     </div>
-                    <div class="history-main-info">
-                        <h4>${log.routineName}</h4>
-                        <span class="history-exercises-summary">${exSummary}</span>
-                        
-                        <div class="history-metrics-row">
-                            <div class="h-metric">
-                                <i class="ri-list-check-3"></i>
-                                <span>${totalSets}<span class="label">Series</span></span>
-                            </div>
-                            <div class="h-metric">
-                                <i class="ri-attachment-line"></i>
-                                <span>${log.exercises.length}<span class="label">Ejercicios</span></span>
-                            </div>
-                            <div class="h-metric">
-                                <i class="ri-timer-line"></i>
-                                <span>${log.duration || '--:--'}</span>
-                            </div>
+                    <div class="history-metrics-row">
+                        <div class="h-metric">
+                            <i class="ri-list-check-3"></i>
+                            <span>${totalSets}<span class="label">Series</span></span>
+                        </div>
+                        <div class="h-metric">
+                            <i class="ri-attachment-line"></i>
+                            <span>${log.exercises.length}<span class="label">Ejercicios</span></span>
+                        </div>
+                        <div class="h-metric">
+                            <i class="ri-timer-line"></i>
+                            <span>${log.duration || '--:--'}</span>
                         </div>
                     </div>
                 </div>
@@ -447,15 +447,15 @@ document.addEventListener('DOMContentLoaded', () => {
             workoutSessionList.querySelectorAll('.logging-exercise-card').forEach(card => {
                 const exName = card.querySelector('h3').textContent;
                 const sets = [];
-                card.querySelectorAll('.set-row').forEach(row => {
-                    const weight = row.querySelector('.log-weight').value;
-                    const reps = row.querySelector('.log-reps').value;
+                card.querySelectorAll('.set-card').forEach(cardEl => {
+                    const weight = cardEl.querySelector('.log-weight').value;
+                    const reps = cardEl.querySelector('.log-reps').value;
                     if (weight && reps) {
                         sets.push({
                             weight: weight,
                             reps: reps,
-                            rir: row.querySelector('.log-rir').value,
-                            completed: row.classList.contains('completed')
+                            rir: cardEl.querySelector('.log-rir').value,
+                            completed: cardEl.classList.contains('completed')
                         });
                     }
                 });

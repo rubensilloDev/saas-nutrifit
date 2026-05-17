@@ -395,6 +395,141 @@
     }
 }
 
+/* --- MODAL DE SELECCIÓN DE ROL (Post-registro) --- */
+.role-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+}
+
+.role-modal.active {
+    display: flex;
+}
+
+.role-modal-content {
+    background: white;
+    border-radius: 28px;
+    padding: var(--spacing-xxl);
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.role-modal-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.role-modal-logo {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto var(--spacing-md);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(13, 99, 27, 0.2);
+}
+
+.role-modal-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.role-modal-header h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--on-surface);
+    margin: 0 0 6px 0;
+}
+
+.role-modal-header p {
+    font-size: 0.9rem;
+    color: var(--on-surface-variant);
+    margin: 0;
+}
+
+.role-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.role-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 2px solid var(--outline-variant);
+    border-radius: 18px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: left;
+    font-family: var(--font-body);
+    width: 100%;
+}
+
+.role-card:hover {
+    border-color: var(--primary);
+    background: #f1f8e9;
+    transform: translateX(6px);
+}
+
+.role-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #f3e5f5;
+    color: #7b1fa2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.role-card-info {
+    flex: 1;
+}
+
+.role-card-title {
+    display: block;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--on-surface);
+    margin-bottom: 2px;
+}
+
+.role-card-desc {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--on-surface-variant);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.role-arrow {
+    font-size: 1.4rem;
+    color: var(--primary);
+    transition: transform 0.2s;
+}
+
+.role-card:hover .role-arrow {
+    transform: translateX(4px);
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 540px) {
     .auth-card {

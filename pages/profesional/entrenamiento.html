@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenamiento - Panel Pro - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-entrenamiento.css">
+</head>
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <div style="display:flex;align-items:center;gap:14px;">
+                <a href="clientes.html?mode=entreno" class="pro-chat-back"><i class="ri-arrow-left-line"></i></a>
+                <div>
+                    <h1 style="margin:0;"><i class="ri-run-line" style="color:var(--pro-primary);"></i> Registro de Entrenamiento</h1>
+                    <p style="margin:2px 0 0 0;font-size:0.85rem;color:var(--on-surface-variant);" id="pro-entreno-subtitle">Asigna una rutina a tu cliente</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="pro-entreno-layout">
+            <aside class="pro-entreno-cliente">
+                <div class="pro-entreno-cliente-card" id="cliente-info-card">
+                    <div class="pro-entreno-cliente-placeholder" id="cliente-placeholder">
+                        <i class="ri-user-search-line"></i>
+                        <p>Selecciona un cliente desde el listado o usando el buscador</p>
+                    </div>
+                    <div class="pro-entreno-cliente-data" id="cliente-data" style="display:none;">
+                        <div class="pro-entreno-cliente-header">
+                            <div class="pro-entreno-cliente-avatar" id="cliente-avatar">--</div>
+                            <div>
+                                <span class="pro-entreno-cliente-name" id="cliente-name">--</span>
+                                <span class="pro-entreno-cliente-goal" id="cliente-goal">--</span>
+                            </div>
+                        </div>
+                        <div class="pro-entreno-cliente-stats">
+                            <div class="pro-entreno-stat"><span class="pro-entreno-stat-val" id="cliente-routines">0</span><span class="pro-entreno-stat-lbl">Rutinas</span></div>
+                            <div class="pro-entreno-stat"><span class="pro-entreno-stat-val" id="cliente-workouts">0</span><span class="pro-entreno-stat-lbl">Entrenos</span></div>
+                            <div class="pro-entreno-stat"><span class="pro-entreno-stat-val" id="cliente-adherence">0%</span><span class="pro-entreno-stat-lbl">Adherencia</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pro-entreno-select">
+                    <label>Seleccionar Cliente</label>
+                    <select id="select-cliente-entreno">
+                        <option value="">-- Elige un cliente --</option>
+                    </select>
+                </div>
+
+                <div class="pro-entreno-plantillas">
+                    <div class="pro-entreno-small-header">
+                        <i class="ri-file-copy-line"></i>
+                        <span>Plantillas Guardadas</span>
+                    </div>
+                    <div id="plantillas-list">
+                        <p style="font-size:0.82rem;opacity:0.6;text-align:center;padding:12px;">Usa el creador para guardar tu primera plantilla</p>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="pro-entreno-main">
+                <div class="pro-entreno-creator">
+                    <div class="pro-entreno-creator-header">
+                        <h3><i class="ri-add-circle-line"></i> Crear Rutina</h3>
+                        <div class="pro-entreno-creator-actions">
+                            <button class="pro-entreno-btn-outline" id="btn-save-template"><i class="ri-save-line"></i> Guardar Plantilla</button>
+                            <button class="pro-entreno-btn-primary" id="btn-assign-routine"><i class="ri-send-plane-fill"></i> Asignar a Cliente</button>
+                        </div>
+                    </div>
+
+                    <div class="pro-entreno-form">
+                        <div class="pro-entreno-field">
+                            <label>Nombre de la Rutina</label>
+                            <input type="text" id="routine-name-input" placeholder="Ej: Push + Core">
+                        </div>
+
+                        <div id="pro-exercise-list">
+                            <!-- Ejercicios dinámicos -->
+                        </div>
+
+                        <button class="pro-entreno-btn-add-ex" id="btn-add-exercise"><i class="ri-add-line"></i> Añadir Ejercicio</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const clients = [
+                { id: 1, name: 'Alex Rivera', goal: 'Hipertrofia', avatar: 'AR', routines: 3, workouts: 24, adherence: 87 },
+                { id: 2, name: 'María García', goal: 'Pérdida de peso', avatar: 'MG', routines: 2, workouts: 18, adherence: 72 },
+                { id: 3, name: 'Carlos Mendoza', goal: 'Rendimiento', avatar: 'CM', routines: 4, workouts: 32, adherence: 91 },
+                { id: 4, name: 'Lucía Fernández', goal: 'Definición', avatar: 'LF', routines: 2, workouts: 15, adherence: 65 },
+                { id: 5, name: 'Pedro Sánchez', goal: 'Volumen', avatar: 'PS', routines: 1, workouts: 8, adherence: 45 },
+                { id: 6, name: 'Ana Romero', goal: 'Pérdida de peso', avatar: 'AR', routines: 3, workouts: 22, adherence: 80 }
+            ];
+
+            const params = new URLSearchParams(window.location.search);
+            const selectedClientId = params.get('cliente') ? parseInt(params.get('cliente')) : null;
+
+            const selectCliente = document.getElementById('select-cliente-entreno');
+            const exerciseList = document.getElementById('pro-exercise-list');
+            const routineName = document.getElementById('routine-name-input');
+            const clientePlaceholder = document.getElementById('cliente-placeholder');
+            const clienteData = document.getElementById('cliente-data');
+
+            let exerciseCount = 0;
+
+            clients.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id;
+                opt.textContent = `${c.name} · ${c.goal}`;
+                selectCliente.appendChild(opt);
+            });
+
+            function loadCliente(id) {
+                const c = clients.find(x => x.id == id);
+                if (!c) return;
+                clientePlaceholder.style.display = 'none';
+                clienteData.style.display = 'block';
+                document.getElementById('cliente-avatar').textContent = c.avatar;
+                document.getElementById('cliente-name').textContent = c.name;
+                document.getElementById('cliente-goal').textContent = c.goal;
+                document.getElementById('cliente-routines').textContent = c.routines;
+                document.getElementById('cliente-workouts').textContent = c.workouts;
+                document.getElementById('cliente-adherence').textContent = c.adherence + '%';
+                document.getElementById('pro-entreno-subtitle').textContent = `Asignando rutina a ${c.name}`;
+            }
+
+            if (selectedClientId) {
+                selectCliente.value = selectedClientId;
+                loadCliente(selectedClientId);
+            }
+
+            selectCliente.addEventListener('change', () => {
+                if (selectCliente.value) {
+                    loadCliente(selectCliente.value);
+                    window.history.replaceState(null, '', `?cliente=${selectCliente.value}`);
+                }
+            });
+
+            function addExercise(data) {
+                exerciseCount++;
+                const idx = exerciseCount;
+                const div = document.createElement('div');
+                div.className = 'pro-ejercicio-card';
+                div.innerHTML = `
+                    <div class="pro-ejercicio-header">
+                        <span class="pro-ejercicio-number"><i class="ri-list-check-2"></i> Ejercicio ${idx}</span>
+                        <button type="button" class="pro-ejercicio-remove"><i class="ri-close-line"></i></button>
+                    </div>
+                    <div class="pro-ejercicio-body">
+                        <div class="pro-ejercicio-field">
+                            <label><i class="ri-footprint-line"></i> Ejercicio</label>
+                            <input type="text" class="pro-ejercicio-name" placeholder="Ej: Press de Banca" value="${data?.name || ''}">
+                        </div>
+                        <div class="pro-ejercicio-row">
+                            <div class="pro-ejercicio-field">
+                                <label><i class="ri-list-check-2"></i> Series</label>
+                                <input type="number" class="pro-ejercicio-sets" placeholder="4" value="${data?.sets || ''}" min="1">
+                            </div>
+                            <div class="pro-ejercicio-field">
+                                <label><i class="ri-loop-right-line"></i> Repeticiones</label>
+                                <input type="text" class="pro-ejercicio-reps" placeholder="8-12" value="${data?.reps || ''}">
+                            </div>
+                            <div class="pro-ejercicio-field">
+                                <label><i class="ri-timer-line"></i> RIR</label>
+                                <select class="pro-ejercicio-rir">
+                                    <option value="0" ${data?.rir === '0' ? 'selected' : ''}>0 · Al fallo</option>
+                                    <option value="1" ${data?.rir === '1' ? 'selected' : ''}>1 · Muy cerca</option>
+                                    <option value="2" ${data?.rir === '2' ? 'selected' : ''}>2 · Cómodo</option>
+                                    <option value="3" ${data?.rir === '3' ? 'selected' : ''}>3+ · Fácil</option>
+                                </select>
+                            </div>
+                            <div class="pro-ejercicio-field">
+                                <label><i class="ri-hourglass-line"></i> Descanso</label>
+                                <select class="pro-ejercicio-rest">
+                                    <option value="60" ${data?.rest === '60' ? 'selected' : ''}>60s</option>
+                                    <option value="90" ${data?.rest === '90' ? 'selected' : ''}>90s</option>
+                                    <option value="120" ${data?.rest === '120' ? 'selected' : ''}>120s</option>
+                                    <option value="180" ${data?.rest === '180' ? 'selected' : ''}>180s</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pro-ejercicio-field">
+                            <label><i class="ri-file-edit-line"></i> Anotaciones Técnicas</label>
+                            <textarea class="pro-ejercicio-notes" placeholder="Ej: Controlar fase excéntrica, no arquear zona lumbar...">${data?.notes || ''}</textarea>
+                        </div>
+                    </div>
+                `;
+                div.querySelector('.pro-ejercicio-remove').addEventListener('click', () => {
+                    div.remove();
+                    renumberExercises();
+                });
+                exerciseList.appendChild(div);
+            }
+
+            function renumberExercises() {
+                const cards = exerciseList.querySelectorAll('.pro-ejercicio-card');
+                cards.forEach((card, i) => {
+                    card.querySelector('.pro-ejercicio-number').textContent = `Ejercicio ${i + 1}`;
+                });
+                exerciseCount = cards.length;
+            }
+
+            document.getElementById('btn-add-exercise').addEventListener('click', () => addExercise());
+
+            document.getElementById('btn-save-template').addEventListener('click', () => {
+                const name = routineName.value.trim() || 'Rutina sin nombre';
+                const exercises = [];
+                exerciseList.querySelectorAll('.pro-ejercicio-card').forEach(card => {
+                    const exName = card.querySelector('.pro-ejercicio-name').value.trim();
+                    if (exName) {
+                        exercises.push({
+                            name: exName,
+                            sets: card.querySelector('.pro-ejercicio-sets').value,
+                            reps: card.querySelector('.pro-ejercicio-reps').value,
+                            rir: card.querySelector('.pro-ejercicio-rir').value,
+                            rest: card.querySelector('.pro-ejercicio-rest').value,
+                            notes: card.querySelector('.pro-ejercicio-notes').value
+                        });
+                    }
+                });
+                if (!exercises.length) { alert('Añade al menos un ejercicio'); return; }
+                const templates = JSON.parse(localStorage.getItem('nutrifit_pro_templates') || '[]');
+                templates.push({ id: Date.now(), name, exercises, createdAt: new Date().toISOString() });
+                localStorage.setItem('nutrifit_pro_templates', JSON.stringify(templates));
+                alert('Plantilla guardada correctamente');
+                renderTemplates();
+            });
+
+            document.getElementById('btn-assign-routine').addEventListener('click', () => {
+                const clientId = selectCliente.value;
+                if (!clientId) { alert('Selecciona un cliente primero'); return; }
+                const name = routineName.value.trim() || 'Rutina sin nombre';
+                const exercises = [];
+                exerciseList.querySelectorAll('.pro-ejercicio-card').forEach(card => {
+                    const exName = card.querySelector('.pro-ejercicio-name').value.trim();
+                    if (exName) {
+                        exercises.push({
+                            name: exName,
+                            sets: card.querySelector('.pro-ejercicio-sets').value,
+                            reps: card.querySelector('.pro-ejercicio-reps').value,
+                            rir: card.querySelector('.pro-ejercicio-rir').value,
+                            rest: card.querySelector('.pro-ejercicio-rest').value,
+                            notes: card.querySelector('.pro-ejercicio-notes').value
+                        });
+                    }
+                });
+                if (!exercises.length) { alert('Añade al menos un ejercicio'); return; }
+                const assignments = JSON.parse(localStorage.getItem('nutrifit_pro_assignments') || '[]');
+                assignments.push({ id: Date.now(), clientId: parseInt(clientId), name, exercises, date: new Date().toISOString() });
+                localStorage.setItem('nutrifit_pro_assignments', JSON.stringify(assignments));
+                alert(`Rutina "${name}" asignada correctamente`);
+            });
+
+            function renderTemplates() {
+                const container = document.getElementById('plantillas-list');
+                const templates = JSON.parse(localStorage.getItem('nutrifit_pro_templates') || '[]');
+                if (!templates.length) {
+                    container.innerHTML = '<p style="font-size:0.82rem;opacity:0.6;text-align:center;padding:12px;">Usa el creador para guardar tu primera plantilla</p>';
+                    return;
+                }
+                container.innerHTML = templates.map(t => `
+                    <div class="pro-plantilla-item" data-id="${t.id}">
+                        <div class="pro-plantilla-info">
+                            <span class="pro-plantilla-name">${t.name}</span>
+                            <span class="pro-plantilla-meta">${t.exercises.length} ejercicios</span>
+                        </div>
+                        <button class="pro-plantilla-cargar" title="Cargar plantilla"><i class="ri-download-line"></i></button>
+                    </div>
+                `).join('');
+                container.querySelectorAll('.pro-plantilla-cargar').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = parseInt(btn.closest('.pro-plantilla-item').dataset.id);
+                        const t = templates.find(x => x.id === id);
+                        if (t) {
+                            routineName.value = t.name;
+                            exerciseList.innerHTML = '';
+                            exerciseCount = 0;
+                            t.exercises.forEach(ex => addExercise(ex));
+                        }
+                    });
+                });
+            }
+
+            addExercise();
+            renderTemplates();
+        });
+    </script>
+</body>
+</html>

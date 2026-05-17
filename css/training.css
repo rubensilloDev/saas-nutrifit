@@ -165,58 +165,117 @@ textarea:focus {
 /* BUILDER ITEMS: Tarjetas anidadas para ejercicios de rutina */
 .exercise-build-item {
     background: white;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
-    border-left: 4px solid var(--primary);
-    margin-bottom: var(--spacing-md);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+    border-left: 5px solid var(--primary);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .exercise-build-item h3 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     margin-bottom: var(--spacing-md);
     color: var(--primary);
 }
 
-/* TABLA DE SERIES: Diseño profesional de alto rendimiento */
-.sets-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 8px;
-    margin-bottom: var(--spacing-md);
+/* STACK DE SERIES: Diseño vertical con tarjetas apiladas */
+.sets-stack {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.sets-table th {
-    text-align: left;
-    padding: 8px 12px;
+.set-card {
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: 16px;
+    padding: 16px 20px;
+    transition: all 0.3s;
+}
+
+.set-card.completed {
+    border-color: var(--primary);
+    background: #f1f8e9;
+}
+
+.set-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.set-number {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.checkmark-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--outline-variant);
+    background: white;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    font-size: 1.1rem;
+}
+
+.checkmark-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.checkmark-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.set-card-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+.set-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.set-field label {
     font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
     color: var(--on-surface-variant);
-    font-weight: 800;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.5px;
 }
 
-.sets-table td {
-    padding: 4px;
-    vertical-align: middle;
-}
-
-.sets-table tr td:first-child {
-    font-weight: 900;
-    color: var(--primary);
+.set-field input,
+.set-field select {
+    padding: 12px 14px;
+    background: white;
+    border: 1px solid var(--outline-variant);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
     text-align: center;
-    width: 40px;
+    transition: all 0.2s;
+    outline: none;
+    font-family: var(--font-body);
 }
 
-/* INPUTS DENTRO DE TABLA: Integración invisible */
-.sets-table input {
-    padding: 8px 12px;
-    background: var(--surface-container-low);
-    border: none;
-    text-align: center;
-}
-
-.sets-table input:focus {
+.set-field input:focus,
+.set-field select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(13, 99, 27, 0.1);
     background: white;
 }
 
@@ -475,11 +534,11 @@ textarea:focus {
 /* --- TARJETAS DE REGISTRO (Logging) --- */
 .logging-exercise-card {
     background: white;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     border: 1px solid var(--outline-variant);
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .exercise-header {
@@ -505,38 +564,7 @@ textarea:focus {
     margin: 0;
 }
 
-/* --- TABLAS DE SERIES --- */
-.sets-table-wrapper {
-    padding: 24px;
-}
 
-.sets-table th {
-    background: transparent;
-    border-bottom: 2px solid var(--surface-container-low);
-    color: var(--on-surface-variant);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    padding: 12px 10px;
-}
-
-.sets-table td {
-    padding: 12px 10px;
-}
-
-.sets-table input,
-.sets-table select {
-    background: var(--surface-container-low);
-    border: 1px solid transparent;
-    border-radius: 6px;
-    padding: 8px 12px;
-    transition: all 0.2s;
-}
-
-.sets-table input:focus {
-    background: white;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
-}
 
 /* ANIMACIONES SUTILES: Ajuste de velocidad y suavizado */
 .exercise-build-item,
@@ -617,18 +645,16 @@ textarea:focus {
 #history-list-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 18px;
     margin-top: 25px;
 }
 
 .history-card {
     background: white;
-    border-radius: 20px;
+    border-radius: 22px;
     padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     border: 1px solid var(--outline-variant);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
@@ -636,35 +662,48 @@ textarea:focus {
 
 .history-card:hover {
     border-color: var(--primary);
-    transform: translateX(8px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(13, 99, 27, 0.12);
 }
 
-.history-card::after {
+.history-card::before {
     content: '';
     position: absolute;
     left: 0;
     top: 0;
-    height: 100%;
-    width: 4px;
-    background: var(--primary);
-    opacity: 0.3;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), #81c784);
+    opacity: 0.4;
+}
+
+.history-card:hover::before {
+    opacity: 1;
+}
+
+.history-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
 }
 
 .history-date-badge {
-    background: var(--surface-container-low);
-    padding: 10px;
+    background: linear-gradient(135deg, var(--surface-container-lowest), #e8f5e9);
+    padding: 10px 14px;
     border-radius: 14px;
     text-align: center;
     min-width: 60px;
+    border: 1px solid var(--outline-variant);
+    flex-shrink: 0;
 }
 
 .history-date-badge .day {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 900;
     color: var(--primary);
-    line-height: 1;
+    line-height: 1.1;
 }
 
 .history-date-badge .month {
@@ -673,33 +712,37 @@ textarea:focus {
     text-transform: uppercase;
     font-weight: 800;
     color: var(--on-surface-variant);
+    margin-top: 2px;
 }
 
-.history-main-info {
-    flex-grow: 1;
-    margin-left: 20px;
+.history-card-title {
+    flex: 1;
+    min-width: 0;
 }
 
-.history-main-info h4 {
-    margin: 0 0 6px 0;
+.history-card-title h4 {
+    margin: 0 0 4px 0;
     font-size: 1.15rem;
     font-weight: 800;
     color: var(--on-surface);
 }
 
 .history-exercises-summary {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--on-surface-variant);
     opacity: 0.8;
-    margin-bottom: 12px;
     font-style: italic;
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .history-metrics-row {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .h-metric {
@@ -710,8 +753,8 @@ textarea:focus {
     font-weight: 700;
     color: var(--primary);
     background: var(--surface-container-lowest);
-    padding: 4px 12px;
-    border-radius: 8px;
+    padding: 6px 14px;
+    border-radius: 10px;
     border: 1px solid var(--outline-variant);
 }
 
@@ -721,7 +764,7 @@ textarea:focus {
 }
 
 .h-metric .label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     color: var(--on-surface-variant);
     margin-left: 2px;

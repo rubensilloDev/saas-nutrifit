@@ -104,11 +104,85 @@
             </div>
 
             <!-- Enlace para entrar sin registrarse -->
-            <a href="pages/dashboard/index.html" class="auth-skip">
+            <a href="#" class="auth-skip" id="skip-login">
                 Entrar sin registrarse
                 <i class="ri-arrow-right-s-line"></i>
             </a>
         </div>
     </div>
+
+    <!-- Modal de selección de rol (aparece tras registrarse) -->
+    <div id="role-modal" class="role-modal">
+        <div class="role-modal-content">
+            <div class="role-modal-header">
+                <div class="role-modal-logo">
+                    <img src="img/icono-nutrifit.webp" alt="NutriFit">
+                </div>
+                <h2>¡Cuenta creada con éxito!</h2>
+                <p>¿Cómo quieres usar NutriFit Systems?</p>
+            </div>
+            <div class="role-options">
+                <button class="role-card" data-role="profesional">
+                    <div class="role-card-icon">
+                        <i class="ri-user-star-line"></i>
+                    </div>
+                    <div class="role-card-info">
+                        <span class="role-card-title">Nutricionista / Entrenador</span>
+                        <span class="role-card-desc">Gestiona clientes, crea planes y haz seguimiento profesional</span>
+                    </div>
+                    <i class="ri-arrow-right-s-line role-arrow"></i>
+                </button>
+                <button class="role-card" data-role="usuario">
+                    <div class="role-card-icon" style="background:#e8f5e9;color:var(--primary);">
+                        <i class="ri-user-smile-line"></i>
+                    </div>
+                    <div class="role-card-info">
+                        <span class="role-card-title">Usuario</span>
+                        <span class="role-card-desc">Registra tus comidas, entrenos y alcanza tus metas personales</span>
+                    </div>
+                    <i class="ri-arrow-right-s-line role-arrow"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === ROL SELECTOR: Aparece tras registro o "Entrar sin registrarse" ===
+        document.addEventListener('DOMContentLoaded', () => {
+            const registerBtn = document.querySelector('.auth-panel--register .auth-btn--primary');
+            const skipBtn = document.getElementById('skip-login');
+            const roleModal = document.getElementById('role-modal');
+            const roleModalTitle = roleModal.querySelector('h2');
+            const roleCards = document.querySelectorAll('.role-card');
+
+            function showRoleModal(titleText) {
+                roleModalTitle.textContent = titleText;
+                roleModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            registerBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showRoleModal('¡Cuenta creada con éxito!');
+            });
+
+            skipBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showRoleModal('Elige tu rol');
+            });
+
+            roleCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const role = card.dataset.role;
+                    localStorage.setItem('nutrifit-role', role);
+                    roleModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                    window.location.href = role === 'profesional'
+                        ? 'pages/profesional/dashboard.html'
+                        : 'pages/dashboard/index.html';
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,683 @@
+.pro-nutri-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+
+.pro-nutri-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.pro-nutri-select {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pro-nutri-select label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+}
+
+.pro-nutri-select select {
+    padding: 12px 14px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    background: white;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.pro-nutri-select select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(13, 99, 27, 0.1);
+}
+
+.pro-nutri-cliente-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--outline-variant);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.pro-nutri-cliente-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: var(--spacing-md);
+}
+
+.pro-nutri-cliente-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e8f5e9;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.pro-nutri-cliente-name {
+    display: block;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--on-surface);
+}
+
+.pro-nutri-cliente-goal {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.pro-nutri-cliente-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.pro-nutri-cliente-stats > div {
+    text-align: center;
+    background: #f1f8e9;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.pro-nutri-stat-val {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.pro-nutri-stat-lbl {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.pro-nutri-food-lists {
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--outline-variant);
+    padding: var(--spacing-md) var(--spacing-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.pro-nutri-food-section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.pro-nutri-food-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 30px;
+}
+
+.pro-nutri-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.pro-nutri-tag--fav {
+    background: #e8f5e9;
+    color: var(--primary);
+}
+
+.pro-nutri-tag--dislike {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+.pro-nutri-btn-food {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed var(--outline-variant);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--on-surface-variant);
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.pro-nutri-btn-food:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: #e8f5e9;
+}
+
+/* MAIN */
+.pro-nutri-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.pro-nutri-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--surface-container-low);
+    padding: 4px;
+    border-radius: 14px;
+}
+
+.pro-nutri-tab {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--on-surface-variant);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pro-nutri-tab.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.pro-nutri-tab-content {
+    display: none;
+}
+
+.pro-nutri-tab-content.active {
+    display: block;
+}
+
+.pro-nutri-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--outline-variant);
+    padding: var(--spacing-xl);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    margin-bottom: var(--spacing-lg);
+}
+
+.pro-nutri-card h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--on-surface);
+    margin: 0 0 var(--spacing-lg) 0;
+}
+
+.pro-nutri-card h3 i {
+    color: var(--primary);
+}
+
+.pro-nutri-card--preview {
+    background: linear-gradient(135deg, #f1f8e9, white);
+}
+
+.pro-nutri-macro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.pro-nutri-macro-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+}
+
+.pro-nutri-macro-field label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+}
+
+.pro-nutri-macro-field input {
+    padding: 12px 14px;
+    padding-right: 50px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    outline: none;
+    transition: all 0.2s;
+}
+
+.pro-nutri-macro-field input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(13, 99, 27, 0.08);
+}
+
+.pro-nutri-macro-unit {
+    position: absolute;
+    right: 14px;
+    bottom: 13px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+}
+
+.pro-nutri-btn-save {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-container));
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-heading);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(13, 99, 27, 0.25);
+}
+
+.pro-nutri-btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(13, 99, 27, 0.35);
+}
+
+/* DISTRIBUCIÓN */
+.pro-nutri-dist-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.pro-nutri-dist-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-width: 100px;
+    color: var(--on-surface);
+}
+
+.pro-nutri-dist-bar {
+    flex: 1;
+    height: 12px;
+    background: var(--surface-container-high);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.pro-nutri-dist-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.pro-nutri-dist-pct {
+    font-size: 0.85rem;
+    font-weight: 800;
+    min-width: 40px;
+    text-align: right;
+}
+
+/* HISTORIAL TABLE */
+.pro-nutri-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pro-nutri-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: #f1f8e9;
+    border-bottom: 2px solid var(--outline-variant);
+}
+
+.pro-nutri-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--outline-variant);
+    font-size: 0.88rem;
+    color: var(--on-surface);
+}
+
+.pro-nutri-table tr:hover td {
+    background: var(--surface-container-lowest);
+}
+
+/* FOOD PICKER */
+.pro-nutri-food-picker {
+    margin-bottom: var(--spacing-xl);
+}
+
+.pro-nutri-food-picker-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface-container-low);
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: var(--spacing-md);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.pro-nutri-food-picker-search:focus-within {
+    border-color: var(--primary);
+    background: white;
+}
+
+.pro-nutri-food-picker-search i {
+    color: var(--on-surface-variant);
+    font-size: 1.1rem;
+}
+
+.pro-nutri-food-picker-search input {
+    border: none;
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 600;
+    outline: none;
+    width: 100%;
+    font-family: var(--font-body);
+}
+
+.pro-nutri-food-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+}
+
+.pro-nutri-picker-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 10px;
+    background: white;
+    border: 1px solid var(--outline-variant);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+}
+
+.pro-nutri-picker-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(13, 99, 27, 0.1);
+}
+
+.pro-nutri-picker-item i {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.pro-nutri-picker-item span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--on-surface);
+}
+
+.pro-nutri-picker-item small {
+    font-size: 0.7rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+/* MEAL PLAN */
+.pro-nutri-meal-plan h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 0 0 var(--spacing-md) 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#suggested-meals {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.pro-nutri-meal-slot {
+    background: var(--surface-container-lowest);
+    border-radius: 14px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: 1px solid var(--outline-variant);
+}
+
+.pro-nutri-meal-slot-label {
+    display: block;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.pro-nutri-meal-slot-foods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 32px;
+    margin-bottom: 10px;
+}
+
+.pro-nutri-meal-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: white;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.pro-nutri-meal-chip-kcal {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 0.72rem;
+}
+
+.pro-nutri-meal-chip-remove {
+    cursor: pointer;
+    color: var(--on-surface-variant);
+    font-size: 0.85rem;
+    margin-left: 2px;
+}
+
+.pro-nutri-meal-chip-remove:hover {
+    color: #d32f2f;
+}
+
+.pro-nutri-meal-add-food {
+    padding: 6px 14px;
+    border: 1px dashed var(--outline-variant);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--on-surface-variant);
+    font-weight: 700;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-heading);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pro-nutri-meal-add-food:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: #f1f8e9;
+}
+
+/* MODAL */
+.pro-nutri-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.pro-nutri-modal-content {
+    background: white;
+    width: 90%;
+    max-width: 550px;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pro-nutri-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+.pro-nutri-modal-header h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
+
+.pro-nutri-modal-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--surface-container-low);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+}
+
+.pro-nutri-modal-close:hover { background: #ff5252; color: white; }
+
+.pro-nutri-modal-body {
+    padding: 24px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.pro-nutri-modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--outline-variant);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pro-nutri-food-manager-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+.pro-nutri-food-manager-item:last-child { border-bottom: none; }
+
+.pro-nutri-food-manager-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pro-nutri-food-manager-toggles {
+    display: flex;
+    gap: 12px;
+}
+
+.pro-nutri-toggle-label {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid var(--outline-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.pro-nutri-toggle-label input { position: absolute; opacity: 0; }
+
+.pro-nutri-toggle-label.active-fav { background: #e8f5e9; border-color: var(--primary); color: var(--primary); }
+.pro-nutri-toggle-label.active-dis { background: #ffebee; border-color: #d32f2f; color: #d32f2f; }
+.pro-nutri-toggle-label:not(.active-fav):not(.active-dis) { color: var(--on-surface-variant); }
+
+@keyframes modalPop {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 1024px) {
+    .pro-nutri-layout { grid-template-columns: 1fr; }
+    .pro-nutri-macro-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+    .pro-nutri-macro-grid { grid-template-columns: 1fr; }
+    .pro-nutri-tab { font-size: 0.75rem; padding: 8px 10px; }
+}

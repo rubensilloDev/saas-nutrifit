@@ -501,6 +501,16 @@
     color: var(--on-surface-variant);
 }
 
+/* BOTÓN REGISTRAR ENTRENAMIENTO: Widget de acceso directo */
+.workout-register-widget {
+    grid-column: span 12;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-xl);
+}
+
 /* COLUMNA LATERAL: Contenedor de widgets secundarios */
 .sidebar-widgets {
     grid-column: span 4;
@@ -733,10 +743,10 @@
     /* El stroke-dasharray NO se modifica porque el SVG viewBox sigue siendo 220×220 con r=100 */
     .kcal-progress-bg { stroke-width: 8; }
     .kcal-progress-bar { stroke-width: 8; }
-    .kcal-value { font-size: 1.4rem; }
-    .kcal-label { font-size: 0.55rem; }
-    .kcal-target { padding: 4px 12px; }
-    .kcal-target .target-val { font-size: 0.85rem; }
+    .kcal-value { font-size: 2rem; }
+    .kcal-label { font-size: 0.6rem; }
+    .kcal-target { padding: 6px 16px; }
+    .kcal-target .target-val { font-size: 1.1rem; }
     .summary-info {
         padding-left: 0;
         border-left: none;
@@ -833,6 +843,13 @@
         grid-column: span 1;
         padding: 20px !important;
         min-height: 140px;
+    }
+
+    /* === REGISTRAR ENTRENAMIENTO === */
+    .workout-register-widget {
+        grid-column: span 1;
+        flex-wrap: wrap;
+        padding: 16px 18px;
     }
     .water-icon {
         font-size: 1.8rem;

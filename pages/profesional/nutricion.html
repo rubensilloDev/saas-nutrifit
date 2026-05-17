@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrición - Panel Pro - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-nutricion.css">
+</head>
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <div style="display:flex;align-items:center;gap:14px;">
+                <a href="clientes.html?mode=nutricion" class="pro-chat-back"><i class="ri-arrow-left-line"></i></a>
+                <div>
+                    <h1 style="margin:0;"><i class="ri-restaurant-2-line" style="color:var(--primary);"></i> Registro Nutricional</h1>
+                    <p style="margin:2px 0 0 0;font-size:0.85rem;color:var(--on-surface-variant);" id="pro-nutri-subtitle">Gestiona el plan nutricional de tu cliente</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="pro-nutri-layout">
+            <aside class="pro-nutri-sidebar">
+                <div class="pro-nutri-select">
+                    <label>Cliente</label>
+                    <select id="select-cliente-nutri">
+                        <option value="">-- Selecciona --</option>
+                    </select>
+                </div>
+
+                <div class="pro-nutri-cliente-card" id="nutri-cliente-card" style="display:none;">
+                    <div class="pro-nutri-cliente-header">
+                        <div class="pro-nutri-cliente-avatar" id="nutri-cliente-avatar">--</div>
+                        <div>
+                            <span class="pro-nutri-cliente-name" id="nutri-cliente-name">--</span>
+                            <span class="pro-nutri-cliente-goal" id="nutri-cliente-goal">--</span>
+                        </div>
+                    </div>
+                    <div class="pro-nutri-cliente-stats">
+                        <div><span class="pro-nutri-stat-val" id="nutri-cliente-days">0</span><span class="pro-nutri-stat-lbl">Días</span></div>
+                        <div><span class="pro-nutri-stat-val" id="nutri-cliente-avg">0</span><span class="pro-nutri-stat-lbl">Media kcal</span></div>
+                        <div><span class="pro-nutri-stat-val" id="nutri-cliente-water">0L</span><span class="pro-nutri-stat-lbl">Agua media</span></div>
+                    </div>
+                </div>
+
+                <!-- Alimentos favoritos y no gustan -->
+                <div class="pro-nutri-food-lists">
+                    <div class="pro-nutri-food-section">
+                        <div class="pro-nutri-food-section-header" style="color:var(--primary);">
+                            <i class="ri-heart-3-fill"></i> <span>Favoritos</span>
+                        </div>
+                        <div id="fav-foods-list" class="pro-nutri-food-tags">
+                            <p style="font-size:0.8rem;opacity:0.5;">Selecciona un cliente</p>
+                        </div>
+                    </div>
+                    <div class="pro-nutri-food-section">
+                        <div class="pro-nutri-food-section-header" style="color:#d32f2f;">
+                            <i class="ri-dislike-fill"></i> <span>No le gustan</span>
+                        </div>
+                        <div id="dislike-foods-list" class="pro-nutri-food-tags">
+                            <p style="font-size:0.8rem;opacity:0.5;">Selecciona un cliente</p>
+                        </div>
+                    </div>
+                    <div class="pro-nutri-food-section">
+                        <button id="btn-manage-foods" class="pro-nutri-btn-food"><i class="ri-settings-4-line"></i> Gestionar Alimentos</button>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="pro-nutri-main">
+                <!-- TABS -->
+                <div class="pro-nutri-tabs">
+                    <button class="pro-nutri-tab active" data-tab="macros"><i class="ri-dashboard-line"></i> Macros</button>
+                    <button class="pro-nutri-tab" data-tab="historial"><i class="ri-history-line"></i> Historial</button>
+                    <button class="pro-nutri-tab" data-tab="comidas"><i class="ri-restaurant-line"></i> Comidas Sugeridas</button>
+                </div>
+
+                <!-- TAB: MACROS -->
+                <div class="pro-nutri-tab-content active" id="tab-macros">
+                    <div class="pro-nutri-card">
+                        <h3><i class="ri-dashboard-line"></i> Asignar Macros</h3>
+                        <div class="pro-nutri-macro-grid">
+                            <div class="pro-nutri-macro-field">
+                                <label>Calorías</label>
+                                <input type="number" id="macro-kcal" value="2500" step="50">
+                                <span class="pro-nutri-macro-unit">kcal</span>
+                            </div>
+                            <div class="pro-nutri-macro-field">
+                                <label>Proteína</label>
+                                <input type="number" id="macro-protein" value="160" step="5">
+                                <span class="pro-nutri-macro-unit">g</span>
+                            </div>
+                            <div class="pro-nutri-macro-field">
+                                <label>Carbohidratos</label>
+                                <input type="number" id="macro-carbs" value="250" step="5">
+                                <span class="pro-nutri-macro-unit">g</span>
+                            </div>
+                            <div class="pro-nutri-macro-field">
+                                <label>Grasas</label>
+                                <input type="number" id="macro-fats" value="70" step="5">
+                                <span class="pro-nutri-macro-unit">g</span>
+                            </div>
+                            <div class="pro-nutri-macro-field">
+                                <label>Agua</label>
+                                <input type="number" id="macro-water" value="3.0" step="0.1">
+                                <span class="pro-nutri-macro-unit">L</span>
+                            </div>
+                        </div>
+                        <button class="pro-nutri-btn-save" id="btn-save-macros"><i class="ri-save-line"></i> Guardar Plan</button>
+                    </div>
+
+                    <div class="pro-nutri-card pro-nutri-card--preview">
+                        <h3><i class="ri-pie-chart-line"></i> Distribución</h3>
+                        <div id="macro-distribution">
+                            <div class="pro-nutri-dist-item">
+                                <span class="pro-nutri-dist-label">Proteínas</span>
+                                <div class="pro-nutri-dist-bar"><div class="pro-nutri-dist-fill" style="width:30%;background:var(--primary);"></div></div>
+                                <span class="pro-nutri-dist-pct">30%</span>
+                            </div>
+                            <div class="pro-nutri-dist-item">
+                                <span class="pro-nutri-dist-label">Carbohidratos</span>
+                                <div class="pro-nutri-dist-bar"><div class="pro-nutri-dist-fill" style="width:40%;background:var(--primary-container);"></div></div>
+                                <span class="pro-nutri-dist-pct">40%</span>
+                            </div>
+                            <div class="pro-nutri-dist-item">
+                                <span class="pro-nutri-dist-label">Grasas</span>
+                                <div class="pro-nutri-dist-bar"><div class="pro-nutri-dist-fill" style="width:30%;background:var(--secondary);"></div></div>
+                                <span class="pro-nutri-dist-pct">30%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: HISTORIAL -->
+                <div class="pro-nutri-tab-content" id="tab-historial">
+                    <div class="pro-nutri-card">
+                        <h3><i class="ri-bar-chart-2-line"></i> Historial de Calorías</h3>
+                        <div id="historial-list">
+                            <!-- Se renderiza dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: COMIDAS SUGERIDAS -->
+                <div class="pro-nutri-tab-content" id="tab-comidas">
+                    <div class="pro-nutri-card">
+                        <h3><i class="ri-restaurant-line"></i> Asignar Comidas Sugeridas</h3>
+                        <p style="font-size:0.85rem;color:var(--on-surface-variant);margin-bottom:var(--spacing-lg);">Arrastra o selecciona alimentos para crear un menú sugerido para el cliente.</p>
+
+                        <div class="pro-nutri-food-picker">
+                            <div class="pro-nutri-food-picker-search">
+                                <i class="ri-search-line"></i>
+                                <input type="text" id="food-picker-search" placeholder="Buscar alimentos...">
+                            </div>
+                            <div class="pro-nutri-food-picker-grid" id="food-picker-grid">
+                                <!-- Alimentos dinámicos -->
+                            </div>
+                        </div>
+
+                        <div class="pro-nutri-meal-plan">
+                            <h4>Menú Sugerido</h4>
+                            <div id="suggested-meals">
+                                <div class="pro-nutri-meal-slot">
+                                    <span class="pro-nutri-meal-slot-label">Desayuno</span>
+                                    <div class="pro-nutri-meal-slot-foods" id="meal-breakfast"></div>
+                                    <button class="pro-nutri-meal-add-food" data-meal="breakfast"><i class="ri-add-line"></i> Añadir</button>
+                                </div>
+                                <div class="pro-nutri-meal-slot">
+                                    <span class="pro-nutri-meal-slot-label">Almuerzo</span>
+                                    <div class="pro-nutri-meal-slot-foods" id="meal-lunch"></div>
+                                    <button class="pro-nutri-meal-add-food" data-meal="lunch"><i class="ri-add-line"></i> Añadir</button>
+                                </div>
+                                <div class="pro-nutri-meal-slot">
+                                    <span class="pro-nutri-meal-slot-label">Cena</span>
+                                    <div class="pro-nutri-meal-slot-foods" id="meal-dinner"></div>
+                                    <button class="pro-nutri-meal-add-food" data-meal="dinner"><i class="ri-add-line"></i> Añadir</button>
+                                </div>
+                                <div class="pro-nutri-meal-slot">
+                                    <span class="pro-nutri-meal-slot-label">Snacks</span>
+                                    <div class="pro-nutri-meal-slot-foods" id="meal-snacks"></div>
+                                    <button class="pro-nutri-meal-add-food" data-meal="snacks"><i class="ri-add-line"></i> Añadir</button>
+                                </div>
+                            </div>
+                            <button class="pro-nutri-btn-save" id="btn-save-meals" style="margin-top:var(--spacing-lg);"><i class="ri-send-plane-fill"></i> Asignar Menú al Cliente</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal: Gestionar Alimentos (Favoritos / No gustan) -->
+    <div id="food-manager-modal" class="pro-nutri-modal" style="display:none;">
+        <div class="pro-nutri-modal-content">
+            <div class="pro-nutri-modal-header">
+                <h3>Gestionar Preferencias de Alimentos</h3>
+                <button class="pro-nutri-modal-close"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="pro-nutri-modal-body">
+                <p style="font-size:0.9rem;color:var(--on-surface-variant);margin-bottom:var(--spacing-lg);">Marca los alimentos como favoritos o como "no le gustan" para este cliente.</p>
+                <div id="food-manager-list">
+                    <!-- Alimentos con checkboxes -->
+                </div>
+            </div>
+            <div class="pro-nutri-modal-footer">
+                <button class="pro-entreno-btn-primary" id="btn-save-preferences">Guardar Preferencias</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const FOODS = [
+                { id: 'pollo', name: 'Pechuga de Pollo', kcal: 165, protein: 31, carbs: 0, fats: 3.6, emoji: 'ri-restaurant-fill' },
+                { id: 'arroz', name: 'Arroz Blanco', kcal: 130, protein: 2.7, carbs: 28, fats: 0.3, emoji: 'ri-restaurant-2-fill' },
+                { id: 'aguacate', name: 'Aguacate', kcal: 160, protein: 2, carbs: 8.5, fats: 15, emoji: 'ri-leaf-fill' },
+                { id: 'huevos', name: 'Huevos', kcal: 155, protein: 13, carbs: 1.1, fats: 11, emoji: 'ri-egg-fill' },
+                { id: 'salmon', name: 'Salmón', kcal: 208, protein: 20, carbs: 0, fats: 13, emoji: 'ri-restaurant-fill' },
+                { id: 'batata', name: 'Batata', kcal: 86, protein: 1.6, carbs: 20, fats: 0.1, emoji: 'ri-leaf-fill' },
+                { id: 'avena', name: 'Avena', kcal: 66, protein: 2.4, carbs: 12, fats: 1.4, emoji: 'ri-cup-fill' },
+                { id: 'brocoli', name: 'Brócoli', kcal: 34, protein: 2.8, carbs: 7, fats: 0.4, emoji: 'ri-leaf-fill' },
+                { id: 'yogur', name: 'Yogur Griego', kcal: 59, protein: 10, carbs: 3.6, fats: 0.7, emoji: 'ri-cup-fill' },
+                { id: 'platano', name: 'Plátano', kcal: 89, protein: 1.1, carbs: 23, fats: 0.3, emoji: 'ri-restaurant-2-fill' },
+                { id: 'almendras', name: 'Almendras', kcal: 579, protein: 21, carbs: 22, fats: 50, emoji: 'ri-leaf-fill' },
+                { id: 'atun', name: 'Atún', kcal: 184, protein: 30, carbs: 0, fats: 6, emoji: 'ri-restaurant-fill' },
+                { id: 'espinacas', name: 'Espinacas', kcal: 23, protein: 2.9, carbs: 3.6, fats: 0.4, emoji: 'ri-leaf-fill' },
+                { id: 'aceite', name: 'Aceite de Oliva', kcal: 884, protein: 0, carbs: 0, fats: 100, emoji: 'ri-oil-line' }
+            ];
+
+            const clients = [
+                { id: 1, name: 'Alex Rivera', goal: 'Hipertrofia', avatar: 'AR', days: 45, avgKcal: 2100, avgWater: '2.1L' },
+                { id: 2, name: 'María García', goal: 'Pérdida de peso', avatar: 'MG', days: 30, avgKcal: 1450, avgWater: '1.8L' },
+                { id: 3, name: 'Carlos Mendoza', goal: 'Rendimiento', avatar: 'CM', days: 60, avgKcal: 2850, avgWater: '2.8L' },
+                { id: 4, name: 'Lucía Fernández', goal: 'Definición', avatar: 'LF', days: 25, avgKcal: 1650, avgWater: '1.9L' },
+                { id: 5, name: 'Sofía Torres', goal: 'Hipertrofia', avatar: 'ST', days: 40, avgKcal: 1950, avgWater: '2.2L' }
+            ];
+
+            const selectCliente = document.getElementById('select-cliente-nutri');
+            const params = new URLSearchParams(window.location.search);
+            const selectedClientId = params.get('cliente') ? parseInt(params.get('cliente')) : null;
+
+            function getFoodPrefs(clientId) {
+                try {
+                    const all = JSON.parse(localStorage.getItem('nutrifit_pro_food_prefs') || '{}');
+                    return all[clientId] || { favs: [], dislikes: [] };
+                } catch (e) { return { favs: [], dislikes: [] }; }
+            }
+
+            function saveFoodPrefs(clientId, prefs) {
+                try {
+                    const all = JSON.parse(localStorage.getItem('nutrifit_pro_food_prefs') || '{}');
+                    all[clientId] = prefs;
+                    localStorage.setItem('nutrifit_pro_food_prefs', JSON.stringify(all));
+                } catch (e) {}
+            }
+
+            // Poblar select
+            clients.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id;
+                opt.textContent = `${c.name} · ${c.goal}`;
+                selectCliente.appendChild(opt);
+            });
+
+            function loadCliente(id) {
+                const c = clients.find(x => x.id == id);
+                if (!c) return;
+                document.getElementById('nutri-cliente-card').style.display = 'block';
+                document.getElementById('nutri-cliente-avatar').textContent = c.avatar;
+                document.getElementById('nutri-cliente-name').textContent = c.name;
+                document.getElementById('nutri-cliente-goal').textContent = c.goal;
+                document.getElementById('nutri-cliente-days').textContent = c.days;
+                document.getElementById('nutri-cliente-avg').textContent = c.avgKcal;
+                document.getElementById('nutri-cliente-water').textContent = c.avgWater;
+                document.getElementById('pro-nutri-subtitle').textContent = `Plan nutricional de ${c.name}`;
+
+                renderFoodPrefs(id);
+                renderHistorial(id);
+            }
+
+            if (selectedClientId) {
+                selectCliente.value = selectedClientId;
+                loadCliente(selectedClientId);
+            }
+
+            selectCliente.addEventListener('change', () => {
+                if (selectCliente.value) {
+                    loadCliente(selectCliente.value);
+                    window.history.replaceState(null, '', `?cliente=${selectCliente.value}`);
+                }
+            });
+
+            // =========== FOOD PREFERENCES ===========
+            function renderFoodPrefs(clientId) {
+                const prefs = getFoodPrefs(clientId);
+                const favContainer = document.getElementById('fav-foods-list');
+                const disContainer = document.getElementById('dislike-foods-list');
+
+                if (prefs.favs.length) {
+                    favContainer.innerHTML = prefs.favs.map(f => `<span class="pro-nutri-tag pro-nutri-tag--fav"><i class="ri-heart-3-fill"></i> ${f}</span>`).join('');
+                } else {
+                    favContainer.innerHTML = '<p style="font-size:0.8rem;opacity:0.5;">Sin favoritos aún</p>';
+                }
+                if (prefs.dislikes.length) {
+                    disContainer.innerHTML = prefs.dislikes.map(f => `<span class="pro-nutri-tag pro-nutri-tag--dislike"><i class="ri-close-circle-fill"></i> ${f}</span>`).join('');
+                } else {
+                    disContainer.innerHTML = '<p style="font-size:0.8rem;opacity:0.5;">Ninguno registrado</p>';
+                }
+            }
+
+            // Modal gestionar alimentos
+            const modal = document.getElementById('food-manager-modal');
+            document.getElementById('btn-manage-foods').addEventListener('click', () => {
+                const cid = parseInt(selectCliente.value);
+                if (!cid) { alert('Selecciona un cliente primero'); return; }
+                const prefs = getFoodPrefs(cid);
+                const list = document.getElementById('food-manager-list');
+                list.innerHTML = FOODS.map(f => {
+                    const isFav = prefs.favs.includes(f.name);
+                    const isDis = prefs.dislikes.includes(f.name);
+                    return `
+                        <div class="pro-nutri-food-manager-item">
+                            <span class="pro-nutri-food-manager-name"><i class="${f.emoji}"></i> ${f.name}</span>
+                            <div class="pro-nutri-food-manager-toggles">
+                                <label class="pro-nutri-toggle-label ${isFav ? 'active-fav' : ''}">
+                                    <i class="ri-heart-3-fill"></i>
+                                    <input type="checkbox" class="food-fav" data-food="${f.name}" ${isFav ? 'checked' : ''}>
+                                </label>
+                                <label class="pro-nutri-toggle-label ${isDis ? 'active-dis' : ''}">
+                                    <i class="ri-close-circle-fill"></i>
+                                    <input type="checkbox" class="food-dislike" data-food="${f.name}" ${isDis ? 'checked' : ''}>
+                                </label>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+
+            document.querySelector('.pro-nutri-modal-close').addEventListener('click', () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            });
+            modal.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } });
+
+            document.getElementById('btn-save-preferences').addEventListener('click', () => {
+                const cid = parseInt(selectCliente.value);
+                const favs = [...document.querySelectorAll('.food-fav:checked')].map(el => el.dataset.food);
+                const dislikes = [...document.querySelectorAll('.food-dislike:checked')].map(el => el.dataset.food);
+                saveFoodPrefs(cid, { favs, dislikes });
+                renderFoodPrefs(cid);
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+                alert('Preferencias guardadas');
+            });
+
+            // =========== MACROS ===========
+            const macroInputs = {
+                kcal: document.getElementById('macro-kcal'),
+                protein: document.getElementById('macro-protein'),
+                carbs: document.getElementById('macro-carbs'),
+                fats: document.getElementById('macro-fats'),
+                water: document.getElementById('macro-water')
+            };
+
+            function updateDistribution() {
+                const kcal = parseFloat(macroInputs.kcal.value) || 0;
+                const p = (parseFloat(macroInputs.protein.value) || 0) * 4;
+                const c = (parseFloat(macroInputs.carbs.value) || 0) * 4;
+                const f = (parseFloat(macroInputs.fats.value) || 0) * 9;
+                const total = p + c + f || 1;
+                const distItems = document.querySelectorAll('.pro-nutri-dist-item');
+                if (distItems.length >= 3) {
+                    distItems[0].querySelector('.pro-nutri-dist-fill').style.width = Math.round(p / total * 100) + '%';
+                    distItems[0].querySelector('.pro-nutri-dist-pct').textContent = Math.round(p / total * 100) + '%';
+                    distItems[1].querySelector('.pro-nutri-dist-fill').style.width = Math.round(c / total * 100) + '%';
+                    distItems[1].querySelector('.pro-nutri-dist-pct').textContent = Math.round(c / total * 100) + '%';
+                    distItems[2].querySelector('.pro-nutri-dist-fill').style.width = Math.round(f / total * 100) + '%';
+                    distItems[2].querySelector('.pro-nutri-dist-pct').textContent = Math.round(f / total * 100) + '%';
+                }
+                const avgEl = document.getElementById('nutri-cliente-avg');
+                if (avgEl) avgEl.textContent = kcal;
+            }
+
+            Object.values(macroInputs).forEach(inp => inp.addEventListener('input', updateDistribution));
+
+            document.getElementById('btn-save-macros').addEventListener('click', () => {
+                const cid = parseInt(selectCliente.value);
+                if (!cid) { alert('Selecciona un cliente'); return; }
+                const plan = {
+                    kcal: macroInputs.kcal.value,
+                    protein: macroInputs.protein.value,
+                    carbs: macroInputs.carbs.value,
+                    fats: macroInputs.fats.value,
+                    water: macroInputs.water.value
+                };
+                try {
+                    const all = JSON.parse(localStorage.getItem('nutrifit_pro_macros') || '{}');
+                    all[cid] = plan;
+                    localStorage.setItem('nutrifit_pro_macros', JSON.stringify(all));
+                    alert('Plan de macros guardado correctamente');
+                } catch (e) {}
+            });
+
+            // =========== FOOD PICKER ===========
+            const pickerGrid = document.getElementById('food-picker-grid');
+            const pickerSearch = document.getElementById('food-picker-search');
+
+            function renderFoodPicker(filter) {
+                const q = (filter || '').toLowerCase();
+                pickerGrid.innerHTML = FOODS.filter(f => f.name.toLowerCase().includes(q)).map(f => `
+                    <div class="pro-nutri-picker-item" data-food-id="${f.id}" data-food-name="${f.name}" data-food-kcal="${f.kcal}" data-food-protein="${f.protein}" data-food-carbs="${f.carbs}" data-food-fats="${f.fats}" data-food-emoji="${f.emoji}">
+                        <i class="${f.emoji}"></i>
+                        <span>${f.name}</span>
+                        <small>${f.kcal} kcal</small>
+                    </div>
+                `).join('');
+
+                pickerGrid.querySelectorAll('.pro-nutri-picker-item').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const meal = el.dataset.meal || 'breakfast';
+                        addFoodToMeal(meal, {
+                            id: el.dataset.foodId,
+                            name: el.dataset.foodName,
+                            kcal: el.dataset.foodKcal,
+                            protein: el.dataset.foodProtein,
+                            carbs: el.dataset.foodCarbs,
+                            fats: el.dataset.foodFats,
+                            emoji: el.dataset.foodEmoji
+                        });
+                    });
+                });
+            }
+
+            renderFoodPicker();
+            pickerSearch.addEventListener('input', () => renderFoodPicker(pickerSearch.value));
+
+            function addFoodToMeal(mealId, food) {
+                const container = document.getElementById(`meal-${mealId}`);
+                const chip = document.createElement('span');
+                chip.className = 'pro-nutri-meal-chip';
+                chip.innerHTML = `<i class="${food.emoji}"></i> ${food.name} <span class="pro-nutri-meal-chip-kcal">${food.kcal} kcal</span> <i class="ri-close-line pro-nutri-meal-chip-remove"></i>`;
+                chip.querySelector('.pro-nutri-meal-chip-remove').addEventListener('click', () => chip.remove());
+                container.appendChild(chip);
+            }
+
+            document.querySelectorAll('.pro-nutri-meal-add-food').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const meal = btn.dataset.meal;
+                    pickerGrid.querySelectorAll('.pro-nutri-picker-item').forEach(el => {
+                        el.dataset.meal = meal;
+                    });
+                    document.querySelector('.pro-nutri-tab[data-tab="comidas"]').click();
+                    document.querySelector('.pro-nutri-food-picker').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            document.getElementById('btn-save-meals').addEventListener('click', () => {
+                const cid = parseInt(selectCliente.value);
+                if (!cid) { alert('Selecciona un cliente'); return; }
+                const meals = {};
+                ['breakfast', 'lunch', 'dinner', 'snacks'].forEach(m => {
+                    const chips = document.querySelectorAll(`#meal-${m} .pro-nutri-meal-chip`);
+                    meals[m] = [...chips].map(chip => chip.textContent.trim().split(' ')[0]);
+                });
+                try {
+                    const all = JSON.parse(localStorage.getItem('nutrifit_pro_meals') || '{}');
+                    all[cid] = meals;
+                    localStorage.setItem('nutrifit_pro_meals', JSON.stringify(all));
+                    alert('Menú asignado correctamente');
+                } catch (e) {}
+            });
+
+            // =========== HISTORIAL ===========
+            function renderHistorial(clientId) {
+                const container = document.getElementById('historial-list');
+                const mockHistory = [
+                    { date: 'Hoy', kcal: 1842, protein: 145, carbs: 210, fats: 52 },
+                    { date: 'Ayer', kcal: 2200, protein: 160, carbs: 245, fats: 65 },
+                    { date: '16 May', kcal: 1950, protein: 138, carbs: 220, fats: 48 },
+                    { date: '15 May', kcal: 2100, protein: 155, carbs: 230, fats: 58 },
+                    { date: '14 May', kcal: 1780, protein: 130, carbs: 190, fats: 45 },
+                    { date: '13 May', kcal: 2400, protein: 170, carbs: 260, fats: 70 },
+                    { date: '12 May', kcal: 1650, protein: 120, carbs: 180, fats: 40 }
+                ];
+
+                container.innerHTML = `
+                    <div style="overflow-x:auto;">
+                        <table class="pro-nutri-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Calorías</th>
+                                    <th>Proteína</th>
+                                    <th>Carbs</th>
+                                    <th>Grasas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${mockHistory.map(h => `
+                                    <tr>
+                                        <td><strong>${h.date}</strong></td>
+                                        <td>${h.kcal} kcal</td>
+                                        <td>${h.protein}g</td>
+                                        <td>${h.carbs}g</td>
+                                        <td>${h.fats}g</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            // =========== TABS ===========
+            document.querySelectorAll('.pro-nutri-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.pro-nutri-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.pro-nutri-tab-content').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            updateDistribution();
+        });
+    </script>
+</body>
+</html>

@@ -297,16 +297,14 @@
                 if (savedAvatar) imgAvatar.src = savedAvatar;
             } catch (e) { /* ignorar */ }
 
-            // === LOGOUT (demo visual) ===
+            // === LOGOUT: redirige a la pantalla de inicio de sesión ===
             document.getElementById('logout-btn').addEventListener('click', () => {
                 const btn = document.getElementById('logout-btn');
                 btn.innerHTML = '<i class="ri-loader-4-line" style="animation: spin 1s linear infinite;"></i> Cerrando sesión...';
+                btn.disabled = true;
                 setTimeout(() => {
-                    btn.innerHTML = '<i class="ri-check-line"></i> Sesión cerrada (demo)';
-                    btn.style.background = '#e8f5e9';
-                    btn.style.color = '#2e7d32';
-                    btn.style.cursor = 'default';
-                }, 1500);
+                    window.location.href = '/';
+                }, 800);
             });
         });
     </script>

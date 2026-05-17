@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Profesional - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-dashboard.css">
+</head>
+
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1><i class="ri-dashboard-3-line" style="color: var(--pro-primary);"></i> Panel Profesional</h1>
+            <p>Gestiona tus clientes, revisa check-ins y supervisa el progreso general.</p>
+        </header>
+
+        <div class="pro-dashboard-grid">
+
+            <!-- === KPIS === -->
+            <div class="pro-kpi-row">
+                <div class="pro-kpi-card pro-kpi-card--total">
+                    <div class="pro-kpi-icon"><i class="ri-team-line"></i></div>
+                    <div class="pro-kpi-info">
+                        <span class="pro-kpi-value" id="kpi-total">0</span>
+                        <span class="pro-kpi-label">Total Clientes</span>
+                    </div>
+                </div>
+                <div class="pro-kpi-card pro-kpi-card--active">
+                    <div class="pro-kpi-icon"><i class="ri-user-heart-line"></i></div>
+                    <div class="pro-kpi-info">
+                        <span class="pro-kpi-value" id="kpi-active">0</span>
+                        <span class="pro-kpi-label">Clientes Activos</span>
+                    </div>
+                </div>
+                <div class="pro-kpi-card pro-kpi-card--pending">
+                    <div class="pro-kpi-icon"><i class="ri-alarm-warning-line"></i></div>
+                    <div class="pro-kpi-info">
+                        <span class="pro-kpi-value" id="kpi-pending">0</span>
+                        <span class="pro-kpi-label">Check-ins Pendientes</span>
+                    </div>
+                </div>
+                <div class="pro-kpi-card pro-kpi-card--inactive">
+                    <div class="pro-kpi-icon"><i class="ri-user-unfollow-line"></i></div>
+                    <div class="pro-kpi-info">
+                        <span class="pro-kpi-value" id="kpi-inactive">0</span>
+                        <span class="pro-kpi-label">Clientes Inactivos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- === ALERTAS / PENDING CHECK-INS === -->
+            <section class="widget pro-alerts-section">
+                <div class="pro-section-header">
+                    <h3><i class="ri-notification-3-line"></i> Próximas Acciones</h3>
+                    <span style="font-size:0.82rem;font-weight:700;color:var(--on-surface-variant);">
+                        <span id="pending-count">0</span> pendientes
+                    </span>
+                </div>
+                <div id="alerts-list">
+                    <!-- Se renderiza dinámicamente -->
+                </div>
+            </section>
+
+            <!-- === RESUMEN LATERAL === -->
+            <aside class="pro-summary-section">
+                <div class="pro-summary-card">
+                    <div class="pro-section-header" style="margin-bottom:var(--spacing-sm);">
+                        <h3><i class="ri-bar-chart-2-line"></i> Resumen Rápido</h3>
+                    </div>
+                    <div class="pro-summary-row">
+                        <span class="pro-summary-row-label"><i class="ri-asterisk"></i> Tasa de adherencia media</span>
+                        <span class="pro-summary-row-value" id="summary-adherence">0%</span>
+                    </div>
+                    <div class="pro-summary-row">
+                        <span class="pro-summary-row-label"><i class="ri-fire-line"></i> Media kcal / cliente</span>
+                        <span class="pro-summary-row-value" id="summary-kcal">0</span>
+                    </div>
+                    <div class="pro-summary-row">
+                        <span class="pro-summary-row-label"><i class="ri-calendar-check-line"></i> Entrenos esta semana</span>
+                        <span class="pro-summary-row-value" id="summary-workouts">0</span>
+                    </div>
+                    <div class="pro-summary-row">
+                        <span class="pro-summary-row-label"><i class="ri-user-smile-line"></i> Clientes en riesgo</span>
+                        <span class="pro-summary-row-value" id="summary-risk">0</span>
+                    </div>
+                </div>
+
+                <div class="pro-quick-actions">
+                    <div class="pro-quick-header">
+                        <i class="ri-lightbulb-flash-line"></i>
+                        <span>Acción Rápida</span>
+                    </div>
+                    <a href="clientes.html?mode=chat" class="pro-quick-btn pro-quick-btn--chat">
+                        <div class="pro-quick-btn-icon"><i class="ri-message-3-line"></i></div>
+                        <div class="pro-quick-btn-info">
+                            <span class="pro-quick-btn-label">Chat con Clientes</span>
+                            <span class="pro-quick-btn-desc">Conversa al instante</span>
+                        </div>
+                        <i class="ri-arrow-right-s-line pro-quick-arrow"></i>
+                    </a>
+                    <a href="clientes.html?mode=entreno" class="pro-quick-btn pro-quick-btn--training">
+                        <div class="pro-quick-btn-icon"><i class="ri-kettlebell-line"></i></div>
+                        <div class="pro-quick-btn-info">
+                            <span class="pro-quick-btn-label">Nueva Rutina</span>
+                            <span class="pro-quick-btn-desc">Asigna entrenamiento</span>
+                        </div>
+                        <i class="ri-arrow-right-s-line pro-quick-arrow"></i>
+                    </a>
+                    <a href="clientes.html?mode=nutricion" class="pro-quick-btn pro-quick-btn--nutrition">
+                        <div class="pro-quick-btn-icon"><i class="ri-restaurant-2-line"></i></div>
+                        <div class="pro-quick-btn-info">
+                            <span class="pro-quick-btn-label">Plan Nutricional</span>
+                            <span class="pro-quick-btn-desc">Macros y comidas</span>
+                        </div>
+                        <i class="ri-arrow-right-s-line pro-quick-arrow"></i>
+                    </a>
+                    <a href="#" class="pro-quick-btn pro-quick-btn--add" onclick="alert('Añadir cliente — próximamente');return false;">
+                        <div class="pro-quick-btn-icon"><i class="ri-user-add-line"></i></div>
+                        <div class="pro-quick-btn-info">
+                            <span class="pro-quick-btn-label">Nuevo Cliente</span>
+                            <span class="pro-quick-btn-desc">Registrar paciente</span>
+                        </div>
+                        <i class="ri-arrow-right-s-line pro-quick-arrow"></i>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- === TABLA DE CLIENTES === -->
+            <section class="pro-clients-section">
+                <div class="pro-section-header">
+                    <h3><i class="ri-group-line"></i> Lista Resumida de Clientes</h3>
+                    <a href="#" class="pro-table-link" onclick="alert('Ver todos — próximamente');return false;">
+                        Ver todos <i class="ri-arrow-right-s-line"></i>
+                    </a>
+                </div>
+                <div class="pro-table-wrapper">
+                    <table class="pro-table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Objetivo</th>
+                                <th>Calorías</th>
+                                <th>Última Actividad</th>
+                                <th>Estado</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="clients-table-body">
+                            <!-- Se renderiza dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ============================================================
+            //  MOCK DATA — Simula los datos del panel profesional
+            // ============================================================
+            const mockData = {
+                stats: {
+                    totalClients: 24,
+                    activeClients: 18,
+                    pendingCheckins: 5,
+                    inactiveClients: 4
+                },
+                summary: {
+                    adherence: 78,
+                    avgKcal: '1,920 kcal',
+                    weeklyWorkouts: 42,
+                    riskClients: 3
+                },
+                pendingCheckins: [
+                    { id: 1, name: 'María García', lastDate: 'Hace 3 días', days: 3 },
+                    { id: 2, name: 'Carlos Mendoza', lastDate: 'Hace 5 días', days: 5 },
+                    { id: 3, name: 'Lucía Fernández', lastDate: 'Hace 2 días', days: 2 },
+                    { id: 4, name: 'Pedro Sánchez', lastDate: 'Hace 4 días', days: 4 },
+                    { id: 5, name: 'Ana Romero', lastDate: 'Hace 6 días', days: 6 }
+                ],
+                clients: [
+                    { id: 1, name: 'Alex Rivera', goal: 'Hipertrofia', kcal: '2,500', lastActivity: 'Hoy', status: 'active', avatar: 'AR' },
+                    { id: 2, name: 'María García', goal: 'Pérdida de peso', kcal: '1,800', lastActivity: 'Hace 3 días', status: 'inactive', avatar: 'MG' },
+                    { id: 3, name: 'Carlos Mendoza', goal: 'Rendimiento', kcal: '3,200', lastActivity: 'Hace 5 días', status: 'risk', avatar: 'CM' },
+                    { id: 4, name: 'Lucía Fernández', goal: 'Definición', kcal: '2,100', lastActivity: 'Hace 2 días', status: 'active', avatar: 'LF' },
+                    { id: 5, name: 'Pedro Sánchez', goal: 'Volumen', kcal: '2,800', lastActivity: 'Hace 4 días', status: 'inactive', avatar: 'PS' },
+                    { id: 6, name: 'Ana Romero', goal: 'Pérdida de peso', kcal: '1,700', lastActivity: 'Hace 6 días', status: 'risk', avatar: 'AR' },
+                    { id: 7, name: 'Sofía Torres', goal: 'Hipertrofia', kcal: '2,400', lastActivity: 'Hoy', status: 'active', avatar: 'ST' },
+                    { id: 8, name: 'Diego Martínez', goal: 'Rendimiento', kcal: '3,000', lastActivity: 'Ayer', status: 'active', avatar: 'DM' }
+                ]
+            };
+
+            // ============================================================
+            //  RENDER: KPIs
+            // ============================================================
+            function renderKPIs(data) {
+                document.getElementById('kpi-total').textContent = data.stats.totalClients;
+                document.getElementById('kpi-active').textContent = data.stats.activeClients;
+                document.getElementById('kpi-pending').textContent = data.stats.pendingCheckins;
+                document.getElementById('kpi-inactive').textContent = data.stats.inactiveClients;
+                document.getElementById('pending-count').textContent = data.stats.pendingCheckins;
+            }
+
+            // ============================================================
+            //  RENDER: Alertas / Pending Check-ins
+            // ============================================================
+            function renderAlerts(data) {
+                const container = document.getElementById('alerts-list');
+                const items = data.pendingCheckins.slice(0, 5);
+                container.innerHTML = items.map(item => `
+                    <div class="pro-alert-item">
+                        <div class="pro-alert-avatar">${item.name.split(' ').map(w => w[0]).join('')}</div>
+                        <div class="pro-alert-info">
+                            <span class="pro-alert-name">${item.name}</span>
+                            <span class="pro-alert-meta">Check-in pendiente · ${item.lastDate}</span>
+                        </div>
+                        <span class="pro-alert-badge">${item.days} días</span>
+                        <button class="pro-alert-btn" data-client="${item.id}">Revisar</button>
+                    </div>
+                `).join('');
+
+                container.querySelectorAll('.pro-alert-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        alert(`Revisando check-in del cliente ID ${btn.dataset.client} — próximamente`);
+                    });
+                });
+            }
+
+            // ============================================================
+            //  RENDER: Summary
+            // ============================================================
+            function renderSummary(data) {
+                document.getElementById('summary-adherence').textContent = data.summary.adherence + '%';
+                document.getElementById('summary-kcal').textContent = data.summary.avgKcal;
+                document.getElementById('summary-workouts').textContent = data.summary.weeklyWorkouts;
+                document.getElementById('summary-risk').textContent = data.summary.riskClients;
+            }
+
+            // ============================================================
+            //  RENDER: Tabla de Clientes
+            // ============================================================
+            function renderClientsTable(data) {
+                const tbody = document.getElementById('clients-table-body');
+                tbody.innerHTML = data.clients.map(client => {
+                    const statusMap = {
+                        active: { label: 'Activo', cls: 'pro-status-badge--active' },
+                        inactive: { label: 'Inactivo', cls: 'pro-status-badge--inactive' },
+                        risk: { label: 'En Riesgo', cls: 'pro-status-badge--risk' }
+                    };
+                    const st = statusMap[client.status] || statusMap.inactive;
+                    return `
+                        <tr>
+                            <td>
+                                <div class="pro-client-cell">
+                                    <div class="pro-client-avatar">${client.avatar}</div>
+                                    <span class="pro-client-name">${client.name}</span>
+                                </div>
+                            </td>
+                            <td>${client.goal}</td>
+                            <td><strong>${client.kcal}</strong></td>
+                            <td>${client.lastActivity}</td>
+                            <td><span class="pro-status-badge ${st.cls}">${st.label}</span></td>
+                            <td>
+                                <a href="#" class="pro-table-link" onclick="alert('Detalle de ${client.name} — próximamente');return false;">
+                                    Ver <i class="ri-arrow-right-s-line"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // ============================================================
+            //  CARGAR TODO
+            // ============================================================
+            renderKPIs(mockData);
+            renderAlerts(mockData);
+            renderSummary(mockData);
+            renderClientsTable(mockData);
+        });
+    </script>
+</body>
+
+</html>

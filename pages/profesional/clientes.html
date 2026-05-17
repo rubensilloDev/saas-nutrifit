@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Cliente - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-clientes.css">
+</head>
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <h1 id="page-title"><i class="ri-group-line" style="color: var(--pro-primary);"></i> Seleccionar Cliente</h1>
+            <p id="page-subtitle">Elige un cliente para comenzar</p>
+        </header>
+
+        <div class="pro-client-list-container">
+            <div class="pro-client-search">
+                <i class="ri-search-line"></i>
+                <input type="text" id="client-search-input" placeholder="Buscar cliente por nombre...">
+            </div>
+
+            <div class="pro-client-grid" id="client-grid">
+                <!-- Se renderiza dinámicamente -->
+            </div>
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mode = new URLSearchParams(window.location.search).get('mode') || 'chat';
+            const titles = {
+                chat: { title: 'Chat con Clientes', subtitle: 'Selecciona un cliente para iniciar una conversación', icon: 'ri-message-3-line' },
+                entreno: { title: 'Registros de Entrenamiento', subtitle: 'Selecciona un cliente para asignarle una rutina', icon: 'ri-kettlebell-line' },
+                nutricion: { title: 'Registros Nutricionales', subtitle: 'Selecciona un cliente para gestionar su plan', icon: 'ri-restaurant-2-line' }
+            };
+            const info = titles[mode] || titles.chat;
+            document.getElementById('page-title').innerHTML = `<i class="${info.icon}" style="color: var(--pro-primary);"></i> ${info.title}`;
+            document.getElementById('page-subtitle').textContent = info.subtitle;
+
+            const clients = [
+                { id: 1, name: 'Alex Rivera', goal: 'Hipertrofia', age: 29, avatar: 'AR', status: 'active' },
+                { id: 2, name: 'María García', goal: 'Pérdida de peso', age: 34, avatar: 'MG', status: 'active' },
+                { id: 3, name: 'Carlos Mendoza', goal: 'Rendimiento', age: 27, avatar: 'CM', status: 'inactive' },
+                { id: 4, name: 'Lucía Fernández', goal: 'Definición', age: 31, avatar: 'LF', status: 'active' },
+                { id: 5, name: 'Pedro Sánchez', goal: 'Volumen', age: 25, avatar: 'PS', status: 'active' },
+                { id: 6, name: 'Ana Romero', goal: 'Pérdida de peso', age: 28, avatar: 'AR', status: 'inactive' },
+                { id: 7, name: 'Sofía Torres', goal: 'Hipertrofia', age: 26, avatar: 'ST', status: 'active' },
+                { id: 8, name: 'Diego Martínez', goal: 'Rendimiento', age: 33, avatar: 'DM', status: 'active' }
+            ];
+
+            const grid = document.getElementById('client-grid');
+            const searchInput = document.getElementById('client-search-input');
+
+            function renderClients(filter) {
+                const filtered = filter
+                    ? clients.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()))
+                    : clients;
+                grid.innerHTML = filtered.map(c => `
+                    <a href="${mode === 'chat' ? 'chat-cliente.html' : mode === 'entreno' ? 'entrenamiento.html' : 'nutricion.html'}?cliente=${c.id}" class="pro-client-card">
+                        <div class="pro-client-card-avatar">${c.avatar}</div>
+                        <div class="pro-client-card-info">
+                            <span class="pro-client-card-name">${c.name}</span>
+                            <span class="pro-client-card-goal">${c.goal} · ${c.age} años</span>
+                        </div>
+                        <span class="pro-client-card-status pro-client-card-status--${c.status}">${c.status === 'active' ? 'Activo' : 'Inactivo'}</span>
+                        <i class="ri-arrow-right-s-line pro-client-card-arrow"></i>
+                    </a>
+                `).join('');
+            }
+
+            searchInput.addEventListener('input', () => renderClients(searchInput.value));
+            renderClients();
+        });
+    </script>
+</body>
+</html>

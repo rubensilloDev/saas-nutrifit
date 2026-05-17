@@ -108,6 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentDateSpan = document.getElementById('current-date');
     const btnPrevDay = document.getElementById('prev-day');
     const btnNextDay = document.getElementById('next-day');
+    const btnCalendar = document.getElementById('btn-calendar');
+    const datePicker = document.getElementById('date-picker');
 
     const btnAddFoods = document.querySelectorAll('.btn-add-food');
     const btnWaterBtns = document.querySelectorAll('.btn-water');
@@ -612,6 +614,18 @@ document.addEventListener('DOMContentLoaded', () => {
     btnNextDay.addEventListener('click', () => {
         state.currentDate.setDate(state.currentDate.getDate() + 1);
         currentDateSpan.textContent = formatDate(state.currentDate);
+    });
+
+    btnCalendar.addEventListener('click', () => {
+        datePicker.valueAsDate = state.currentDate;
+        datePicker.showPicker();
+    });
+
+    datePicker.addEventListener('change', () => {
+        if (datePicker.value) {
+            state.currentDate = new Date(datePicker.value + 'T12:00:00');
+            currentDateSpan.textContent = formatDate(state.currentDate);
+        }
     });
 
     // ============================================================

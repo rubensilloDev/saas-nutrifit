@@ -697,6 +697,21 @@
     }
 }
 
+/* Mobile: Objetivos a ancho completo con inputs grandes */
+@media (max-width: 768px) {
+    .profile-goals-card {
+        grid-column: 1 / -1;
+    }
+    .profile-goal-input {
+        width: 160px;
+        font-size: 1.15rem;
+        padding: 8px 14px;
+    }
+    .profile-goal-item {
+        padding: 16px 0;
+    }
+}
+
 @media (max-width: 1024px) {
     .settings-grid {
         grid-template-columns: 1fr;
