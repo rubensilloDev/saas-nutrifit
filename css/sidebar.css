@@ -97,7 +97,7 @@
     background: var(--surface-container-high);
     border: 1px solid var(--outline-variant);
     border-radius: var(--radius-md);
-    color: var(--primary);
+    color: var(--pro-primary);
     cursor: pointer;
     font-weight: 700;
     font-family: var(--font-heading);
@@ -111,9 +111,9 @@
 }
 
 .toggle-btn:hover {
-    background: var(--primary-container);
+    background: var(--pro-primary);
     color: white;
-    border-color: var(--primary);
+    border-color: var(--pro-primary);
 }
 
 /* Estilo minimalista para el toggle cuando está colapsado */
@@ -184,20 +184,20 @@
 /* Estados Hover y Active */
 .menu-link:hover {
     background-color: var(--surface-container-high, rgba(0, 0, 0, 0.05));
-    color: var(--primary);
+    color: var(--pro-primary);
 }
 
 .menu-link.active {
-    background: linear-gradient(90deg, rgba(13, 99, 27, 0.08), transparent);
-    color: var(--primary);
+    background: linear-gradient(90deg, rgba(21, 101, 192, 0.08), transparent);
+    color: var(--pro-primary);
     font-weight: 700;
-    border-left: 3px solid var(--primary);
+    border-left: 3px solid var(--pro-primary);
     /* Indicador visual de página actual */
     border-radius: var(--radius-md);
 }
 
 .menu-link.active .icon {
-    color: var(--primary);
+    color: var(--pro-primary);
 }
 
 /* --- Submenús (Dropdowns) --- */
@@ -247,10 +247,10 @@
 }
 
 .submenu-link.active {
-    background: linear-gradient(90deg, rgba(13, 99, 27, 0.08), transparent);
-    color: var(--primary);
+    background: linear-gradient(90deg, rgba(21, 101, 192, 0.08), transparent);
+    color: var(--pro-primary);
     font-weight: 700;
-    border-left: 3px solid var(--primary);
+    border-left: 3px solid var(--pro-primary);
 }
 
 /* --- Footer: Perfil de Usuario --- */
@@ -276,7 +276,7 @@
     min-width: 40px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--primary-container);
+    border: 2px solid var(--pro-primary);
 }
 
 .user-avatar img {
@@ -343,7 +343,7 @@ body:has(.collapsed) main {
     border: none;
     border-radius: 14px;
     background: white;
-    color: var(--primary);
+    color: var(--pro-primary);
     font-size: 1.5rem;
     cursor: pointer;
     z-index: 1002;                /* Sobre el sidebar y el overlay */
@@ -354,7 +354,7 @@ body:has(.collapsed) main {
 }
 
 .mobile-menu-btn:hover {
-    background: var(--primary);
+    background: var(--pro-primary);
     color: white;
 }
 

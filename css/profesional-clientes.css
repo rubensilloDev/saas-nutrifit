@@ -127,8 +127,8 @@
 }
 
 .pro-client-card-status--active {
-    background: #e8f5e9;
-    color: var(--primary);
+    background: var(--pro-surface);
+    color: var(--pro-primary);
 }
 
 .pro-client-card-status--inactive {

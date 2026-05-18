@@ -172,7 +172,7 @@ function initSidebar() {
                 </button>
                 <div class="user-profile">
                     <div class="user-avatar">
-                        <img src="https://ui-avatars.com/api/?name=Usuario+Fit&background=4CAF50&color=fff" alt="User Avatar">
+                        <img src="https://ui-avatars.com/api/?name=Usuario+Fit&background=1565C0&color=fff" alt="User Avatar">
                     </div>
                     <div class="user-info">
                         <span class="user-name">Usuario Fit</span>

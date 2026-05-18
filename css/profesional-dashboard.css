@@ -48,7 +48,7 @@
 }
 
 .pro-kpi-card--total::before { background: var(--pro-primary); }
-.pro-kpi-card--active::before { background: var(--primary); }
+.pro-kpi-card--active::before { background: var(--pro-primary); }
 .pro-kpi-card--pending::before { background: var(--pro-alert); }
 .pro-kpi-card--inactive::before { background: var(--pro-inactive); }
 
@@ -64,7 +64,7 @@
 }
 
 .pro-kpi-card--total .pro-kpi-icon { background: var(--pro-surface); color: var(--pro-primary); }
-.pro-kpi-card--active .pro-kpi-icon { background: #e8f5e9; color: var(--primary); }
+.pro-kpi-card--active .pro-kpi-icon { background: var(--pro-surface); color: var(--pro-primary); }
 .pro-kpi-card--pending .pro-kpi-icon { background: var(--pro-alert-bg); color: var(--pro-alert); }
 .pro-kpi-card--inactive .pro-kpi-icon { background: var(--pro-inactive-bg); color: var(--pro-inactive); }
 
@@ -330,8 +330,8 @@
 }
 
 .pro-status-badge--active {
-    background: #e8f5e9;
-    color: var(--primary);
+    background: var(--pro-surface);
+    color: var(--pro-primary);
 }
 
 .pro-status-badge--inactive {
@@ -418,7 +418,7 @@
 }
 
 .pro-quick-btn--chat::before { background: var(--pro-primary); }
-.pro-quick-btn--training::before { background: var(--primary); }
+.pro-quick-btn--training::before { background: var(--pro-primary); }
 .pro-quick-btn--nutrition::before { background: #f57c00; }
 .pro-quick-btn--add::before { background: #7b1fa2; }
 
@@ -449,7 +449,7 @@
 }
 
 .pro-quick-btn--chat .pro-quick-btn-icon { background: var(--pro-surface); color: var(--pro-primary); }
-.pro-quick-btn--training .pro-quick-btn-icon { background: #e8f5e9; color: var(--primary); }
+.pro-quick-btn--training .pro-quick-btn-icon { background: var(--pro-surface); color: var(--pro-primary); }
 .pro-quick-btn--nutrition .pro-quick-btn-icon { background: #fff3e0; color: #f57c00; }
 .pro-quick-btn--add .pro-quick-btn-icon { background: #f3e5f5; color: #7b1fa2; }
 
@@ -535,15 +535,24 @@
 
 /* ===== PERFIL inline styles replacement ===== */
 .pro-perfil-icon { color:var(--pro-primary); }
+.profile-section-title .pro-perfil-icon { color:var(--pro-primary); }
+.profile-section-title i.pro-config-icon { color:var(--pro-primary); }
 .pro-perfil-avatar-card { background:linear-gradient(160deg,var(--surface-container-lowest),var(--pro-surface)); }
-.pro-perfil-avatar { border-color:var(--pro-primary); }
-.pro-perfil-avatar-edit { background:var(--pro-primary); }
+.pro-perfil-avatar { border-color:var(--pro-primary) !important; box-shadow:0 4px 16px rgba(21,101,192,0.15) !important; }
+.pro-perfil-avatar-edit { background:var(--pro-primary) !important; box-shadow:0 2px 8px rgba(21,101,192,0.3) !important; }
+.pro-perfil-avatar-edit:hover { background:#1976d2 !important; }
 .pro-perfil-hidden { display:none; }
 .pro-perfil-save-btn { background:linear-gradient(135deg,var(--pro-primary),#1976d2);box-shadow:0 4px 16px rgba(21,101,192,0.25); }
+.profile-input:focus { border-color:var(--pro-primary) !important; box-shadow:0 0 0 4px rgba(21,101,192,0.08) !important; }
 .pro-perfil-card-right { grid-column:2/3; }
 .pro-perfil-schedule-card { grid-column:1/2; }
 .pro-perfil-textarea { min-height:100px; resize:vertical; font-family:var(--font-body); }
-.pro-perfil-stat-value { color:var(--pro-primary); }
+.pro-perfil-stat-value { color:var(--pro-primary) !important; }
+.profile-badge { background:var(--pro-surface) !important; color:var(--pro-primary) !important; }
+.settings-switch input:checked + .settings-slider { background:var(--pro-primary) !important; }
+.settings-card--actions { background:linear-gradient(160deg,var(--pro-surface),var(--surface-container-lowest)) !important; }
+.settings-action-btn:hover { border-color:var(--pro-primary) !important; color:var(--pro-primary) !important; background:var(--pro-surface) !important; }
+.settings-theme-option input:checked + .settings-theme-box { border-color:var(--pro-primary) !important; background:var(--pro-surface) !important; color:var(--pro-primary) !important; box-shadow:0 0 0 3px rgba(21,101,192,0.08) !important; }
 .pro-perfil-mt-lg { margin-top:var(--spacing-lg); }
 .pro-perfil-mt-md { margin-top:var(--spacing-md); }
 .pro-perfil-stats-card-bg { background:linear-gradient(160deg,var(--surface-container-lowest),var(--pro-surface)) !important; }
