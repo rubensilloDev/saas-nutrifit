@@ -26,27 +26,8 @@
         </header>
 
         <div class="pro-chat-layout">
-            <div class="pro-chat-sidebar" id="chat-clients-sidebar">
-                <div class="pro-chat-sidebar-header">
-                    <div class="pro-chat-header-left">
-                        <h3>Conversaciones</h3>
-                        <span class="pro-chat-count" id="unread-count">0</span>
-                    </div>
-                    <button class="pro-chat-toggle-sidebar" id="toggle-sidebar-btn" title="Contraer/Expandir"><i class="ri-collapse-horizontal-fill"></i></button>
-                </div>
-                <div id="chat-clients-list">
-                    <!-- Se renderiza dinámicamente -->
-                </div>
-            </div>
-
             <div class="pro-chat-main" id="chat-main-area">
-                <div class="pro-chat-empty" id="chat-empty-state">
-                    <i class="ri-message-3-line"></i>
-                    <h3>Selecciona un cliente</h3>
-                    <p>Elige una conversación de la lista para empezar a chatear.</p>
-                </div>
-
-                <div class="pro-chat-conversation hidden" id="chat-conversation">
+                <div class="pro-chat-conversation" id="chat-conversation">
                     <div class="pro-chat-messages" id="chat-messages">
                         <!-- Mensajes dinámicos -->
                     </div>
@@ -105,45 +86,20 @@
             const params = new URLSearchParams(window.location.search);
             const selectedClientId = params.get('cliente') ? parseInt(params.get('cliente')) : null;
 
-            const clientsList = document.getElementById('chat-clients-list');
             const messagesContainer = document.getElementById('chat-messages');
             const conversationArea = document.getElementById('chat-conversation');
-            const emptyState = document.getElementById('chat-empty-state');
             const chatInput = document.getElementById('chat-input');
             const sendBtn = document.getElementById('chat-send-btn');
             const attachBtn = document.getElementById('chat-attach-btn');
             const fileInput = document.getElementById('chat-file-input');
-            const chatSidebar = document.getElementById('chat-clients-sidebar');
-            const chatLayout = document.querySelector('.pro-chat-layout');
-            const toggleSidebar = document.getElementById('toggle-sidebar-btn');
             let attachedFiles = [];
-
-            function renderClientsList() {
-                const unreadTotal = clients.reduce((sum, c) => sum + c.unread, 0);
-                document.getElementById('unread-count').textContent = unreadTotal;
-
-                clientsList.innerHTML = clients.map(c => `
-                    <a href="chat-cliente.html?cliente=${c.id}" class="pro-chat-client-item ${c.id === selectedClientId ? 'active' : ''}">
-                        <div class="pro-chat-client-avatar">${c.avatar}</div>
-                        <div class="pro-chat-client-info">
-                            <span class="pro-chat-client-name">${c.name}</span>
-                            <span class="pro-chat-client-preview">${c.lastMsg}</span>
-                        </div>
-                        <div class="pro-chat-client-meta">
-                            <span class="pro-chat-client-time">${c.time}</span>
-                            ${c.unread > 0 ? `<span class="pro-chat-client-badge">${c.unread}</span>` : ''}
-                        </div>
-                    </a>
-                `).join('');
-            }
 
             function renderConversation(clientId) {
                 const client = clients.find(c => c.id === clientId);
                 if (!client) return;
 
                 document.getElementById('chat-client-name').innerHTML = `<i class="ri-message-3-line pro-chat-icon"></i> ${client.name}`;
-                document.getElementById('chat-client-subtitle').textContent = `${client.goal} · Conversación activa`;
-                emptyState.classList.add('hidden');
+                document.getElementById('chat-client-subtitle').textContent = `${client.goal} · Chat activo`;
                 conversationArea.classList.remove('hidden');
 
                 const msgs = messagesDB[clientId] || [];
@@ -235,29 +191,6 @@
                     });
                 }
             });
-
-            // Toggle sidebar
-            const setCollapsed = (collapsed) => {
-                if (collapsed) {
-                    chatLayout.classList.add('sidebar-collapsed');
-                    toggleSidebar.querySelector('i').className = 'ri-expand-horizontal-fill';
-                } else {
-                    chatLayout.classList.remove('sidebar-collapsed');
-                    toggleSidebar.querySelector('i').className = 'ri-collapse-horizontal-fill';
-                }
-                localStorage.setItem('nutrifit_chat_sidebar_collapsed', collapsed);
-            };
-
-            toggleSidebar.addEventListener('click', () => {
-                const isCollapsed = chatLayout.classList.contains('sidebar-collapsed');
-                setCollapsed(!isCollapsed);
-            });
-
-            if (localStorage.getItem('nutrifit_chat_sidebar_collapsed') === 'true') {
-                setCollapsed(true);
-            }
-
-            renderClientsList();
 
             if (selectedClientId) {
                 renderConversation(selectedClientId);

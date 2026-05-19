@@ -306,6 +306,52 @@
     color: var(--on-surface-variant);
 }
 
+/* ===== MACRO MODE TOGGLE ===== */
+.pro-nutri-mode-toggle {
+    display: flex;
+    gap: 4px;
+    background: var(--surface-container-low);
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: var(--spacing-lg);
+    width: fit-content;
+}
+
+.pro-nutri-mode-btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--on-surface-variant);
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-heading);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pro-nutri-mode-btn.active {
+    background: white;
+    color: var(--pro-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.pro-nutri-mode-btn:hover:not(.active) {
+    color: var(--on-surface);
+}
+
+.pro-nutri-macro-calc {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--pro-primary);
+    margin-top: 2px;
+    text-align: right;
+}
+
 .pro-nutri-btn-save {
     padding: 12px 24px;
     border: none;
@@ -714,7 +760,20 @@
 .pro-nutri-desc-text { font-size:0.85rem; color:var(--on-surface-variant); margin-bottom:var(--spacing-lg); }
 .pro-nutri-btn-save-mt { margin-top:var(--spacing-lg); }
 .pro-nutri-modal-text { font-size:0.9rem; color:var(--on-surface-variant); margin-bottom:var(--spacing-lg); }
-.pro-nutri-scroll-x { overflow-x:auto; }
+.pro-nutri-scroll-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.pro-nutri-scroll-x table {
+    min-width: 420px;
+}
+
+.pro-nutri-scroll-x th,
+.pro-nutri-scroll-x td {
+    white-space: nowrap;
+}
 
 @media (max-width: 1024px) {
     .pro-nutri-layout { grid-template-columns: 1fr; }

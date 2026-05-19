@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Cliente - NutriFit Systems</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-dashboard.css">
+    <link rel="stylesheet" href="../../css/profesional-clientes.css">
+    <link rel="stylesheet" href="../../css/profesional-detalle.css">
+</head>
+<body>
+    <div id="sidebar-target"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="pro-detalle-header-flex">
+                <a href="dashboard.html" class="pro-chat-back"><i class="ri-arrow-left-line"></i></a>
+                <div>
+                    <h1 id="page-title" class="pro-detalle-header-title"><i class="ri-user-heart-line pro-perfil-icon"></i> Detalle del Cliente</h1>
+                    <p id="page-subtitle" class="pro-detalle-header-subtitle">Información y gestión del cliente</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="pro-detalle-layout">
+            <!-- SIDEBAR: Avatar + Stats + Acciones rápidas -->
+            <aside class="pro-detalle-sidebar">
+                <div class="pro-detalle-card pro-detalle-avatar-section">
+                    <div class="pro-detalle-avatar" id="det-avatar">--</div>
+                    <span class="pro-detalle-name" id="det-name">--</span>
+                    <span class="pro-detalle-goal" id="det-goal">--</span>
+
+                    <div class="pro-detalle-stats-wrap">
+                        <div class="pro-detalle-stat-grid">
+                            <div class="pro-detalle-stat">
+                                <span class="pro-detalle-stat-val" id="det-weight">--</span>
+                                <span class="pro-detalle-stat-lbl">Peso (kg)</span>
+                            </div>
+                            <div class="pro-detalle-stat">
+                                <span class="pro-detalle-stat-val" id="det-height">--</span>
+                                <span class="pro-detalle-stat-lbl">Altura (cm)</span>
+                            </div>
+                            <div class="pro-detalle-stat">
+                                <span class="pro-detalle-stat-val" id="det-time">--</span>
+                                <span class="pro-detalle-stat-lbl">Conmigo</span>
+                            </div>
+                            <div class="pro-detalle-stat">
+                                <span class="pro-detalle-stat-val" id="det-age">--</span>
+                                <span class="pro-detalle-stat-lbl">Edad</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pro-detalle-card">
+                    <h3><i class="ri-calendar-check-line"></i> Check-in</h3>
+                    <div class="pro-detalle-field pro-detalle-field-gap">
+                        <label>Frecuencia</label>
+                        <select id="det-checkin-freq">
+                            <option value="Semanal">Semanal</option>
+                            <option value="Quincenal">Quincenal</option>
+                            <option value="Mensual">Mensual</option>
+                        </select>
+                    </div>
+                    <div class="pro-detalle-field">
+                        <label>Día</label>
+                        <select id="det-checkin-day">
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pro-detalle-card">
+                    <h3><i class="ri-flashlight-line"></i> Acciones</h3>
+                    <div class="pro-detalle-actions-column">
+                        <a href="chat-cliente.html?cliente=" class="pro-detalle-btn pro-detalle-btn-sm" id="btn-chat-cliente"><i class="ri-message-3-line"></i> Enviar Mensaje</a>
+                        <a href="nutricion.html?cliente=" class="pro-detalle-btn pro-detalle-btn-sm pro-detalle-btn-outline" id="btn-nutri-cliente"><i class="ri-restaurant-2-line"></i> Ver Nutrición</a>
+                        <a href="entrenamiento.html?cliente=" class="pro-detalle-btn pro-detalle-btn-sm pro-detalle-btn-outline" id="btn-entreno-cliente"><i class="ri-run-line"></i> Ver Entrenamiento</a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- MAIN -->
+            <div class="pro-detalle-main">
+                <!-- FILA: Objetivos + Macro resumen -->
+                <div class="pro-detalle-card">
+                    <h3><i class="ri-pie-chart-line"></i> Objetivos Nutricionales</h3>
+                    <div class="pro-detalle-macro-grid" id="det-macro-grid">
+                        <div class="pro-detalle-macro-item">
+                            <span class="val" id="det-macro-kcal">0</span>
+                            <span class="lbl">Calorías</span>
+                        </div>
+                        <div class="pro-detalle-macro-item">
+                            <span class="val" id="det-macro-protein">0</span>
+                            <span class="lbl">Proteína (g)</span>
+                        </div>
+                        <div class="pro-detalle-macro-item">
+                            <span class="val" id="det-macro-carbs">0</span>
+                            <span class="lbl">Carbos (g)</span>
+                        </div>
+                        <div class="pro-detalle-macro-item">
+                            <span class="val" id="det-macro-fats">0</span>
+                            <span class="lbl">Grasas (g)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EDITAR DATOS -->
+                <div class="pro-detalle-card">
+                    <h3><i class="ri-edit-box-line"></i> Editar Datos del Cliente</h3>
+                    <div class="pro-detalle-edit-grid">
+                        <div class="pro-detalle-field">
+                            <label>Peso (kg)</label>
+                            <input type="number" id="edit-weight" step="0.1" min="0">
+                        </div>
+                        <div class="pro-detalle-field">
+                            <label>Altura (cm)</label>
+                            <input type="number" id="edit-height" step="1" min="0">
+                        </div>
+                        <div class="pro-detalle-field">
+                            <label>Objetivo</label>
+                            <select id="edit-goal">
+                                <option value="Hipertrofia">Hipertrofia</option>
+                                <option value="Pérdida de peso">Pérdida de peso</option>
+                                <option value="Definición">Definición</option>
+                                <option value="Rendimiento">Rendimiento</option>
+                                <option value="Volumen">Volumen</option>
+                                <option value="Mantenimiento">Mantenimiento</option>
+                            </select>
+                        </div>
+                        <div class="pro-detalle-field">
+                            <label>Rutina Actual</label>
+                            <input type="text" id="edit-routine" placeholder="Ej: Push/Pull/Legs">
+                        </div>
+                    </div>
+                    <div class="pro-detalle-field pro-detalle-field-mt">
+                        <label>Notas del cliente</label>
+                        <textarea id="edit-notes" placeholder="Observaciones, alergias, preferencias..."></textarea>
+                    </div>
+                    <button class="pro-detalle-btn pro-detalle-btn-mt" id="btn-save-client"><i class="ri-save-line"></i> Guardar Cambios</button>
+                </div>
+
+                <!-- ANALÍTICAS / PDFs -->
+                <div class="pro-detalle-card">
+                    <h3><i class="ri-file-pdf-line"></i> Analíticas</h3>
+                    <div id="det-pdf-list" class="pro-detalle-pdf-list">
+                        <!-- Se renderiza dinámicamente -->
+                    </div>
+                    <button class="pro-detalle-btn pro-detalle-btn-sm pro-detalle-btn-outline pro-detalle-btn-mt" id="btn-add-pdf"><i class="ri-add-line"></i> Añadir Analítica</button>
+                    <input type="file" id="pdf-file-input" accept=".pdf" class="pro-detalle-hidden-input">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../src/components/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const clientId = params.get('cliente') ? parseInt(params.get('cliente')) : null;
+
+            const clients = [
+                { id: 1, name: 'Alex Rivera', goal: 'Hipertrofia', age: 29, avatar: 'AR', weight: 78, height: 178, startDate: '2025-01-15', routine: 'Push/Pull/Legs x5', notes: '' },
+                { id: 2, name: 'María García', goal: 'Pérdida de peso', age: 34, avatar: 'MG', weight: 68, height: 165, startDate: '2025-02-20', routine: 'Full Body x3 + Cardio', notes: '' },
+                { id: 3, name: 'Carlos Mendoza', goal: 'Rendimiento', age: 27, avatar: 'CM', weight: 82, height: 180, startDate: '2025-03-10', routine: 'Weider x6', notes: '' },
+                { id: 4, name: 'Lucía Fernández', goal: 'Definición', age: 31, avatar: 'LF', weight: 60, height: 168, startDate: '2025-04-05', routine: 'Upper/Lower x4', notes: '' },
+                { id: 5, name: 'Sofía Torres', goal: 'Hipertrofia', age: 26, avatar: 'ST', weight: 72, height: 172, startDate: '2024-12-01', routine: 'PPL x5', notes: '' }
+            ];
+
+            function getClientData(id) {
+                try {
+                    return JSON.parse(localStorage.getItem('nutrifit_cliente_data_' + id));
+                } catch (e) { return null; }
+            }
+
+            function saveClientData(id, data) {
+                try {
+                    localStorage.setItem('nutrifit_cliente_data_' + id, JSON.stringify(data));
+                } catch (e) {}
+            }
+
+            function getAnaliticas(id) {
+                try {
+                    return JSON.parse(localStorage.getItem('nutrifit_cliente_analiticas_' + id)) || [];
+                } catch (e) { return []; }
+            }
+
+            function saveAnaliticas(id, data) {
+                try {
+                    localStorage.setItem('nutrifit_cliente_analiticas_' + id, JSON.stringify(data));
+                } catch (e) {}
+            }
+
+            function getClientMacros(id) {
+                try {
+                    return JSON.parse(localStorage.getItem('nutrifit_pro_macros') || '{}')[id];
+                } catch (e) { return null; }
+            }
+
+            function loadClient(id) {
+                const c = clients.find(x => x.id === id);
+                if (!c) { document.getElementById('page-title').textContent = 'Cliente no encontrado'; return; }
+
+                const saved = getClientData(id);
+                const data = saved ? { ...c, ...saved } : c;
+
+                document.getElementById('det-avatar').textContent = data.avatar;
+                document.getElementById('det-name').textContent = data.name;
+                document.getElementById('det-goal').textContent = data.goal;
+                document.getElementById('det-weight').textContent = data.weight;
+                document.getElementById('det-height').textContent = data.height;
+                document.getElementById('det-age').textContent = data.age + ' años';
+
+                const start = new Date(data.startDate);
+                const now = new Date();
+                const months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+                const timeStr = months >= 12 ? Math.floor(months / 12) + 'a ' + (months % 12) + 'm' : months + 'm';
+                document.getElementById('det-time').textContent = timeStr;
+
+                // Check-in
+                document.getElementById('det-checkin-freq').value = data.checkinFreq || 'Semanal';
+                document.getElementById('det-checkin-day').value = data.checkinDay || 'Lunes';
+
+                // Macros
+                const macros = getClientMacros(id);
+                if (macros) {
+                    document.getElementById('det-macro-kcal').textContent = macros.kcal;
+                    document.getElementById('det-macro-protein').textContent = macros.protein;
+                    document.getElementById('det-macro-carbs').textContent = macros.carbs;
+                    document.getElementById('det-macro-fats').textContent = macros.fats;
+                }
+
+                // Edit fields
+                document.getElementById('edit-weight').value = data.weight;
+                document.getElementById('edit-height').value = data.height;
+                document.getElementById('edit-goal').value = data.goal;
+                document.getElementById('edit-routine').value = data.routine || '';
+                document.getElementById('edit-notes').value = data.notes || '';
+
+                // Action links
+                document.getElementById('btn-chat-cliente').href = 'chat-cliente.html?cliente=' + id;
+                document.getElementById('btn-nutri-cliente').href = 'nutricion.html?cliente=' + id;
+                document.getElementById('btn-entreno-cliente').href = 'entrenamiento.html?cliente=' + id;
+
+                renderAnaliticas(id);
+            }
+
+            function renderAnaliticas(id) {
+                const list = document.getElementById('det-pdf-list');
+                const items = getAnaliticas(id);
+                if (!items.length) {
+                    list.innerHTML = '<div class="pro-detalle-pdf-empty"><i class="ri-file-pdf-line"></i> No hay analíticas registradas</div>';
+                    return;
+                }
+                list.innerHTML = items.map((a, i) => `
+                    <div class="pro-detalle-pdf-item">
+                        <div class="pro-detalle-pdf-info">
+                            <div class="pro-detalle-pdf-icon"><i class="ri-file-pdf-2-fill"></i></div>
+                            <div>
+                                <span class="pro-detalle-pdf-name">${a.name}</span>
+                                <span class="pro-detalle-pdf-date">${a.date}</span>
+                            </div>
+                        </div>
+                        <div class="pro-detalle-pdf-actions">
+                            <button class="pro-detalle-btn pro-detalle-btn-sm" onclick="alert('Descargando ${a.file}')"><i class="ri-download-line"></i></button>
+                            <button class="pro-detalle-btn pro-detalle-btn-sm pro-detalle-btn-outline" onclick="eliminarAnalitica(${id}, ${i})"><i class="ri-delete-bin-line"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            window.eliminarAnalitica = function(id, idx) {
+                const items = getAnaliticas(id);
+                items.splice(idx, 1);
+                saveAnaliticas(id, items);
+                renderAnaliticas(id);
+            };
+
+            if (clientId) {
+                loadClient(clientId);
+            }
+
+            // Save client data
+            document.getElementById('btn-save-client').addEventListener('click', function() {
+                if (!clientId) return;
+                const btn = this;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="ri-loader-4-line pro-perfil-spin"></i> Guardando...';
+                setTimeout(() => {
+                    const data = {
+                        weight: parseFloat(document.getElementById('edit-weight').value) || 0,
+                        height: parseFloat(document.getElementById('edit-height').value) || 0,
+                        goal: document.getElementById('edit-goal').value,
+                        routine: document.getElementById('edit-routine').value,
+                        notes: document.getElementById('edit-notes').value,
+                        checkinFreq: document.getElementById('det-checkin-freq').value,
+                        checkinDay: document.getElementById('det-checkin-day').value
+                    };
+                    saveClientData(clientId, data);
+                    loadClient(clientId);
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="ri-save-line"></i> Guardar Cambios';
+                }, 400);
+            });
+
+            // Save check-in changes
+            document.getElementById('det-checkin-freq').addEventListener('change', function() {
+                if (!clientId) return;
+                const data = getClientData(clientId) || {};
+                data.checkinFreq = this.value;
+                saveClientData(clientId, data);
+            });
+
+            document.getElementById('det-checkin-day').addEventListener('change', function() {
+                if (!clientId) return;
+                const data = getClientData(clientId) || {};
+                data.checkinDay = this.value;
+                saveClientData(clientId, data);
+            });
+
+            // Add PDF
+            document.getElementById('btn-add-pdf').addEventListener('click', () => {
+                document.getElementById('pdf-file-input').click();
+            });
+
+            document.getElementById('pdf-file-input').addEventListener('change', function() {
+                if (!clientId || !this.files.length) return;
+                const file = this.files[0];
+                if (file.type !== 'application/pdf') { alert('Solo se aceptan archivos PDF'); return; }
+                const name = prompt('Nombre descriptivo de la analítica:', file.name.replace('.pdf', ''));
+                if (!name) { this.value = ''; return; }
+                const items = getAnaliticas(clientId);
+                const today = new Date();
+                const dateStr = today.getDate() + ' ' +
+                    ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'][today.getMonth()] + ' ' +
+                    today.getFullYear();
+                items.push({ name: name, file: file.name, date: dateStr });
+                saveAnaliticas(clientId, items);
+                renderAnaliticas(clientId);
+                this.value = '';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -85,7 +85,13 @@
                 <div class="pro-nutri-tab-content active" id="tab-macros">
                     <div class="pro-nutri-card">
                         <h3><i class="ri-dashboard-line"></i> Asignar Macros</h3>
-                        <div class="pro-nutri-macro-grid">
+
+                        <div class="pro-nutri-mode-toggle">
+                            <button class="pro-nutri-mode-btn active" data-mode="manual"><i class="ri-input-cursor-line"></i> Manual (g)</button>
+                            <button class="pro-nutri-mode-btn" data-mode="percent"><i class="ri-pie-chart-line"></i> Porcentajes (%)</button>
+                        </div>
+
+                        <div class="pro-nutri-macro-grid" id="macro-grid-manual">
                             <div class="pro-nutri-macro-field">
                                 <label>Calorías</label>
                                 <input type="number" id="macro-kcal" value="2500" step="50">
@@ -112,6 +118,38 @@
                                 <span class="pro-nutri-macro-unit">L</span>
                             </div>
                         </div>
+
+                        <div class="pro-nutri-macro-grid pro-nutri-hidden" id="macro-grid-percent">
+                            <div class="pro-nutri-macro-field">
+                                <label>Calorías</label>
+                                <input type="number" id="macro-kcal-pct" value="2500" step="50">
+                                <span class="pro-nutri-macro-unit">kcal</span>
+                            </div>
+                            <div class="pro-nutri-macro-field">
+                                <label>% Proteína</label>
+                                <input type="number" id="macro-protein-pct" value="30" min="0" max="100" step="1">
+                                <span class="pro-nutri-macro-unit">%</span>
+                                <span class="pro-nutri-macro-calc" id="calc-protein">160 g</span>
+                            </div>
+                            <div class="pro-nutri-macro-field">
+                                <label>% Carbohidratos</label>
+                                <input type="number" id="macro-carbs-pct" value="50" min="0" max="100" step="1">
+                                <span class="pro-nutri-macro-unit">%</span>
+                                <span class="pro-nutri-macro-calc" id="calc-carbs">250 g</span>
+                            </div>
+                            <div class="pro-nutri-macro-field">
+                                <label>% Grasas</label>
+                                <input type="number" id="macro-fats-pct" value="20" min="0" max="100" step="1">
+                                <span class="pro-nutri-macro-unit">%</span>
+                                <span class="pro-nutri-macro-calc" id="calc-fats">70 g</span>
+                            </div>
+                            <div class="pro-nutri-macro-field">
+                                <label>Agua</label>
+                                <input type="number" id="macro-water-pct" value="3.0" step="0.1">
+                                <span class="pro-nutri-macro-unit">L</span>
+                            </div>
+                        </div>
+
                         <button class="pro-nutri-btn-save" id="btn-save-macros"><i class="ri-save-line"></i> Guardar Plan</button>
                     </div>
 
@@ -379,6 +417,8 @@
             });
 
             // =========== MACROS ===========
+            let currentMode = 'manual';
+
             const macroInputs = {
                 kcal: document.getElementById('macro-kcal'),
                 protein: document.getElementById('macro-protein'),
@@ -387,43 +427,146 @@
                 water: document.getElementById('macro-water')
             };
 
+            const pctInputs = {
+                kcal: document.getElementById('macro-kcal-pct'),
+                protein: document.getElementById('macro-protein-pct'),
+                carbs: document.getElementById('macro-carbs-pct'),
+                fats: document.getElementById('macro-fats-pct'),
+                water: document.getElementById('macro-water-pct')
+            };
+
+            const calcDisplays = {
+                protein: document.getElementById('calc-protein'),
+                carbs: document.getElementById('calc-carbs'),
+                fats: document.getElementById('calc-fats')
+            };
+
+            const manualGrid = document.getElementById('macro-grid-manual');
+            const pctGrid = document.getElementById('macro-grid-percent');
+
+            function getProteinGrams() {
+                const kcal = parseFloat(pctInputs.kcal.value) || 0;
+                const pct = parseFloat(pctInputs.protein.value) || 0;
+                return Math.round((kcal * pct / 100) / 4);
+            }
+
+            function getCarbsGrams() {
+                const kcal = parseFloat(pctInputs.kcal.value) || 0;
+                const pct = parseFloat(pctInputs.carbs.value) || 0;
+                return Math.round((kcal * pct / 100) / 4);
+            }
+
+            function getFatsGrams() {
+                const kcal = parseFloat(pctInputs.kcal.value) || 0;
+                const pct = parseFloat(pctInputs.fats.value) || 0;
+                return Math.round((kcal * pct / 100) / 9);
+            }
+
+            function updatePercentMode() {
+                const p = getProteinGrams();
+                const c = getCarbsGrams();
+                const f = getFatsGrams();
+                calcDisplays.protein.textContent = p + ' g';
+                calcDisplays.carbs.textContent = c + ' g';
+                calcDisplays.fats.textContent = f + ' g';
+                updateDistribution();
+            }
+
             function updateDistribution() {
-                const kcal = parseFloat(macroInputs.kcal.value) || 0;
-                const p = (parseFloat(macroInputs.protein.value) || 0) * 4;
-                const c = (parseFloat(macroInputs.carbs.value) || 0) * 4;
-                const f = (parseFloat(macroInputs.fats.value) || 0) * 9;
-                const total = p + c + f || 1;
+                let pKcal, cKcal, fKcal, kcal;
+                if (currentMode === 'manual') {
+                    kcal = parseFloat(macroInputs.kcal.value) || 0;
+                    pKcal = (parseFloat(macroInputs.protein.value) || 0) * 4;
+                    cKcal = (parseFloat(macroInputs.carbs.value) || 0) * 4;
+                    fKcal = (parseFloat(macroInputs.fats.value) || 0) * 9;
+                } else {
+                    kcal = parseFloat(pctInputs.kcal.value) || 0;
+                    pKcal = (parseFloat(pctInputs.protein.value) || 0) / 100 * kcal;
+                    cKcal = (parseFloat(pctInputs.carbs.value) || 0) / 100 * kcal;
+                    fKcal = (parseFloat(pctInputs.fats.value) || 0) / 100 * kcal;
+                }
+                const total = pKcal + cKcal + fKcal || 1;
                 const distItems = document.querySelectorAll('.pro-nutri-dist-item');
                 if (distItems.length >= 3) {
-                    distItems[0].querySelector('.pro-nutri-dist-fill').style.width = Math.round(p / total * 100) + '%';
-                    distItems[0].querySelector('.pro-nutri-dist-pct').textContent = Math.round(p / total * 100) + '%';
-                    distItems[1].querySelector('.pro-nutri-dist-fill').style.width = Math.round(c / total * 100) + '%';
-                    distItems[1].querySelector('.pro-nutri-dist-pct').textContent = Math.round(c / total * 100) + '%';
-                    distItems[2].querySelector('.pro-nutri-dist-fill').style.width = Math.round(f / total * 100) + '%';
-                    distItems[2].querySelector('.pro-nutri-dist-pct').textContent = Math.round(f / total * 100) + '%';
+                    distItems[0].querySelector('.pro-nutri-dist-fill').style.width = Math.round(pKcal / total * 100) + '%';
+                    distItems[0].querySelector('.pro-nutri-dist-pct').textContent = Math.round(pKcal / total * 100) + '%';
+                    distItems[1].querySelector('.pro-nutri-dist-fill').style.width = Math.round(cKcal / total * 100) + '%';
+                    distItems[1].querySelector('.pro-nutri-dist-pct').textContent = Math.round(cKcal / total * 100) + '%';
+                    distItems[2].querySelector('.pro-nutri-dist-fill').style.width = Math.round(fKcal / total * 100) + '%';
+                    distItems[2].querySelector('.pro-nutri-dist-pct').textContent = Math.round(fKcal / total * 100) + '%';
                 }
                 const avgEl = document.getElementById('nutri-cliente-avg');
                 if (avgEl) avgEl.textContent = kcal;
             }
 
+            function setMode(mode) {
+                currentMode = mode;
+                document.querySelectorAll('.pro-nutri-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+                manualGrid.classList.toggle('pro-nutri-hidden', mode !== 'manual');
+                pctGrid.classList.toggle('pro-nutri-hidden', mode !== 'percent');
+
+                if (mode === 'percent') {
+                    const kcal = parseFloat(macroInputs.kcal.value) || 2500;
+                    const pG = parseFloat(macroInputs.protein.value) || 0;
+                    const cG = parseFloat(macroInputs.carbs.value) || 0;
+                    const fG = parseFloat(macroInputs.fats.value) || 0;
+                    const totalCalFromG = pG * 4 + cG * 4 + fG * 9;
+                    if (totalCalFromG > 0) {
+                        pctInputs.kcal.value = kcal;
+                        pctInputs.protein.value = Math.round(pG * 4 / totalCalFromG * 100);
+                        pctInputs.carbs.value = Math.round(cG * 4 / totalCalFromG * 100);
+                        pctInputs.fats.value = Math.round(fG * 9 / totalCalFromG * 100);
+                    }
+                    pctInputs.water.value = macroInputs.water.value;
+                    updatePercentMode();
+                } else {
+                    const kcal = parseFloat(pctInputs.kcal.value) || 2500;
+                    macroInputs.kcal.value = kcal;
+                    macroInputs.protein.value = getProteinGrams();
+                    macroInputs.carbs.value = getCarbsGrams();
+                    macroInputs.fats.value = getFatsGrams();
+                    macroInputs.water.value = pctInputs.water.value;
+                    updateDistribution();
+                }
+            }
+
+            document.querySelectorAll('.pro-nutri-mode-btn').forEach(btn => {
+                btn.addEventListener('click', () => setMode(btn.dataset.mode));
+            });
+
             Object.values(macroInputs).forEach(inp => inp.addEventListener('input', updateDistribution));
 
-            document.getElementById('btn-save-macros').addEventListener('click', () => {
+            Object.values(pctInputs).forEach(inp => inp.addEventListener('input', updatePercentMode));
+
+            document.getElementById('btn-save-macros').addEventListener('click', function () {
                 const cid = parseInt(selectCliente.value);
                 if (!cid) { alert('Selecciona un cliente'); return; }
-                const plan = {
+                const plan = currentMode === 'manual' ? {
                     kcal: macroInputs.kcal.value,
                     protein: macroInputs.protein.value,
                     carbs: macroInputs.carbs.value,
                     fats: macroInputs.fats.value,
                     water: macroInputs.water.value
+                } : {
+                    kcal: pctInputs.kcal.value,
+                    protein: getProteinGrams(),
+                    carbs: getCarbsGrams(),
+                    fats: getFatsGrams(),
+                    water: pctInputs.water.value
                 };
-                try {
-                    const all = JSON.parse(localStorage.getItem('nutrifit_pro_macros') || '{}');
-                    all[cid] = plan;
-                    localStorage.setItem('nutrifit_pro_macros', JSON.stringify(all));
-                    alert('Plan de macros guardado correctamente');
-                } catch (e) {}
+                const btn = this;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="ri-save-line"></i> Guardando <i class="ri-loader-4-line pro-perfil-spin"></i>';
+                setTimeout(() => {
+                    try {
+                        const all = JSON.parse(localStorage.getItem('nutrifit_pro_macros') || '{}');
+                        all[cid] = plan;
+                        localStorage.setItem('nutrifit_pro_macros', JSON.stringify(all));
+                    } catch (e) {}
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="ri-save-line"></i> Guardar Plan';
+                    if (typeof renderHistorial === 'function') renderHistorial(cid);
+                }, 500);
             });
 
             // =========== FOOD PICKER ===========
