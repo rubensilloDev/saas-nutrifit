@@ -67,6 +67,15 @@
 
     /* 6. Transiciones Estándar */
     --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* 7. Variables de Sidebar (role-aware) */
+    --sidebar-accent: var(--primary);
+    --sidebar-accent-rgb: 13, 99, 27;
+}
+
+body[data-role="profesional"] {
+    --sidebar-accent: #1565c0;
+    --sidebar-accent-rgb: 21, 101, 192;
 }
 
 /* --- Loading Screen Premium --- */

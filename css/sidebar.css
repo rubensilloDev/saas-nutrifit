@@ -97,7 +97,7 @@
     background: var(--surface-container-high);
     border: 1px solid var(--outline-variant);
     border-radius: var(--radius-md);
-    color: var(--pro-primary);
+    color: var(--sidebar-accent);
     cursor: pointer;
     font-weight: 700;
     font-family: var(--font-heading);
@@ -111,9 +111,9 @@
 }
 
 .toggle-btn:hover {
-    background: var(--pro-primary);
+    background: var(--sidebar-accent);
     color: white;
-    border-color: var(--pro-primary);
+    border-color: var(--sidebar-accent);
 }
 
 /* Estilo minimalista para el toggle cuando está colapsado */
@@ -184,20 +184,20 @@
 /* Estados Hover y Active */
 .menu-link:hover {
     background-color: var(--surface-container-high, rgba(0, 0, 0, 0.05));
-    color: var(--pro-primary);
+    color: var(--sidebar-accent);
 }
 
 .menu-link.active {
-    background: linear-gradient(90deg, rgba(21, 101, 192, 0.08), transparent);
-    color: var(--pro-primary);
+    background: linear-gradient(90deg, rgba(var(--sidebar-accent-rgb), 0.08), transparent);
+    color: var(--sidebar-accent);
     font-weight: 700;
-    border-left: 3px solid var(--pro-primary);
+    border-left: 3px solid var(--sidebar-accent);
     /* Indicador visual de página actual */
     border-radius: var(--radius-md);
 }
 
 .menu-link.active .icon {
-    color: var(--pro-primary);
+    color: var(--sidebar-accent);
 }
 
 /* --- Submenús (Dropdowns) --- */
@@ -247,10 +247,10 @@
 }
 
 .submenu-link.active {
-    background: linear-gradient(90deg, rgba(21, 101, 192, 0.08), transparent);
-    color: var(--pro-primary);
+    background: linear-gradient(90deg, rgba(var(--sidebar-accent-rgb), 0.08), transparent);
+    color: var(--sidebar-accent);
     font-weight: 700;
-    border-left: 3px solid var(--pro-primary);
+    border-left: 3px solid var(--sidebar-accent);
 }
 
 /* --- Footer: Perfil de Usuario --- */
@@ -276,7 +276,7 @@
     min-width: 40px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--pro-primary);
+    border: 2px solid var(--sidebar-accent);
 }
 
 .user-avatar img {
@@ -343,7 +343,7 @@ body:has(.collapsed) main {
     border: none;
     border-radius: 14px;
     background: white;
-    color: var(--pro-primary);
+    color: var(--sidebar-accent);
     font-size: 1.5rem;
     cursor: pointer;
     z-index: 1002;                /* Sobre el sidebar y el overlay */
@@ -354,7 +354,7 @@ body:has(.collapsed) main {
 }
 
 .mobile-menu-btn:hover {
-    background: var(--pro-primary);
+    background: var(--sidebar-accent);
     color: white;
 }
 

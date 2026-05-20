@@ -5,12 +5,12 @@
 
 /* --- Variables de Diseño y Tema Profesional --- */
 :root {
-    /* Paleta del Profesional (Tema Azul) */
-    --pro-primary: #1565c0;
-    /* Azul principal del profesional/entrenador */
-    --pro-primary-container: #42a5f5;
+    /* Paleta del Profesional (Tema Verde para el rol Usuario) */
+    --pro-primary: #0d631b;
+    /* Verde principal */
+    --pro-primary-container: #4caf50;
     /* Variación para elementos destacados */
-    --pro-surface: #e3f2fd;
+    --pro-surface: #e8f5e9;
     /* Fondo suave para tarjetas y burbujas */
     --pro-alert: #FF9000;
     /* Alertas o llamadas a la acción */
@@ -81,8 +81,8 @@
     height: 14px;
     border-radius: 50%;
     border: 2.5px solid white;
-    background: #42a5f5;
-    box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.2);
+    background: #4caf50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
 .pro-chat-details h3 {
@@ -129,7 +129,7 @@
 }
 
 .pro-chat-actions button:hover {
-    background: rgba(21, 101, 192, 0.08);
+    background: rgba(13, 99, 27, 0.08);
     color: var(--pro-primary);
 }
 
@@ -203,7 +203,7 @@
 }
 
 .pro-session-btn:hover {
-    background: #1976d2;
+    background: #2e7d32;
     transform: translateY(-1px);
 }
 
@@ -239,7 +239,7 @@
 
 .pro-plan-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--pro-primary), #64b5f6);
+    background: linear-gradient(90deg, var(--pro-primary), #81c784);
     border-radius: 6px;
     transition: width 0.8s ease;
 }
@@ -304,8 +304,8 @@
     flex-direction: column;
     gap: 20px;
     background:
-        radial-gradient(ellipse at 0% 0%, rgba(21, 101, 192, 0.03) 0%, transparent 60%),
-        radial-gradient(ellipse at 100% 100%, rgba(21, 101, 192, 0.02) 0%, transparent 50%),
+        radial-gradient(ellipse at 0% 0%, rgba(13, 99, 27, 0.03) 0%, transparent 60%),
+        radial-gradient(ellipse at 100% 100%, rgba(13, 99, 27, 0.02) 0%, transparent 50%),
         var(--surface-container-lowest);
 }
 
@@ -440,7 +440,7 @@
 
 .pro-input-wrapper:focus-within {
     border-color: var(--pro-primary);
-    box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.08);
+    box-shadow: 0 0 0 4px rgba(13, 99, 27, 0.08);
 }
 
 #pro-user-input {
@@ -478,13 +478,13 @@
 
 .pro-attachment-btn:hover {
     color: var(--pro-primary);
-    background: rgba(21, 101, 192, 0.06);
+    background: rgba(13, 99, 27, 0.06);
 }
 
 .pro-send-button {
     width: 52px;
     height: 52px;
-    background: linear-gradient(135deg, var(--pro-primary), #1976d2);
+    background: linear-gradient(135deg, var(--pro-primary), #2e7d32);
     color: white;
     border: none;
     border-radius: 16px;
@@ -494,13 +494,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 16px rgba(21, 101, 192, 0.25);
+    box-shadow: 0 4px 16px rgba(13, 99, 27, 0.25);
     flex-shrink: 0;
 }
 
 .pro-send-button:hover {
     transform: scale(1.06) translateY(-2px);
-    box-shadow: 0 8px 24px rgba(21, 101, 192, 0.35);
+    box-shadow: 0 8px 24px rgba(13, 99, 27, 0.35);
 }
 
 .pro-send-button:active {

@@ -54,6 +54,7 @@ function initSidebar() {
     const defaultCollapsed = isMobile ? true : localStorage.getItem('sidebar-collapsed') === 'true';
     const role = (() => { try { return localStorage.getItem('nutrifit-role'); } catch (e) { return null; } })();
     const isPro = role === 'profesional';
+    document.body.dataset.role = role || 'usuario';
 
     const userMenu = isPro ? `
         <nav class="sidebar-menu">
@@ -172,7 +173,7 @@ function initSidebar() {
                 </button>
                 <div class="user-profile">
                     <div class="user-avatar">
-                        <img src="https://ui-avatars.com/api/?name=Usuario+Fit&background=1565C0&color=fff" alt="User Avatar">
+                        <img src="https://ui-avatars.com/api/?name=Usuario+Fit&background=${isPro ? '1565C0' : '0d631b'}&color=fff" alt="User Avatar">
                     </div>
                     <div class="user-info">
                         <span class="user-name">Usuario Fit</span>
