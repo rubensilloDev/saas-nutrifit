@@ -2,6 +2,8 @@
     --pro-primary: #1565c0;
     --pro-primary-container: #42a5f5;
     --pro-surface: #e3f2fd;
+    --pro-alert: #FF9000;   
+    --pro-inactive: #0008FF;   
 }
 
 .pro-dashboard-grid {
