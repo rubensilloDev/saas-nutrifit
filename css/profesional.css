@@ -30,9 +30,8 @@
 
 /* --- Contenedor Principal --- */
 .pro-chat-container {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    grid-template-rows: auto 1fr auto;
+    display: flex;
+    flex-direction: column;
     height: calc(100vh - 100px);
     background: var(--surface-container-lowest);
     border-radius: 24px;
@@ -43,7 +42,6 @@
 
 /* --- Cabecera del Chat --- */
 .pro-chat-header {
-    grid-column: 1 / -1;
     padding: 16px 24px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(16px);
@@ -298,6 +296,8 @@
 
 /* --- Área de Mensajes --- */
 .pro-chat-messages {
+    flex: 1;
+    min-height: 0;
     padding: 24px;
     overflow-y: auto;
     display: flex;
@@ -362,7 +362,7 @@
 }
 
 .pro-message-user .pro-message-content {
-    background: linear-gradient(135deg, var(--pro-primary), #1976d2);
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
     color: white;
     border-radius: 18px 4px 18px 18px;
     border: none;
@@ -414,7 +414,6 @@
 
 /* --- Zona de Entrada de Texto --- */
 .pro-chat-input-area {
-    grid-column: 2 / 3;
     padding: 16px 24px 20px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(16px);
@@ -510,18 +509,6 @@
 
 /* --- Responsive --- */
 @media (max-width: 1024px) {
-    .pro-chat-container {
-        grid-template-columns: 1fr;
-    }
-
-    .pro-sidebar {
-        display: none;
-    }
-
-    .pro-chat-input-area {
-        grid-column: 1 / 2;
-    }
-
     .pro-message {
         max-width: 90%;
     }

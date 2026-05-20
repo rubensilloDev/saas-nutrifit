@@ -1,4 +1,7 @@
 .pro-chat-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
     margin-top: var(--spacing-lg);
     height: calc(100vh - 140px);
     min-height: 450px;
@@ -77,8 +80,8 @@
 }
 
 .pro-chat-msg--client .pro-chat-msg-content {
-    background: var(--surface-container-low);
-    color: var(--on-surface);
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
     border-bottom-left-radius: 4px;
 }
 
@@ -119,9 +122,9 @@
 }
 
 .pro-chat-msg--client .pro-chat-file-preview {
-    background: var(--surface-container-lowest);
-    border-color: var(--outline-variant);
-    color: var(--on-surface);
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.2);
+    color: white;
 }
 
 /* FILE BAR (antes de enviar) */
@@ -294,10 +297,175 @@
     display: none;
 }
 
+/* ===== SIDEBAR DEL ENTRENADOR ===== */
+.pro-sidebar {
+    background: var(--surface-container-low);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--outline-variant);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.pro-sidebar-section h4 {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--on-surface-variant);
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pro-sidebar-section h4 i {
+    color: var(--pro-primary);
+    font-size: 0.9rem;
+}
+
+.pro-session-card {
+    background: white;
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid var(--outline-variant);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pro-session-date {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--on-surface);
+}
+
+.pro-session-time {
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+.pro-session-btn {
+    background: var(--pro-primary);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+    transition: all 0.2s;
+    font-family: var(--font-heading);
+}
+
+.pro-session-btn:hover {
+    background: #1976d2;
+    transform: translateY(-1px);
+}
+
+.pro-plan-card {
+    background: white;
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid var(--outline-variant);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pro-plan-name {
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--on-surface);
+}
+
+.pro-plan-progress {
+    font-size: 0.78rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+.pro-plan-bar {
+    height: 6px;
+    background: var(--surface-container-high);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.pro-plan-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--pro-primary), #64b5f6);
+    border-radius: 6px;
+    transition: width 0.8s ease;
+}
+
+.pro-resource-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    color: var(--on-surface-variant);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.pro-resource-link i {
+    font-size: 1rem;
+    color: var(--pro-primary);
+}
+
+.pro-resource-link:hover {
+    background: var(--surface-container-high);
+    color: var(--pro-primary);
+}
+
+.pro-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 0.82rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+.pro-stat-row:last-child {
+    border-bottom: none;
+}
+
+.pro-stat-val {
+    font-weight: 800;
+}
+
+.pro-stat-val.down {
+    color: var(--color-fats);
+}
+
+.pro-stat-val.up {
+    color: var(--color-protein);
+}
+
 @media (max-width: 768px) {
     .pro-chat-layout {
+        grid-template-columns: 1fr;
         height: calc(100vh - 180px);
         min-height: 400px;
+    }
+    .pro-sidebar {
+        display: none;
     }
     .pro-chat-msg {
         max-width: 90%;
